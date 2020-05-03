@@ -1,6 +1,6 @@
 
-# Created by https://www.gitignore.io/api/node,code,react,linux
-# Edit at https://www.gitignore.io/?templates=node,code,react,linux
+# Created by https://www.gitignore.io/api/node,code
+# Edit at https://www.gitignore.io/?templates=node,code
 
 ### Code ###
 .vscode/*
@@ -8,21 +8,6 @@
 !.vscode/tasks.json
 !.vscode/launch.json
 !.vscode/extensions.json
-
-### Linux ###
-*~
-
-# temporary files which can be created if a process still has a handle open of a deleted file
-.fuse_hidden*
-
-# KDE directory preferences
-.directory
-
-# Linux trash folder which might appear on any partition or disk
-.Trash-*
-
-# .nfs files are created when an open file is removed but is still being accessed
-.nfs*
 
 ### Node ###
 # Logs
@@ -130,17 +115,12 @@ dist/
 tmp/
 temp/
 
-### react ###
-.DS_*
-**/*.backup.*
-**/*.back.*
+# End of https://www.gitignore.io/api/node,code
 
+.DS_Store
+.next
+.vscode
+out/
 node_modules
-
-*.sublime*
-
-psd
-thumb
-sketch
-
-# End of https://www.gitignore.io/api/node,code,react,linux
+yarn.lock
+package-lock.json
