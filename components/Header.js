@@ -53,7 +53,7 @@ const Header = (props) => (
           <a
             href="javascript:;"
             onClick={() => {
-              props.onOpenArticle("construction");
+              props.onOpenArticle("contact");
             }}
           >
             Contact Me
