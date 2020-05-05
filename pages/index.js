@@ -77,17 +77,17 @@ class IndexPage extends React.Component {
           this.state.isArticleVisible ? "is-article-visible" : ""
         }`}
       >
-        <NextSeo
-          title="Koh Jen Yang"
-          description="Jen Yang Koh's Personal Website."
-        />
-        <SocialProfileJsonLd
-          type="Person"
-          name="Koh Jen Yang"
-          url="https://jenyangk.github.io/"
-          sameAs={["https://www.linkedin.com/in/jenyangkoh/"]}
-        />
         <div>
+          <NextSeo
+            title="Koh Jen Yang"
+            description="Jen Yang Koh's Personal Website."
+          />
+          <SocialProfileJsonLd
+            type="Person"
+            name="Koh Jen Yang"
+            url="https://jenyangk.github.io/"
+            sameAs={["https://www.linkedin.com/in/jenyangkoh/"]}
+          />
           <Head>
             <title>Koh Jen Yang</title>
             <link
