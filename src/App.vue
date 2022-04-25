@@ -1,9 +1,11 @@
 <template>
   <nav>
     <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
+    <router-link to="/about">About</router-link> |
+    <router-link to="/projects">Projects</router-link> |
+    <router-link to="/experience">Experience</router-link> 
   </nav>
-  <router-view/>
+  <router-view />
 </template>
 
 <style>
@@ -33,5 +35,18 @@ nav a {
 
 nav a.router-link-exact-active {
   color: #42b983;
+}
+
+::-webkit-scrollbar {
+    width: 3px;
+}
+
+::-webkit-scrollbar-track {
+    background-color: none;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #44999d;
+    border-radius: 60px;
 }
 </style>
