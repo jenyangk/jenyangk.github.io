@@ -6,7 +6,19 @@
     <router-link to="/experience">Experience</router-link> 
   </nav>
   <router-view />
+  <footer-component></footer-component>
 </template>
+
+<script>
+import FooterComponent from './components/Footer.vue'
+
+export default {
+  name: "App",
+  components: {
+    FooterComponent
+  }
+}
+</script>
 
 <style>
 @import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Mono&display=swap");

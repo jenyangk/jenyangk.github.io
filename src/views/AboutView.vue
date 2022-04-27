@@ -28,7 +28,7 @@
     <div class="icon-list">
       <i class="devicon-postgresql-plain" title="PostgreSQL"></i>
       <i class="devicon-angularjs-plain" title="Angular"></i>
-      <i class="devicon-vuejs-plain" title="VueJS"></i>
+      <i class="devicon-vuejs-plain" title="Vue JS"></i>
       <i class="devicon-d3js-plain" title="D3"></i>
       <i class="devicon-threejs-original" title="ThreeJS"></i>
     </div>
@@ -43,6 +43,10 @@
 i {
   font-size: 32px;
   padding: 10px;
+}
+
+p {
+  text-align: justify;
 }
 
 .icon-list {
