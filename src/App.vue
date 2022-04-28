@@ -1,11 +1,13 @@
 <template>
   <nav>
     <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link> |
+    <router-link to="/about">About Me</router-link> |
     <router-link to="/projects">Projects</router-link> |
-    <router-link to="/experience">Experience</router-link> 
+    <router-link to="/experience">Experiences</router-link> 
   </nav>
-  <router-view />
+  <div class="view-container">
+    <router-view />
+  </div>
   <footer-component></footer-component>
 </template>
 
@@ -28,6 +30,12 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
+}
+
+.view-container {
+  margin-right: auto;
+  margin-left: auto;
+  max-width: 500px;
 }
 
 body {
