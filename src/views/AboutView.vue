@@ -2,7 +2,7 @@
   <div class="about">
     <h1>Hello!</h1>
     <p>
-      Passionate in learning new technologies and building software of all
+      I'm passionate in learning new technologies and building software of all
       sizes. No technology is too difficult to understand. An avid self-taught
       software developer with experiences in building frontend applications and
       backend services. Proactive IT analyst with 1+ years in infrastructure,
@@ -18,11 +18,12 @@
     <h1>Stats:</h1>
     <h2>Languages:</h2>
     <div class="icon-list">
-      <i class="devicon-typescript-plain" title="Typescript"></i>
-      <i class="devicon-javascript-plain" title="Javascript"></i>
-      <i class="devicon-solidity-plain" title="Solidity"></i>
-      <i class="devicon-python-plain" title="Python"></i>
-      <i class="devicon-sass-original" title="Sass"></i>
+        <i class="devicon-typescript-plain" title="Typescript"></i>
+        <i class="devicon-javascript-plain" title="Javascript"></i>
+        <i class="devicon-solidity-plain" title="Solidity"></i>
+        <i class="devicon-csharp-plain" title="C#"></i>
+        <i class="devicon-python-plain" title="Python"></i>
+        <i class="devicon-sass-original" title="Sass"></i>
     </div>
     <h2>Frameworks/Libraries:</h2>
     <div class="icon-list">
@@ -30,12 +31,13 @@
       <i class="devicon-angularjs-plain" title="Angular"></i>
       <i class="devicon-vuejs-plain" title="Vue JS"></i>
       <i class="devicon-d3js-plain" title="D3"></i>
-      <i class="devicon-threejs-original" title="ThreeJS"></i>
     </div>
     <h2>Platforms:</h2>
     <div class="icon-list">
       <i class="devicon-azure-plain" title="Azure"></i>
     </div>
+      <h1>Current Interests:</h1>
+      <h3>Web3, Smart Contracts</h3>
   </div>
 </template>
 
