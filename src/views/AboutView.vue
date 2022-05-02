@@ -1,6 +1,7 @@
 <template>
   <div class="about">
     <h1>Hello!</h1>
+    <img id="profile-pic" src="../assets/profile.png" alt="Me" />
     <p>
       I'm passionate in learning new technologies and building software of all
       sizes. No technology is too difficult to understand. An avid self-taught
@@ -15,29 +16,35 @@
       travel to have newer experiences and witness various cultures and
       backgrounds.
     </p>
-    <h1>Stats:</h1>
-    <h2>Languages:</h2>
+    <h2>Stats:</h2>
+    <h3>Languages:</h3>
     <div class="icon-list">
-        <i class="devicon-typescript-plain" title="Typescript"></i>
-        <i class="devicon-javascript-plain" title="Javascript"></i>
-        <i class="devicon-solidity-plain" title="Solidity"></i>
-        <i class="devicon-csharp-plain" title="C#"></i>
-        <i class="devicon-python-plain" title="Python"></i>
-        <i class="devicon-sass-original" title="Sass"></i>
+      <i class="devicon-typescript-plain" title="Typescript"></i>
+      <i class="devicon-javascript-plain" title="Javascript"></i>
+      <i class="devicon-solidity-plain" title="Solidity"></i>
+      <i class="devicon-csharp-plain" title="C#"></i>
+      <i class="devicon-python-plain" title="Python"></i>
+      <i class="devicon-sass-original" title="Sass"></i>
     </div>
-    <h2>Frameworks/Libraries:</h2>
+    <h3>Frameworks/Libraries:</h3>
     <div class="icon-list">
       <i class="devicon-postgresql-plain" title="PostgreSQL"></i>
       <i class="devicon-angularjs-plain" title="Angular"></i>
       <i class="devicon-vuejs-plain" title="Vue JS"></i>
       <i class="devicon-d3js-plain" title="D3"></i>
+      <img
+        id="image-logo"
+        src="../assets/fabric_logo.png"
+        alt="Hyperledger Fabric"
+        title="Hyperledger Fabric"
+      />
     </div>
-    <h2>Platforms:</h2>
+    <h3>Platforms:</h3>
     <div class="icon-list">
       <i class="devicon-azure-plain" title="Azure"></i>
     </div>
-      <h1>Current Interests:</h1>
-      <h3>Web3, Smart Contracts</h3>
+    <h2>Current Interests:</h2>
+    <h4>Web3, Smart Contracts, Enterprise Blockchains</h4>
   </div>
 </template>
 
@@ -49,6 +56,16 @@ i {
 
 p {
   text-align: justify;
+}
+
+#profile-pic {
+  height: 300px;
+  border-radius: 50%;
+}
+
+#image-logo {
+  height: 32px;
+  padding: 10px;
 }
 
 .icon-list {
