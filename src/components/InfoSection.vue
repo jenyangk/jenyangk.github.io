@@ -5,7 +5,7 @@
       <h4>{{ subcaption }}</h4>
     </header>
     <div>
-      <p>{{ info }}</p>
+      <p v-for="info of infos" :key="info">{{ info }}</p>
     </div>
   </article>
 </template>
@@ -16,7 +16,7 @@ export default {
   props: {
     caption: String,
     subcaption: String,
-    info: String,
+    infos: Array,
   },
 };
 </script>

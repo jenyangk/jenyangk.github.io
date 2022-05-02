@@ -1,25 +1,28 @@
 <template>
-  <nav>
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About Me</router-link> |
-    <router-link to="/projects">Projects</router-link> |
-    <router-link to="/experience">Experiences</router-link> 
-  </nav>
   <div class="view-container">
-    <router-view />
+    <nav>
+      <router-link to="/projects">Projects</router-link> |
+      <router-link to="/">About Me</router-link> |
+      <router-link to="/experience">Experiences</router-link>
+    </nav>
+    <router-view v-slot="{ Component }">
+      <transition name="fade" mode="out-in">
+        <component :is="Component"></component>
+      </transition>
+    </router-view>
   </div>
   <footer-component></footer-component>
 </template>
 
 <script>
-import FooterComponent from './components/Footer.vue'
+import FooterComponent from "./components/Footer.vue";
 
 export default {
   name: "App",
   components: {
-    FooterComponent
-  }
-}
+    FooterComponent,
+  },
+};
 </script>
 
 <style>
@@ -33,6 +36,9 @@ export default {
 }
 
 .view-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   margin-right: auto;
   margin-left: auto;
   max-width: 500px;
@@ -42,6 +48,10 @@ body {
   color: white;
   background: rgb(34, 36, 41);
   font-weight: 400;
+}
+
+a {
+  color: white;
 }
 
 nav {
@@ -58,15 +68,29 @@ nav a.router-link-exact-active {
 }
 
 ::-webkit-scrollbar {
-    width: 3px;
+  width: 3px;
 }
 
 ::-webkit-scrollbar-track {
-    background-color: none;
+  background-color: none;
 }
 
 ::-webkit-scrollbar-thumb {
-    background-color: #44999d;
-    border-radius: 60px;
+  background-color: #44999d;
+  border-radius: 60px;
+}
+
+img {
+  image-rendering: optimizeQuality;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.1s ease-out;
 }
 </style>
