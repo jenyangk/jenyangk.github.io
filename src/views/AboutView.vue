@@ -1,5 +1,5 @@
 <template>
-  <div class="about">
+  <div class="about" style="width: 100%">
     <h1>Hello!</h1>
     <img id="profile-pic" src="../assets/profile.png" alt="Me" />
     <p>
@@ -59,7 +59,8 @@ p {
 }
 
 #profile-pic {
-  height: 300px;
+  width: 100%;
+  max-width: 300px;
   border-radius: 50%;
 }
 
