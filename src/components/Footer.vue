@@ -12,6 +12,10 @@
       &copy; 2022 Jen Yang Koh. Built with
       <i class="devicon-vuejs-plain colored" title="Vue JS" style="font-size: 0.7rem"></i>
     </span>
+    <p class="footer-text">
+      Also available on IPFS
+      <a href="https://jenyangk.on.fleek.co/" style="padding: 0; font-size: 0;"><img src="../assets/ipfs.svg" alt="IPFS" title="IPFS" style="height: 0.7rem;"></a>
+    </p>
   </footer>
 </template>
 
