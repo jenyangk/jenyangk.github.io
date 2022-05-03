@@ -1,5 +1,5 @@
 <template>
-  <div class="experiences">
+  <div class="experiences" style="width: 100%">
     <InfoSectionComponent caption="Integration Developer" subcaption="PCL Construction | 2021 - Present"
       :infos="['Onboarded and integrated additional third-party sensors onto our IoT platform. Worked on various mission-critical frontend and backend features on PCL\'s Job Site Insights™, (JSI™) smart construction platform with Latium Technologies\'s IoT operating system.']" />
     <p>

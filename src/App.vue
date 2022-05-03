@@ -41,6 +41,7 @@ export default {
   align-items: center;
   margin-right: auto;
   margin-left: auto;
+  width: 100%;
   max-width: 500px;
 }
 

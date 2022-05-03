@@ -1,5 +1,5 @@
 <template>
-  <div class="projects">
+  <div class="projects" style="width: 100%">
     <img src="../assets/tree.png" alt="Nested Tree Diagram">
     <InfoSectionComponent caption="Hierarchy Tree Visualization" subcaption=""
       :infos="['This project is a simple demonstration of my Angular implementation of Mike Bostock\'s Collapsible Tree (https://observablehq.com/@d3/collapsible-tree?collection=@d3/d3-hierarchy).',
@@ -38,7 +38,7 @@ export default {
 
 <style scoped>
 img {
-  height: 300px;
+  width: 100%;
   border-radius: 20px;
 }
 
