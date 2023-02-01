@@ -3,18 +3,10 @@
     <h1>Hello!</h1>
     <img id="profile-pic" src="../assets/profile.png" alt="Me" />
     <p>
-      I'm passionate in learning new technologies and building software of all
-      sizes. No technology is too difficult to understand. An avid self-taught
-      software developer with experiences in building frontend applications and
-      backend services. Proactive IT analyst with 1+ years in infrastructure,
-      technical support, and process automation through scripting.
+      Greetings! I'm a full-stack software developer with a burning passion for learning new technologies and creating innovative software solutions. My expertise in both frontend and backend development has made me a well-rounded developer capable of handling projects of all sizes. With my self-taught background and over a year of experience, I have developed a strong skill set in full-stack development, process automation, database design and management, and modern frontend technologies such as Angular.
     </p>
     <p>
-      Jack-of-all-trades with broad experiences. Love collaborating with people
-      at all levels of experience. Aside from building software, I enjoy hiking
-      with friends and travelling around the world. As seeing is believing, I
-      travel to have newer experiences and witness various cultures and
-      backgrounds.
+      I bring a unique blend of technical knowledge and collaboration to the table, making me an asset to any team. I'm always eager to work with others and bring my positive energy and problem-solving skills to the table. When I'm not coding, you can find me exploring the great outdoors on a hiking trail or traveling to new destinations to expand my horizons and gather new experiences. For me, travel is an integral part of both my personal and professional growth, allowing me to broaden my perspective and continue to grow as a developer.
     </p>
     <h2>Stats:</h2>
     <h3>Languages:</h3>
