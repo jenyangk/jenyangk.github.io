@@ -1,0 +1,42 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+	a {
+		@apply text-white font-mono px-4 hover:text-cyan-400;
+	}
+
+	h1,
+	h2,
+	h3,
+	h4 {
+		@apply text-white font-mono;
+	}
+
+	p {
+		@apply text-white font-mono;
+	}
+
+	i {
+		@apply text-white;
+	}
+
+	span {
+		@apply text-white;
+	}
+
+	body::-webkit-scrollbar {
+		width: 0.5rem;
+		background-color: transparent;
+	}
+
+	body::-webkit-scrollbar-thumb {
+		background-color: rgba(255, 255, 255, 0.2);
+		border-radius: 10px;
+	}
+
+	body::-webkit-scrollbar-thumb:hover {
+		background-color: rgba(255, 255, 255, 0.5);
+	}
+}
