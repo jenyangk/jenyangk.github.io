@@ -2,9 +2,9 @@
 </script>
 
 <div class="container mx-auto flex flex-col items-center min-h-[85vh]">
-	<div class="flex flex-col min-w-min max-w-lg justify-center text-center">
+	<div class="flex flex-col px-4 max-w-lg justify-center text-center">
 		<div
-			class="flex flex-col rounded-md border-solid border border-white backdrop-blur-sm min-w-min shadow hover:shadow-lg hover:shadow-white hover:cursor-grab transition-shadow"
+			class="flex flex-col rounded-md border-solid border border-white backdrop-blur-sm shadow hover:shadow-lg hover:shadow-white hover:cursor-grab transition-shadow"
 		>
 			<div>
 				<img class="cropped-top" src="images/profile.png" alt="Me" />
@@ -46,7 +46,7 @@
 					</div>
 				</div>
 				<div>
-					<h1 class="mt-4 font-['Libre_Barcode_128'] text-5xl">https://jenyangk.github.io/</h1>
+					<h1 class="mt-4 font-['Libre_Barcode_128'] text-3xl sm:text-5xl">https://jenyangk.github.io/</h1>
 				</div>
 			</div>
 		</div>
