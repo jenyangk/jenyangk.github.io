@@ -3,10 +3,6 @@
 @tailwind utilities;
 
 @layer base {
-	a {
-		@apply text-white font-mono px-4 hover:text-cyan-400;
-	}
-
 	h1,
 	h2,
 	h3,
