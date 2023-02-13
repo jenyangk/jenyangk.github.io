@@ -1,25 +1,11 @@
 <script lang="ts">
 	import '../app.css';
-	import { onMount } from 'svelte';
-
-	let currentPage = '';
-
-	onMount(() => {
-		currentPage = window.location.pathname;
-	});
+	import Navbar from './navbar.svelte';
 </script>
-  
+
 <div class="page">
 	<div class="page-dotted">
-		<nav class="pt-4 pb-6">
-			<div class="container mx-auto flex justify-center">
-				<a href="/projects" class="{currentPage === '/experiences' ? 'text-cyan-400' : ''} text-xl">Projects</a>
-				<span class="text-white">|</span>
-				<a href="/" class="{currentPage === '/' ? 'text-cyan-400' : ''} text-xl">Me</a>
-				<span class="text-white">|</span>
-				<a href="/experiences" class="{currentPage === '/experiences' ? 'text-cyan-400' : ''} text-xl">Experiences</a>
-			</div>
-		</nav>
+		<Navbar />
 
 		<slot />
 
