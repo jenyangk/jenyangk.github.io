@@ -2,14 +2,13 @@
 	import { page } from '$app/stores';
 
 	let currentPage: string;
-	$: {
-		currentPage = $page.url.pathname;
-		console.log(currentPage);
-	}
+	$: currentPage = $page.url.pathname;
 </script>
 
 <nav class="pt-4 pb-6">
 	<div class="container max-w-md mx-auto flex justify-evenly">
+		<a href="/gists" class={currentPage == '/gists' ? 'text-cyan-400' : ''}>Gists</a>
+		<span class="text-white">|</span>
 		<a href="/projects" class={currentPage == '/projects' ? 'text-cyan-400' : ''}>Projects</a>
 		<span class="text-white">|</span>
 		<a href="/" class={currentPage === '/' ? 'text-cyan-400' : ''}>Me</a>
