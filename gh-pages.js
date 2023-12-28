@@ -7,7 +7,7 @@ publish(
 		repo: 'https://github.com/jenyangk/jenyangk.github.io.git', // Update to point to your repository
 		user: {
 			name: 'Jen Yang Koh', // update to use your name
-			email: 'jenyang@ualberta.ca' // Update to use your email
+			email: 'jenyang.koh@gmail.com' // Update to use your email
 		},
 		dotfiles: true
 	},
