@@ -1,62 +1,34 @@
-import { useState } from 'react';
-import logo from './assets/images/logo.svg';
+
+import { Typewriter } from "@/components/ui/typewriter";
+import { Separator } from "@/components/ui/separator";
 
 const App = () => {
-  const [count, setCount] = useState(0);
-
   return (
-    <div className="text-center selection:bg-green-900">
-      <header className="flex min-h-screen flex-col items-center justify-center bg-[#282c34] text-white">
-        <img
-          src={logo}
-          className="animate-speed h-60 motion-safe:animate-spin"
-          alt="logo"
-        />
-        <style>
-          {
-            '\
-            .animate-speed{\
-              animation-duration:20s;\
-            }\
-          '
-          }
-        </style>
-        <p className="bg-gradient-to-r from-emerald-300 to-sky-300 bg-clip-text text-5xl font-black text-transparent selection:bg-transparent">
-          Vite + React + Typescript + Tailwindcss
-        </p>
-        <p className="mt-3">
-          <button
-            type="button"
-            className="my-6 rounded bg-gray-300 px-2 py-2 text-[#282C34] transition-all hover:bg-gray-200"
-            onClick={() => setCount((count) => count + 1)}
-          >
-            count is: {count}
-          </button>
-        </p>
-        <p>
-          Edit <code className="text-[#8d96a7]">App.tsx</code> and save to test
-          HMR updates.
-        </p>
-        <p className="mt-3 flex gap-3 text-center text-[#8d96a7]">
-          <a
-            className="text-[#61dafb] transition-all hover:text-blue-400"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-          {' | '}
-          <a
-            className="text-[#61dafb] transition-all hover:text-blue-400"
-            href="https://vitejs.dev/guide/features.html"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Vite Docs
-          </a>
-        </p>
+    <div className="text-center bg-[##fefbf1]">
+      <header className="flex items-center justify-center text-black">
       </header>
+      <div className="flex min-h-screen flex-col items-center justify-center text-black">
+        <Typewriter
+          text={["Jen Yang Koh.", "辜振洋."]}
+          speed={100}
+          delay={10000}
+          loop={true}
+          className="text-5xl font-medium"
+        />
+        <Separator orientation="horizontal" className="m-4" />
+        <p>About Me</p>
+        <Separator orientation="horizontal" className="m-4" />
+        <p>About Me</p>
+      </div>
+      <footer className="flex items-center justify-between text-black px-8">
+        <p>©2025</p>
+        <p
+          onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+          className="cursor-pointer hover:opacity-70"
+        >
+          Back to top ↑
+        </p>
+      </footer>
     </div>
   );
 };
