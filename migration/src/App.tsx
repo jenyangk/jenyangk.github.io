@@ -1,10 +1,11 @@
-import { TypeScript, JavaScript, CSharp, Go, Python, Angular, React, NextJs, TailwindCSS, Firebase, MicrosoftSQLServer, Azure, Swagger, Xamarin } from "developer-icons"
+import { TypeScript, JavaScript, CSharp, Go, Python, Angular, React, NextJs, TailwindCSS, Firebase, Azure, Xamarin } from "developer-icons"
 
 import { Typewriter } from "@/components/ui/typewriter";
 import { Tilt } from "@/components/ui/tilt";
 import { Spotlight } from "@/components/ui/spotlight";
 
 import profile from "@/assets/images/profile.webp";
+import resume from "@/assets/Resume.pdf";
 
 const App = () => {
   const spotlightSpringOptions = {
@@ -14,8 +15,9 @@ const App = () => {
 
   return (
     <div className="text-center bg-[#fefbf1] grid min-h-screen grid-rows-[auto_1fr_auto]">
-      <header className="flex items-center justify-center text-black px-8 py-2">
-        <a href="" className="hover:underline">Menu</a>
+      <header className="flex items-center justify-center text-black px-8 py-4 gap-4">
+        <a href="" className="hover:underline">Work</a>
+        <a href="" className="hover:underline">Projects</a>
       </header>
       <div className="flex flex-col items-center justify-center text-black">
         <p className="py-4">Hello! 👋</p>
@@ -66,7 +68,7 @@ const App = () => {
                 <div className="mb-1 flex flex-col items-start">
                   <h2>Languages:</h2>
                   <div className="flex gap-2">
-                    <TypeScript size={24} aria-label="TypeScript"></TypeScript>
+                    <TypeScript size={24} aria-label="TypeScript" xlinkTitle="Typescript"></TypeScript>
                     <JavaScript size={24} aria-label="JavaScript"></JavaScript>
                     <Go size={24} aria-label="Go"></Go>
                     <CSharp size={24} aria-label="CSharp"></CSharp>
@@ -94,12 +96,18 @@ const App = () => {
             </div>
           </div>
         </Tilt>
-      </div >
+        <div className="flex gap-4 py-8">
+          <a href="https://github.com/jenyangk" className="underline">GitHub</a>
+          <a href="https://www.linkedin.com/in/jenyangkoh/" className="underline">LinkedIn</a>
+          <a href={resume} className="underline">Résumé</a>
+          <a href="mailto:jenyang.koh@gmail.com" className="underline">Email</a>
+        </div>
+      </div>
       <footer className="flex items-center justify-between text-black px-8 py-2">
         <p>©2025</p>
         <p
           onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-          className="cursor-pointer hover:opacity-70"
+          className="cursor-pointer hover:underline"
         >
           Back to top ↑
         </p>
