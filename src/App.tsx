@@ -3,7 +3,7 @@ import { TypeScript, JavaScript, CSharp, Go, Python, Angular, React, NextJs, Tai
 import { Typewriter } from "@/components/ui/typewriter";
 import { Tilt } from "@/components/ui/tilt";
 import { Spotlight } from "@/components/ui/spotlight";
-import WorldMap from "@/components/ui/world-map";
+// import WorldMap from "@/components/ui/world-map";
 
 import profile from "@/assets/images/profile.webp";
 import resume from "@/assets/Resume.pdf";
