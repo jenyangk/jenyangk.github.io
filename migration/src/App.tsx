@@ -3,6 +3,7 @@ import { TypeScript, JavaScript, CSharp, Go, Python, Angular, React, NextJs, Tai
 import { Typewriter } from "@/components/ui/typewriter";
 import { Tilt } from "@/components/ui/tilt";
 import { Spotlight } from "@/components/ui/spotlight";
+import WorldMap from "@/components/ui/world-map";
 
 import profile from "@/assets/images/profile.webp";
 import resume from "@/assets/Resume.pdf";
@@ -15,10 +16,11 @@ const App = () => {
 
   return (
     <div className="text-center bg-[#fefbf1] grid min-h-screen grid-rows-[auto_1fr_auto]">
-      <header className="flex items-center justify-center text-black px-8 py-4 gap-4">
+      {/* <header className="flex items-center justify-center text-black px-8 py-4 gap-4">
         <a href="" className="hover:underline">Work</a>
         <a href="" className="hover:underline">Projects</a>
-      </header>
+        <a href=""><s className="">Writings</s> 🚧</a>
+      </header> */}
       <div className="flex flex-col items-center justify-center text-black">
         <p className="py-4">Hello! 👋</p>
         <Tilt rotationFactor={8} isRevese>
@@ -102,15 +104,39 @@ const App = () => {
           <a href={resume} className="underline">Résumé</a>
           <a href="mailto:jenyang.koh@gmail.com" className="underline">Email</a>
         </div>
+        {/* <div>
+          <h4>Work</h4>
+          <WorldMap
+            dots={[
+              {
+                start: {
+                  lat: 64.2008,
+                  lng: -149.4937,
+                }, // Alaska (Fairbanks)
+                end: {
+                  lat: 34.0522,
+                  lng: -118.2437,
+                }, // Los Angeles
+              }
+            ]}
+          />
+        </div>
+        <div>
+          <h4>Projects</h4>
+
+        </div>
+        <div>
+          <h4>Writings</h4>
+        </div> */}
       </div>
       <footer className="flex items-center justify-between text-black px-8 py-2">
         <p>©2025</p>
-        <p
+        {/* <p
           onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
           className="cursor-pointer hover:underline"
         >
           Back to top ↑
-        </p>
+        </p> */}
       </footer>
     </div >
   );
