@@ -7,7 +7,7 @@ import path from 'path';
  * @see https://vitejs.dev/config/
  */
 export default defineConfig({
-  base: '/jenyangk.github.io/',
+  base: '/',
   plugins: [MillionLint.vite({
     enabled: true
   }), react()],
