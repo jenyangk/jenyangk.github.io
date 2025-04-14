@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { TypeScript, JavaScript, CSharp, Go, Python, Angular, React, NextJs, TailwindCSS, Firebase, Azure, Xamarin, PowerShell, ThreeJs, Supabase, PostgreSQL, MaterialUI, Django } from "developer-icons"
 
 import { Typewriter } from "@/components/ui/typewriter";
@@ -10,13 +11,16 @@ import pcl from "@/assets/images/pcl.svg";
 import sunway from "@/assets/images/sunway.png";
 import doudou from "@/assets/images/doudou.png";
 import seoer from "@/assets/images/seoer.png";
-import { GlobeIcon } from "lucide-react";
+import { GlobeIcon, ChevronRight } from "lucide-react"; // Changed ChevronDown to ChevronRight
 
 const App = () => {
   const spotlightSpringOptions = {
     bounce: 0.3,
     duration: 0.1
   };
+
+  const [showPclDevDesc, setShowPclDevDesc] = useState(false);
+  const [showPclAnalystDesc, setShowPclAnalystDesc] = useState(false);
 
   return (
     <div className="text-center bg-[#fefbf1] grid min-h-screen grid-rows-[auto_1fr_auto]">
@@ -117,15 +121,38 @@ const App = () => {
           <div className="w-full max-w-xl mx-auto lg:mx-0">
             <h2 id="experience" className="text-xl font-semibold mb-4">Experience</h2>
             <div className="flex flex-col gap-8 items-start">
-              <div className="flex gap-8 items-center justify-start w-full">
+              {/* PCL Software Developer */}
+              <div className="flex gap-8 items-start justify-start w-full">
                 <div className="flex flex-col items-center flex-shrink-0">
                   <img src={pcl} alt="PCL Construction" className="w-24 h-24 object-contain" />
                 </div>
-                <div>
+                <div className="flex-grow">
                   <div className="flex flex-col items-start text-left">
-                    <h3 className="text-lg font-semibold">Software Developer</h3>
+                    <div
+                      className="group flex items-center gap-1 cursor-pointer" // Added group, adjusted gap
+                      onClick={() => setShowPclDevDesc(!showPclDevDesc)}
+                      aria-expanded={showPclDevDesc}
+                      aria-controls="pcl-dev-desc"
+                    >
+                      <h3 className="text-lg font-semibold">Software Developer</h3>
+                      <ChevronRight // Changed icon
+                        className={`w-4 h-4 transition-all duration-300 ease-in-out opacity-0 group-hover:opacity-100 ${ // Added opacity and hover effect
+                          showPclDevDesc ? 'rotate-90' : '' // Changed rotation
+                          }`}
+                      />
+                    </div>
                     <p className="text-gray-600">October 2021 - Present</p>
                     <p>IoT, Microservices, Mobile & Web Applications</p>
+                    {/* Added transition classes, max-h, overflow-hidden */}
+                    <div
+                      id="pcl-dev-desc"
+                      className={`mt-2 text-sm text-gray-700 text-left transition-all duration-300 ease-in-out overflow-hidden ${showPclDevDesc ? 'max-h-40 opacity-100' : 'max-h-0 opacity-0'
+                        }`}
+                    >
+                      <p>
+                        Enhanced system monitoring, automated processes, and led browser and mobile app developments. Optimized data pipelines and deployment workflows, significantly improving efficiency, reliability, and user adoption.
+                      </p>
+                    </div>
                   </div>
                   <div className="flex gap-2 flex-wrap mt-2">
                     <TypeScript size={24} aria-label="TypeScript" xlinkTitle="Typescript"></TypeScript>
@@ -140,19 +167,45 @@ const App = () => {
                   </div>
                 </div>
               </div>
-              <div className="flex gap-8 items-center justify-start w-full">
+              {/* PCL Construction Technology Analyst */}
+              <div className="flex gap-8 items-start justify-start w-full">
                 <div className="flex flex-col items-center flex-shrink-0">
                   <img src={pcl} alt="PCL Construction" className="w-24 h-24 object-contain" />
                 </div>
-                <div className="flex flex-col items-start text-left">
-                  <h3 className="text-lg font-semibold">Construction Technology Analyst</h3>
-                  <p className="text-gray-600">June 2021 - October 2021</p>
-                  <p>System Administrator</p>
+                <div className="flex-grow">
+                  <div className="flex flex-col items-start text-left">
+                    <div
+                      className="group flex items-center gap-1 cursor-pointer" // Added group, adjusted gap
+                      onClick={() => setShowPclAnalystDesc(!showPclAnalystDesc)}
+                      aria-expanded={showPclAnalystDesc}
+                      aria-controls="pcl-analyst-desc"
+                    >
+                      <h3 className="text-lg font-semibold">Construction Technology Analyst</h3>
+                      <ChevronRight // Changed icon
+                        className={`w-4 h-4 transition-all duration-300 ease-in-out opacity-0 group-hover:opacity-100 ${ // Added opacity and hover effect
+                          showPclAnalystDesc ? 'rotate-90' : '' // Changed rotation
+                          }`}
+                      />
+                    </div>
+                    <p className="text-gray-600">June 2021 - October 2021</p>
+                    <p>System Administrator</p>
+                    {/* Added transition classes, max-h, overflow-hidden */}
+                    <div
+                      id="pcl-analyst-desc"
+                      className={`mt-2 text-sm text-gray-700 text-left transition-all duration-300 ease-in-out overflow-hidden ${showPclAnalystDesc ? 'max-h-40 opacity-100' : 'max-h-0 opacity-0'
+                        }`}
+                    >
+                      <p>
+                        Managed campus-wide tech upgrades and provided executive IT support. Automated data tasks with PowerShell, improving workflow efficiency.
+                      </p>
+                    </div>
+                  </div>
                   <div className="flex gap-2 flex-wrap mt-2">
                     <PowerShell size={24} aria-label="PowerShell"></PowerShell>
                   </div>
                 </div>
               </div>
+              {/* Sunway Research Assistant */}
               <div className="flex gap-8 items-center justify-start w-full">
                 <div className="flex flex-col items-center flex-shrink-0">
                   <img src={sunway} alt="Sunway University" className="w-24 h-24 object-contain" />
