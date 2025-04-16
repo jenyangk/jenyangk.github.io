@@ -8,9 +8,9 @@ import { Spotlight } from "@/components/ui/spotlight";
 import profile from "@/assets/images/profile.webp";
 import resume from "@/assets/Resume.pdf";
 import pcl from "@/assets/images/pcl.svg";
-import sunway from "@/assets/images/sunway.png";
-import doudou from "@/assets/images/doudou.png";
-import seoer from "@/assets/images/seoer.png";
+import sunway from "@/assets/images/sunway.webp";
+import doudou from "@/assets/images/doudou.webp";
+import seoer from "@/assets/images/seoer.webp";
 import { GlobeIcon, ChevronRight } from "lucide-react"; // Changed ChevronDown to ChevronRight
 
 const App = () => {
@@ -43,6 +43,7 @@ const App = () => {
               <div id="cutout" className="absolute top-3 left-1/2 -translate-x-1/2 w-[100px] h-[25px] rounded-[25px] bg-black"></div>
               <p className="pt-8">[insert company logo]</p>
               <img
+                width="288"
                 className="w-72 aspect-auto"
                 src={profile}
                 alt="Image of Jen Yang Koh"
@@ -93,7 +94,7 @@ const App = () => {
                       <Angular size={24} aria-label="Angular"></Angular>
                       <svg aria-label=".NET" className="w-6 h-6" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><path fill="#512bd4" d="M-.134-.326h512.002v512.002H-.134z" /><path d="M91.122 326.786c-3.62 0-6.698-1.206-9.232-3.619-2.534-2.475-3.8-5.413-3.8-8.815 0-3.465 1.266-6.434 3.8-8.908 2.534-2.475 5.612-3.712 9.232-3.712 3.68 0 6.787 1.237 9.321 3.712 2.595 2.474 3.892 5.443 3.892 8.908 0 3.402-1.297 6.34-3.892 8.815-2.534 2.413-5.64 3.619-9.321 3.619zM235.844 324.745h-23.532l-61.996-97.807a43.764 43.764 0 01-3.892-7.703h-.543c.483 2.847.724 8.94.724 18.28v87.23h-20.817v-133.07h25.07l59.916 95.487c2.534 3.96 4.163 6.682 4.887 8.166h.362c-.603-3.525-.905-9.495-.905-17.91v-85.743h20.726v133.07zM337.213 324.745h-72.856v-133.07h69.96v18.745h-48.42v37.675h44.62v18.652h-44.62v39.346h51.316v18.652zM440.757 210.42h-37.289v114.325h-21.54V210.42H344.73v-18.745h96.027v18.745z" fill="#fff" /></svg>
                       <Xamarin size={24} aria-label="Xamarin"></Xamarin>
-                      <i aria-label="Microsoft SQL Server" className="devicon-microsoftsqlserver-plain colored text-2xl leading-none" title="Microsoft SQL Server"></i>
+                      <i className="devicon-microsoftsqlserver-plain colored text-2xl leading-none" title="Microsoft SQL Server"></i>
                       <Azure size={24} aria-label="Azure"></Azure>
                       <React size={24} aria-label="React"></React>
                       <NextJs size={24} aria-label="Next JS"></NextJs>
@@ -124,7 +125,7 @@ const App = () => {
               {/* PCL Software Developer */}
               <div className="flex gap-8 items-start justify-start w-full">
                 <div className="flex flex-col items-center flex-shrink-0">
-                  <img src={pcl} alt="PCL Construction" className="w-24 h-24 object-contain" />
+                  <img width="96" height="96" src={pcl} alt="PCL Construction" className="w-24 h-24 object-contain" />
                 </div>
                 <div className="flex-grow">
                   <div className="flex flex-col items-start text-left">
@@ -163,14 +164,14 @@ const App = () => {
                     <Angular size={24} aria-label="Angular"></Angular>
                     <Xamarin size={24} aria-label="Xamarin"></Xamarin>
                     <svg aria-label=".NET" className="w-6 h-6" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><path fill="#512bd4" d="M-.134-.326h512.002v512.002H-.134z" /><path d="M91.122 326.786c-3.62 0-6.698-1.206-9.232-3.619-2.534-2.475-3.8-5.413-3.8-8.815 0-3.465 1.266-6.434 3.8-8.908 2.534-2.475 5.612-3.712 9.232-3.712 3.68 0 6.787 1.237 9.321 3.712 2.595 2.474 3.892 5.443 3.892 8.908 0 3.402-1.297 6.34-3.892 8.815-2.534 2.413-5.64 3.619-9.321 3.619zM235.844 324.745h-23.532l-61.996-97.807a43.764 43.764 0 01-3.892-7.703h-.543c.483 2.847.724 8.94.724 18.28v87.23h-20.817v-133.07h25.07l59.916 95.487c2.534 3.96 4.163 6.682 4.887 8.166h.362c-.603-3.525-.905-9.495-.905-17.91v-85.743h20.726v133.07zM337.213 324.745h-72.856v-133.07h69.96v18.745h-48.42v37.675h44.62v18.652h-44.62v39.346h51.316v18.652zM440.757 210.42h-37.289v114.325h-21.54V210.42H344.73v-18.745h96.027v18.745z" fill="#fff" /></svg>
-                    <i aria-label="Microsoft SQL Server" className="devicon-microsoftsqlserver-plain colored text-2xl leading-none" title="Microsoft SQL Server"></i>
+                    <i className="devicon-microsoftsqlserver-plain colored text-2xl leading-none" title="Microsoft SQL Server"></i>
                   </div>
                 </div>
               </div>
               {/* PCL Construction Technology Analyst */}
               <div className="flex gap-8 items-start justify-start w-full">
                 <div className="flex flex-col items-center flex-shrink-0">
-                  <img src={pcl} alt="PCL Construction" className="w-24 h-24 object-contain" />
+                  <img width="96" height="96" src={pcl} alt="PCL Construction" className="w-24 h-24 object-contain" />
                 </div>
                 <div className="flex-grow">
                   <div className="flex flex-col items-start text-left">
@@ -208,7 +209,7 @@ const App = () => {
               {/* Sunway Research Assistant */}
               <div className="flex gap-8 items-center justify-start w-full">
                 <div className="flex flex-col items-center flex-shrink-0">
-                  <img src={sunway} alt="Sunway University" className="w-24 h-24 object-contain" />
+                  <img width="96" height="96" src={sunway} alt="Sunway University" className="w-24 h-24 object-contain" />
                 </div>
                 <div>
                   <div className="flex flex-col items-start text-left">
@@ -219,7 +220,7 @@ const App = () => {
                   <div className="flex gap-2 flex-wrap mt-2">
                     <JavaScript size={24} aria-label="JavaScript"></JavaScript>
                     <ThreeJs size={24} aria-label="ThreeJs"></ThreeJs>
-                    <i aria-label="Arduino" className="devicon-arduino-plain colored text-2xl leading-none" title="Arduino"></i>
+                    <i className="devicon-arduino-plain colored text-2xl leading-none" title="Arduino"></i>
                   </div>
                 </div>
               </div>
@@ -233,7 +234,7 @@ const App = () => {
               {/* DouDou Project */}
               <div className="flex flex-col p-4 border border-zinc-200 rounded-md bg-white">
                 <div className="flex items-center gap-2 mb-3">
-                  <img src={doudou} alt="DouDou App" className="w-6 h-6 object-contain" />
+                  <img width="24" height="24" src={doudou} alt="DouDou App" className="w-6 h-6 object-contain" />
                   <h3 className="text-lg font-semibold">DouDou</h3>
                 </div>
                 <p className="text-sm mb-4">
@@ -265,7 +266,7 @@ const App = () => {
               {/* SE-OER Project */}
               <div className="flex flex-col p-4 border border-zinc-200 rounded-md bg-white">
                 <div className="flex items-center gap-2 mb-3">
-                  <img src={seoer} alt="SE-OER App" className="w-6 h-6 object-contain" />
+                  <img width="24" height="24" src={seoer} alt="SE-OER App" className="w-6 h-6 object-contain" />
                   <h3 className="text-lg font-semibold">SE-OER</h3>
                 </div>
                 <p className="text-sm mb-4">
