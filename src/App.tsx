@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { TypeScript, JavaScript, CSharp, Go, Python, Angular, React, NextJs, TailwindCSS, Firebase, Azure, Xamarin, PowerShell, ThreeJs, Supabase, PostgreSQL, MaterialUI, Django } from "developer-icons"
+import { TypeScript, JavaScript, CSharp, Go, Python, Angular, React, NextJs, TailwindCSS, Firebase, Azure, Xamarin, PowerShell, ThreeJs, Supabase, PostgreSQL, MaterialUI, Django, Solidity } from "developer-icons"
 
 import { Typewriter } from "@/components/ui/typewriter";
 import { Tilt } from "@/components/ui/tilt";
@@ -11,6 +11,10 @@ import pcl from "@/assets/images/pcl.svg";
 import sunway from "@/assets/images/sunway.webp";
 import doudou from "@/assets/images/doudou.webp";
 import seoer from "@/assets/images/seoer.webp";
+import akogare from "@/assets/images/akogare.webp";
+import ghostchild from "@/assets/images/ghostchild.gif";
+import cybots from "@/assets/images/cybots.webp";
+
 import { GlobeIcon, ChevronRight } from "lucide-react"; // Changed ChevronDown to ChevronRight
 
 const App = () => {
@@ -273,11 +277,6 @@ const App = () => {
                   Developed a collaborative web application for practicing Software Engineering topics through
                   interactive flashcard-style quizzes, enabling customized study and exam-like conditions.
                 </p>
-                {/* <div className="w-full mb-6">
-                  <div className="w-full h-24 bg-gray-100 rounded-md flex items-center justify-center text-xs text-gray-500 overflow-hidden">
-                    <div className="w-32 h-20 bg-gray-300 rounded-md flex items-center justify-center">Thumbnail</div>
-                  </div>
-                </div> */}
                 <div className="flex flex-wrap gap-2 mb-4">
                   <React size={24} aria-label="React"></React>
                   <MaterialUI size={24} aria-label="MaterialUI"></MaterialUI>
@@ -286,8 +285,6 @@ const App = () => {
                   <Python size={24} aria-label="Python"></Python>
                   <PostgreSQL size={24} aria-label="PostgreSQL"></PostgreSQL>
                 </div>
-
-                {/* Footer: Date range grouped with links */}
                 <div className="flex justify-between items-center gap-2 mt-auto pt-4 border-t border-zinc-100">
                   <p className="text-sm text-gray-600">Jan 2020 – May 2020</p>
                   <a href="https://ualberta-cmput401.github.io/SE-OER/" className="flex items-center gap-1 px-3 py-1 bg-gray-100 text-black rounded-md text-sm hover:bg-gray-200 transition-colors">
@@ -298,6 +295,70 @@ const App = () => {
                   </a>
                 </div>
               </div>
+
+              {/* Akogare: Edgerunner Pass */}
+              <div className="flex flex-col p-4 border border-zinc-200 rounded-md bg-white">
+                <div className="flex items-center gap-2 mb-3">
+                  <img width="24" height="24" src={akogare} alt="Akogare: Edgerunner Pass Icon" className="w-6 h-6 object-contain rounded-full bg-gray-200" />
+                  <h3 className="text-lg font-semibold">Akogare: Edgerunner Pass</h3>
+                </div>
+                <p className="text-sm text-gray-700 mb-2">Lead contract developer for this NFT collection.</p>
+                <p className="text-sm text-gray-700 mb-1"><strong>Total Volume:</strong> 14.54 ETH</p>
+                <div className="flex flex-wrap gap-2 my-4">
+                  <Solidity size={24} aria-label="Solidity"></Solidity>
+                  <i className="devicon-hardhat-plain colored text-2xl leading-none" title="Hardhat"></i>
+                  <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">ERC721A</span>
+                </div>
+                <div className="flex justify-between items-center gap-2 mt-auto pt-4 border-t border-zinc-100">
+                  <p className="text-sm text-gray-600">Nov 2023</p>
+                  <a href="https://opensea.io/collection/edgerunner-pass" target="_blank" rel="noopener noreferrer" className="flex items-center gap-1 px-3 py-1 bg-[#2081e2] text-white rounded-md text-sm hover:bg-[#1a69bb] transition-colors">
+                    <GlobeIcon className="w-3 h-3" /> OpenSea
+                  </a>
+                </div>
+              </div>
+
+              {/* Ghost Child: Bones */}
+              <div className="flex flex-col p-4 border border-zinc-200 rounded-md bg-white">
+                <div className="flex items-center gap-2 mb-3">
+                  <img width="24" height="24" src={ghostchild} alt="Ghost Child: Bones Icon" className="w-6 h-6 object-contain rounded-full bg-gray-200" />
+                  <h3 className="text-lg font-semibold">Ghost Child: Bones</h3>
+                </div>
+                <p className="text-sm text-gray-700 mb-2">Lead contract developer for this NFT collection.</p>
+                <p className="text-sm text-gray-700 mb-1"><strong>Total Volume:</strong> 1259.80 ETH</p>
+                <div className="flex flex-wrap gap-2 my-4">
+                  <Solidity size={24} aria-label="Solidity"></Solidity>
+                  <i className="devicon-hardhat-plain colored text-2xl leading-none" title="Hardhat"></i>
+                  <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">ERC721A</span>
+                </div>
+                <div className="flex justify-between items-center gap-2 mt-auto pt-4 border-t border-zinc-100">
+                  <p className="text-sm text-gray-600">April 2023</p>
+                  <a href="https://opensea.io/collection/ghostchildbones" target="_blank" rel="noopener noreferrer" className="flex items-center gap-1 px-3 py-1 bg-[#2081e2] text-white rounded-md text-sm hover:bg-[#1a69bb] transition-colors">
+                    <GlobeIcon className="w-3 h-3" /> OpenSea
+                  </a>
+                </div>
+              </div>
+
+              {/* Cybots NFT */}
+              <div className="flex flex-col p-4 border border-zinc-200 rounded-md bg-white">
+                <div className="flex items-center gap-2 mb-3">
+                  <img width="24" height="24" src={cybots} alt="Cybots NFT Icon" className="w-6 h-6 object-contain rounded-full bg-gray-200" />
+                  <h3 className="text-lg font-semibold">Cybots NFT</h3>
+                </div>
+                <p className="text-sm text-gray-700 mb-2">Lead contract developer for this NFT collection.</p>
+                <p className="text-sm text-gray-700 mb-1"><strong>Total Volume:</strong> 0.58 ETH</p>
+                <div className="flex flex-wrap gap-2 my-4">
+                  <Solidity size={24} aria-label="Solidity"></Solidity>
+                  <i className="devicon-hardhat-plain colored text-2xl leading-none" title="Hardhat"></i>
+                  <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">ERC721A</span>
+                </div>
+                <div className="flex justify-between items-center gap-2 mt-auto pt-4 border-t border-zinc-100">
+                  <p className="text-sm text-gray-600">May 2022</p>
+                  <a href="https://opensea.io/collection/cybotsnft" target="_blank" rel="noopener noreferrer" className="flex items-center gap-1 px-3 py-1 bg-[#2081e2] text-white rounded-md text-sm hover:bg-[#1a69bb] transition-colors">
+                    <GlobeIcon className="w-3 h-3" /> OpenSea
+                  </a>
+                </div>
+              </div>
+
             </div>
           </div>
 
