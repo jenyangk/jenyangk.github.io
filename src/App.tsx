@@ -364,7 +364,7 @@ const App = () => {
 
           {/* Contributions Section */}
           <div className="w-full max-w-xl mx-auto lg:mx-0">
-            <h2 id="contributions" className="text-xl font-semibold mb-4">Contributions</h2>
+            <h2 id="contributions" className="text-xl font-semibold mb-4">Open Contributions</h2>
             <div className="flex flex-col gap-4">
               <div className="flex flex-col text-left bg-white border border-zinc-200 rounded-md p-3">
                 <div className="flex items-start justify-between">
@@ -411,6 +411,35 @@ const App = () => {
               </div>
             </div>
           </div>
+
+          {/* Currently Reading Section */}
+          <div id="reading" className="w-full max-w-xl mx-auto lg:mx-0">
+            <h2 className="text-xl font-semibold mb-4">Currently Reading</h2>
+            <div className="flex flex-col gap-4">
+              {/* Book 1 */}
+              <div className="flex flex-col text-left bg-white border border-zinc-200 rounded-md p-3">
+                <a href="https://www.wiley.com/en-ca/Algorithmic+Trading%3A+Winning+Strategies+and+Their+Rationale-p-9781118460146" target="_blank" rel="noopener noreferrer" className="font-medium hover:underline">
+                  Algorithmic Trading: Winning Strategies and Their Rationale
+                </a>
+                <p className="text-sm text-zinc-500">by Ernest Chan</p>
+              </div>
+              {/* Book 2 */}
+              <div className="flex flex-col text-left bg-white border border-zinc-200 rounded-md p-3">
+                <a href="https://learning.oreilly.com/library/view/ai-engineering/9781098166298/" target="_blank" rel="noopener noreferrer" className="font-medium hover:underline">
+                  AI Engineering
+                </a>
+                <p className="text-sm text-zinc-500">by Chip Huyen</p>
+              </div>
+              {/* Book 3 */}
+              <div className="flex flex-col text-left bg-white border border-zinc-200 rounded-md p-3">
+                <a href="https://learning.oreilly.com/library/view/designing-data-intensive-applications/9781098119058/" target="_blank" rel="noopener noreferrer" className="font-medium hover:underline">
+                  Designing Data-Intensive Applications
+                </a>
+                <p className="text-sm text-zinc-500">by Martin Kleppmann, Chris Riccomini</p>
+              </div>
+            </div>
+          </div>
+
         </div>
       </div>
       <footer className="flex items-center justify-between text-black px-8 py-2">
