@@ -151,7 +151,7 @@ const App = () => {
                     {/* Added transition classes, max-h, overflow-hidden */}
                     <div
                       id="pcl-dev-desc"
-                      className={`mt-2 text-sm text-gray-700 text-left transition-all duration-300 ease-in-out overflow-hidden ${showPclDevDesc ? 'max-h-40 opacity-100' : 'max-h-0 opacity-0'
+                      className={`mt-2 text-gray-700 text-left transition-all duration-300 ease-in-out overflow-hidden ${showPclDevDesc ? 'max-h-40 opacity-100' : 'max-h-0 opacity-0'
                         }`}
                     >
                       <p>
@@ -241,7 +241,7 @@ const App = () => {
                   <img width="24" height="24" src={doudou} alt="DouDou App" className="w-6 h-6 object-contain" />
                   <h3 className="text-lg font-semibold">DouDou</h3>
                 </div>
-                <p className="text-sm mb-4">
+                <p className="mb-4">
                   Developed an interactive photo voting app, allowing users to initiate and manage photo voting sessions,
                   submit photos, and vote on submissions with real-time tracking.
                 </p>
@@ -273,7 +273,7 @@ const App = () => {
                   <img width="24" height="24" src={seoer} alt="SE-OER App" className="w-6 h-6 object-contain" />
                   <h3 className="text-lg font-semibold">SE-OER</h3>
                 </div>
-                <p className="text-sm mb-4">
+                <p className="mb-4">
                   Developed a collaborative web application for practicing Software Engineering topics through
                   interactive flashcard-style quizzes, enabling customized study and exam-like conditions.
                 </p>
@@ -302,7 +302,7 @@ const App = () => {
                   <img width="24" height="24" src={akogare} alt="Akogare: Edgerunner Pass Icon" className="w-6 h-6 object-contain rounded-full bg-gray-200" />
                   <h3 className="text-lg font-semibold">Akogare: Edgerunner Pass</h3>
                 </div>
-                <p className="text-sm text-gray-700 mb-2">Lead contract developer for this NFT collection.</p>
+                <p className="text-gray-700 mb-2">Lead contract developer for this NFT collection.</p>
                 <p className="text-sm text-gray-700 mb-1"><strong>Total Volume:</strong> 14.54 ETH</p>
                 <div className="flex flex-wrap gap-2 my-4">
                   <Solidity size={24} aria-label="Solidity"></Solidity>
@@ -323,7 +323,7 @@ const App = () => {
                   <img width="24" height="24" src={ghostchild} alt="Ghost Child: Bones Icon" className="w-6 h-6 object-contain rounded-full bg-gray-200" />
                   <h3 className="text-lg font-semibold">Ghost Child: Bones</h3>
                 </div>
-                <p className="text-sm text-gray-700 mb-2">Lead contract developer for this NFT collection.</p>
+                <p className="text-gray-700 mb-2">Lead contract developer for this NFT collection.</p>
                 <p className="text-sm text-gray-700 mb-1"><strong>Total Volume:</strong> 1259.80 ETH</p>
                 <div className="flex flex-wrap gap-2 my-4">
                   <Solidity size={24} aria-label="Solidity"></Solidity>
@@ -344,7 +344,7 @@ const App = () => {
                   <img width="24" height="24" src={cybots} alt="Cybots NFT Icon" className="w-6 h-6 object-contain rounded-full bg-gray-200" />
                   <h3 className="text-lg font-semibold">Cybots NFT</h3>
                 </div>
-                <p className="text-sm text-gray-700 mb-2">Lead contract developer for this NFT collection.</p>
+                <p className="text-gray-700 mb-2">Lead contract developer for this NFT collection.</p>
                 <p className="text-sm text-gray-700 mb-1"><strong>Total Volume:</strong> 0.58 ETH</p>
                 <div className="flex flex-wrap gap-2 my-4">
                   <Solidity size={24} aria-label="Solidity"></Solidity>
