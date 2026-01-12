@@ -52,7 +52,7 @@ const App = () => {
                 src={profile}
                 alt="Image of Jen Yang Koh"
               />
-              <div className="backdrop-blur-sm px-4 py-4">
+              <div className="px-4 py-4">
                 <div className="my-4">
                   <div>
                     <Typewriter
