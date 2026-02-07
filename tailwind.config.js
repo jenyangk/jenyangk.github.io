@@ -8,6 +8,7 @@ export default {
     extend: {
       fontFamily: {
         barcode: ['"Libre Barcode 39"', 'monospace'],
+        mono: ['"JetBrains Mono"', '"Fira Code"', 'ui-monospace', 'SFMono-Regular', 'monospace'],
       },
       colors: {
         main: 'var(--main)',

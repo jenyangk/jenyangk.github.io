@@ -1,11 +1,18 @@
 import { useState } from "react";
-import { TypeScript, JavaScript, CSharp, Go, Python, Angular, React, NextJs, TailwindCSS, Firebase, Azure, Xamarin, PowerShell, ThreeJs, Supabase, PostgreSQL, MaterialUI, Django, Solidity } from "developer-icons"
+import {
+  TypeScript, JavaScript, React as ReactIcon, NextJs,
+  TailwindCSS, Supabase, PostgreSQL, MaterialUI, Django, Python, Solidity,
+  ThreeJs
+} from "developer-icons";
+import { motion } from "framer-motion";
 
 import { Typewriter } from "@/components/ui/typewriter";
 import { Tilt } from "@/components/ui/tilt";
 import { Spotlight } from "@/components/ui/spotlight";
 import { ThemeProvider } from "@/components/theme-provider";
 import { ModeToggle } from "@/components/mode-toggle";
+import { BentoGrid, BentoCard, BentoCardHighlight } from "@/components/ui/bento-grid";
+import { Toolkit } from "@/components/toolkit";
 
 import profile from "@/assets/images/profile.webp";
 import resume from "@/assets/Resume.pdf";
@@ -20,7 +27,7 @@ import waving_hand from "@/assets/images/waving-hand.png";
 import canada from "@/assets/images/canada.webp";
 import malaysia from "@/assets/images/malaysia.webp";
 
-import { GlobeIcon, ChevronRight } from "lucide-react";
+import { GlobeIcon, ChevronRight, ExternalLink, BookOpen, Github } from "lucide-react";
 
 const App = () => {
   const spotlightSpringOptions = {
@@ -33,46 +40,62 @@ const App = () => {
 
   return (
     <ThemeProvider defaultTheme="system" storageKey="vite-ui-theme">
-      <div className="text-center bg-bg text-text grid min-h-screen grid-rows-[auto_1fr_auto] transition-colors duration-300">
+      <div className="bg-bg text-text min-h-screen transition-colors duration-300">
+        {/* Fixed Controls */}
         <div className="fixed top-4 right-4 z-50">
           <ModeToggle />
         </div>
-        <header className="flex items-center justify-center text-text px-8 py-4 gap-4 lg:hidden">
-          <a href="#experience" className="hover:underline">Experience</a>
-          <a href="#projects" className="hover:underline">Projects</a>
-          <a href="#contributions" className="hover:underline">Contributions</a>
+
+        {/* Mobile Nav */}
+        <header className="flex items-center justify-center text-text px-8 py-4 gap-4 lg:hidden border-b border-border">
+          <a href="#experience" className="font-mono text-sm uppercase tracking-tight hover:underline">Experience</a>
+          <a href="#projects" className="font-mono text-sm uppercase tracking-tight hover:underline">Projects</a>
+          <a href="#toolkit" className="font-mono text-sm uppercase tracking-tight hover:underline">Toolkit</a>
         </header>
-        <h1 className="hidden">Jen Yang Koh</h1>
-        <div className="grid lg:grid-cols-2 gap-8 items-start justify-center text-text px-4 lg:px-8 py-4 lg:place-self-center">
-          <div className="flex flex-col items-center justify-start w-full lg:sticky lg:top-8">
-            <p className="flex gap-4 py-4 text-4xl font-extrabold">Hi, I'm Andy <img src={waving_hand} alt="Waving Hand" className="w-8 h-8" /></p>
-            <Tilt rotationFactor={8} isRevese>
-              <div
-                className="flex flex-col items-center relative border-[4px] rounded-xl p-2 bg-bw border-border w-full max-w-md mx-auto"
+
+        <h1 className="sr-only">Jen Yang Koh - Software Engineer</h1>
+
+        {/* Main Content */}
+        <main className="px-4 py-8 lg:py-16">
+          <BentoGrid className="gap-4">
+
+            {/* Hero Card - The "ID Badge" */}
+            <BentoCard colSpan={1} rowSpan={1} className="flex flex-col items-center justify-center">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.4 }}
+                className="flex gap-2 items-center mb-4"
               >
-                <Spotlight className='from-zinc-50 via-zinc-100 to-zinc-200 blur-2xl dark:from-zinc-800 dark:via-zinc-900 dark:to-black'
-                  size={64}
-                  springOptions={spotlightSpringOptions}></Spotlight>
-                <div id="cutout" className="absolute top-3 left-1/2 -translate-x-1/2 w-[100px] h-[25px] rounded-[25px] bg-black dark:bg-white"></div>
-                <p className="pt-8">[insert company logo]</p>
-                <img
-                  width="288"
-                  className="w-72 aspect-auto"
-                  src={profile}
-                  alt="Image of Jen Yang Koh"
-                />
-                <div className="px-4 py-4">
-                  <div className="my-4">
-                    <div>
+                <span className="text-3xl font-bold">Hi, I'm Andy</span>
+                <img src={waving_hand} alt="Waving Hand" className="w-7 h-7" />
+              </motion.div>
+
+              <Tilt rotationFactor={6} isRevese>
+                <div className="flex flex-col items-center relative border-2 p-2 bg-bw border-border w-full max-w-xs mx-auto">
+                  <Spotlight
+                    className='from-zinc-50 via-zinc-100 to-zinc-200 blur-2xl dark:from-zinc-800 dark:via-zinc-900 dark:to-black'
+                    size={64}
+                    springOptions={spotlightSpringOptions}
+                  />
+                  <div className="absolute top-2 left-1/2 -translate-x-1/2 w-16 h-4 bg-black dark:bg-white opacity-80" />
+
+                  <img
+                    width="200"
+                    className="w-48 aspect-auto mt-6"
+                    src={profile}
+                    alt="Image of Jen Yang Koh"
+                  />
+
+                  <div className="px-3 py-3 w-full">
+                    <div className="my-3 text-center">
                       <Typewriter
                         text={["Jen Yang Koh", "辜振洋", "Andy Koh"]}
                         speed={100}
                         delay={13000}
                         loop={true}
-                        className="text-3xl font-medium"
+                        className="text-2xl font-bold"
                       />
-                    </div>
-                    <div>
                       <Typewriter
                         text={[
                           "Software Engineer",
@@ -82,385 +105,227 @@ const App = () => {
                         speed={100}
                         delay={10000}
                         loop={true}
-                        className="text-lg font-medium"
+                        className="text-sm text-zinc-600 dark:text-zinc-400"
                       />
-                    </div>
-                    <div className="flex text-sm gap-2 items-center justify-center">
-                      <img src={canada} alt="Canada Flag" className="w-6" />
-                      <img src={malaysia} alt="Malaysia Flag" className="w-6" />
-                    </div>
-                  </div>
-                  <div className="w-full flex flex-col items-start">
-                    <div className="mb-1 flex flex-col items-start">
-                      <h2>Languages:</h2>
-                      <div className="flex gap-2">
-                        <TypeScript size={24} aria-label="TypeScript" xlinkTitle="Typescript"></TypeScript>
-                        <JavaScript size={24} aria-label="JavaScript"></JavaScript>
-                        <Go size={24} aria-label="Go"></Go>
-                        <CSharp size={24} aria-label="CSharp"></CSharp>
-                        <Python size={24} aria-label="Python"></Python>
+                      <div className="flex gap-2 items-center justify-center mt-2">
+                        <img src={canada} alt="Canada Flag" className="w-5" />
+                        <img src={malaysia} alt="Malaysia Flag" className="w-5" />
                       </div>
                     </div>
-                    <div className="mb-1 flex flex-col items-start">
-                      <h2>Stack:</h2>
-                      <div className="flex gap-2">
-                        <Angular size={24} aria-label="Angular"></Angular>
-                        <svg aria-label=".NET" className="w-6 h-6" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><path fill="#512bd4" d="M-.134-.326h512.002v512.002H-.134z" /><path d="M91.122 326.786c-3.62 0-6.698-1.206-9.232-3.619-2.534-2.475-3.8-5.413-3.8-8.815 0-3.465 1.266-6.434 3.8-8.908 2.534-2.475 5.612-3.712 9.232-3.712 3.68 0 6.787 1.237 9.321 3.712 2.595 2.474 3.892 5.443 3.892 8.908 0 3.402-1.297 6.34-3.892 8.815-2.534 2.413-5.64 3.619-9.321 3.619zM235.844 324.745h-23.532l-61.996-97.807a43.764 43.764 0 01-3.892-7.703h-.543c.483 2.847.724 8.94.724 18.28v87.23h-20.817v-133.07h25.07l59.916 95.487c2.534 3.96 4.163 6.682 4.887 8.166h.362c-.603-3.525-.905-9.495-.905-17.91v-85.743h20.726v133.07zM337.213 324.745h-72.856v-133.07h69.96v18.745h-48.42v37.675h44.62v18.652h-44.62v39.346h51.316v18.652zM440.757 210.42h-37.289v114.325h-21.54V210.42H344.73v-18.745h96.027v18.745z" fill="#fff" /></svg>
-                        <Xamarin size={24} aria-label="Xamarin"></Xamarin>
-                        <i className="devicon-microsoftsqlserver-plain colored text-2xl leading-none" title="Microsoft SQL Server"></i>
-                        <Azure size={24} aria-label="Azure"></Azure>
-                        <React size={24} aria-label="React"></React>
-                        <NextJs size={24} aria-label="Next JS"></NextJs>
-                        <TailwindCSS size={24} aria-label="Tailwind CSS"></TailwindCSS>
-                        <Firebase size={24} aria-label="Firebase"></Firebase>
-                      </div>
+                    <div className="mt-4">
+                      <h2 className="font-barcode text-3xl text-center">jenyangk.github.io</h2>
                     </div>
                   </div>
-                  <div>
-                    <h1 className="mt-4 font-barcode text-3xl sm:text-5xl">jenyangk.github.io</h1>
+                </div>
+              </Tilt>
+
+              {/* Social Links */}
+              <div className="flex gap-4 mt-6 text-sm font-mono">
+                <a href="https://github.com/jenyangk" className="flex items-center gap-1 hover:underline">
+                  <Github className="w-4 h-4" /> GitHub
+                </a>
+                <a href="https://www.linkedin.com/in/jenyangkoh/" className="flex items-center gap-1 hover:underline">
+                  <ExternalLink className="w-4 h-4" /> LinkedIn
+                </a>
+                <a href={resume} className="flex items-center gap-1 hover:underline">
+                  Résumé
+                </a>
+              </div>
+            </BentoCard>
+
+            {/* The Manifesto Card */}
+            <BentoCardHighlight colSpan={2}>
+              <h2 className="font-mono text-base uppercase tracking-tight opacity-60 mb-3">// About</h2>
+              <p className="text-2xl lg:text-3xl font-bold leading-relaxed">
+                I build software that works.
+              </p>
+              <p className="mt-4 text-lg opacity-80 leading-relaxed">
+                I don't stress too much about labels like "frontend" or "backend."
+                If a button needs to be clicked, I'll design it. If that button needs to save data, I'll write the API.
+                I just want to build the whole thing right.
+              </p>
+            </BentoCardHighlight>
+
+            {/* Toolkit Card */}
+            <BentoCard colSpan={2} id="toolkit">
+              <Toolkit />
+            </BentoCard>
+
+            {/* Experience: PCL */}
+            <BentoCard colSpan={1} id="experience">
+              <div className="flex items-start gap-4">
+                <img width="56" height="56" src={pcl} alt="PCL Construction" className="w-14 h-14 object-contain flex-shrink-0" />
+                <div className="text-left">
+                  <div
+                    className="group flex items-center gap-1 cursor-pointer"
+                    onClick={() => setShowPclDevDesc(!showPclDevDesc)}
+                    aria-expanded={showPclDevDesc}
+                  >
+                    <h3 className="font-bold">Software Developer</h3>
+                    <ChevronRight className={`w-4 h-4 transition-transform duration-200 ${showPclDevDesc ? 'rotate-90' : ''}`} />
+                  </div>
+                  <p className="text-base text-zinc-500">PCL Construction · 2021 – Present</p>
+                  <p className="text-base mt-1">IoT, Microservices, Mobile & Web</p>
+                  <div className={`mt-2 text-base text-zinc-600 dark:text-zinc-400 transition-all duration-200 overflow-hidden ${showPclDevDesc ? 'max-h-48 opacity-100' : 'max-h-0 opacity-0'}`}>
+                    Built monitoring systems, automated workflows, and led mobile/web app development.
+                    Worked across the stack—from cloud infrastructure to user interfaces.
                   </div>
                 </div>
               </div>
-            </Tilt>
-            <div className="flex gap-4 py-8">
-              <a href="https://github.com/jenyangk" className="underline">GitHub</a>
-              <a href="https://www.linkedin.com/in/jenyangkoh/" className="underline">LinkedIn</a>
-              <a href={resume} className="underline">Résumé</a>
-              <a href="mailto:jenyang.koh@gmail.com" className="underline">Email</a>
-            </div>
-          </div>
+            </BentoCard>
 
-          {/* Column 2: Experience, Projects, Contributions */}
-          <div className="flex flex-col gap-8 items-center lg:items-start w-full">
-            <div className="w-full max-w-xl mx-auto lg:mx-0">
-              <h2 id="experience" className="text-xl font-semibold mb-4">Experience</h2>
-              <div className="flex flex-col gap-8 items-start">
-                {/* PCL Software Developer */}
-                <div className="flex gap-8 items-start justify-start w-full">
-                  <div className="flex flex-col items-center flex-shrink-0">
-                    <img width="96" height="96" src={pcl} alt="PCL Construction" className="w-24 h-24 object-contain" />
+            {/* Experience: PCL Analyst */}
+            <BentoCard colSpan={1}>
+              <div className="flex items-start gap-4">
+                <img width="56" height="56" src={pcl} alt="PCL Construction" className="w-14 h-14 object-contain flex-shrink-0" />
+                <div className="text-left">
+                  <div
+                    className="group flex items-center gap-1 cursor-pointer"
+                    onClick={() => setShowPclAnalystDesc(!showPclAnalystDesc)}
+                    aria-expanded={showPclAnalystDesc}
+                  >
+                    <h3 className="font-bold">Tech Analyst</h3>
+                    <ChevronRight className={`w-4 h-4 transition-transform duration-200 ${showPclAnalystDesc ? 'rotate-90' : ''}`} />
                   </div>
-                  <div className="flex-grow">
-                    <div className="flex flex-col items-start text-left">
-                      <div
-                        className="group flex items-center gap-1 cursor-pointer" // Added group, adjusted gap
-                        onClick={() => setShowPclDevDesc(!showPclDevDesc)}
-                        aria-expanded={showPclDevDesc}
-                        aria-controls="pcl-dev-desc"
-                      >
-                        <h3 className="text-lg font-semibold">Software Developer</h3>
-                        <ChevronRight // Changed icon
-                          className={`w-4 h-4 transition-all duration-300 ease-in-out opacity-0 group-hover:opacity-100 ${ // Added opacity and hover effect
-                            showPclDevDesc ? 'rotate-90' : '' // Changed rotation
-                            }`}
-                        />
-                      </div>
-                      <p className="text-gray-600 dark:text-gray-400">October 2021 - Present</p>
-                      <p>IoT, Microservices, Mobile & Web Applications</p>
-                      {/* Added transition classes, max-h, overflow-hidden */}
-                      <div
-                        id="pcl-dev-desc"
-                        className={`mt-2 text-gray-700 dark:text-gray-300 text-left transition-all duration-300 ease-in-out overflow-hidden ${showPclDevDesc ? 'max-h-40 opacity-100' : 'max-h-0 opacity-0'
-                          }`}
-                      >
-                        <p>
-                          Enhanced system monitoring, automated processes, and led browser and mobile app developments. Optimized data pipelines and deployment workflows, significantly improving efficiency, reliability, and user adoption.
-                        </p>
-                      </div>
-                    </div>
-                    <div className="flex gap-2 flex-wrap mt-2">
-                      <TypeScript size={24} aria-label="TypeScript" xlinkTitle="Typescript"></TypeScript>
-                      <JavaScript size={24} aria-label="JavaScript"></JavaScript>
-                      <Go size={24} aria-label="Go"></Go>
-                      <CSharp size={24} aria-label="CSharp"></CSharp>
-                      <Azure size={24} aria-label="Azure"></Azure>
-                      <Angular size={24} aria-label="Angular"></Angular>
-                      <Xamarin size={24} aria-label="Xamarin"></Xamarin>
-                      <svg aria-label=".NET" className="w-6 h-6" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><path fill="#512bd4" d="M-.134-.326h512.002v512.002H-.134z" /><path d="M91.122 326.786c-3.62 0-6.69232-3.619-2.534-2.475-3.8-5.413-3.8-8.815 0-3.465 1.266-6.434 3.8-8.908 2.534-2.475 5.612-3.712 9.232-3.712 3.68 0 6.787 1.237 9.321 3.712 2.595 2.474 3.892 5.443 3.892 8.908 0 3.402-1.297 6.34-3.892 8.815-2.534 2.413-5.64 3.619-9.321 3.619zM235.844 324.745h-23.532l-61.996-97.807a43.764 43.764 0 01-3.892-7.703h-.543c.483 2.847.724 8.94.724 18.28v87.23h-20.817v-133.07h25.07l59.916 95.487c2.534 3.96 4.163 6.682 4.887 8.166h.362c-.603-3.525-.905-9.495-.905-17.91v-85.743h20.726v133.07zM337.213 324.745h-72.856v-133.07h69.96v18.745h-48.42v37.675h44.62v18.652h-44.62v39.346h51.316v18.652zM440.757 210.42h-37.289v114.325h-21.54V210.42H344.73v-18.745h96.027v18.745z" fill="#fff" /></svg>
-                      <i className="devicon-microsoftsqlserver-plain colored text-2xl leading-none" title="Microsoft SQL Server"></i>
-                    </div>
-                  </div>
-                </div>
-                {/* PCL Construction Technology Analyst */}
-                <div className="flex gap-8 items-start justify-start w-full">
-                  <div className="flex flex-col items-center flex-shrink-0">
-                    <img width="96" height="96" src={pcl} alt="PCL Construction" className="w-24 h-24 object-contain" />
-                  </div>
-                  <div className="flex-grow">
-                    <div className="flex flex-col items-start text-left">
-                      <div
-                        className="group flex items-center gap-1 cursor-pointer" // Added group, adjusted gap
-                        onClick={() => setShowPclAnalystDesc(!showPclAnalystDesc)}
-                        aria-expanded={showPclAnalystDesc}
-                        aria-controls="pcl-analyst-desc"
-                      >
-                        <h3 className="text-lg font-semibold">Construction Technology Analyst</h3>
-                        <ChevronRight // Changed icon
-                          className={`w-4 h-4 transition-all duration-300 ease-in-out opacity-0 group-hover:opacity-100 ${ // Added opacity and hover effect
-                            showPclAnalystDesc ? 'rotate-90' : '' // Changed rotation
-                            }`}
-                        />
-                      </div>
-                      <p className="text-gray-600 dark:text-gray-400">June 2021 - October 2021</p>
-                      <p>System Administrator</p>
-                      {/* Added transition classes, max-h, overflow-hidden */}
-                      <div
-                        id="pcl-analyst-desc"
-                        className={`mt-2 text-sm text-gray-700 dark:text-gray-300 text-left transition-all duration-300 ease-in-out overflow-hidden ${showPclAnalystDesc ? 'max-h-40 opacity-100' : 'max-h-0 opacity-0'
-                          }`}
-                      >
-                        <p>
-                          Managed campus-wide tech upgrades and provided executive IT support. Automated data tasks with PowerShell, improving workflow efficiency.
-                        </p>
-                      </div>
-                    </div>
-                    <div className="flex gap-2 flex-wrap mt-2">
-                      <PowerShell size={24} aria-label="PowerShell"></PowerShell>
-                    </div>
-                  </div>
-                </div>
-                {/* Sunway Research Assistant */}
-                <div className="flex gap-8 items-center justify-start w-full">
-                  <div className="flex flex-col items-center flex-shrink-0">
-                    <img width="96" height="96" src={sunway} alt="Sunway University" className="w-24 h-24 object-contain" />
-                  </div>
-                  <div>
-                    <div className="flex flex-col items-start text-left">
-                      <h3 className="text-lg font-semibold">Research Assistant</h3>
-                      <p className="text-gray-600 dark:text-gray-400">June 2017 - December 2017</p>
-                      <p>Haptic Technology, Augmented Reality, IoT</p>
-                    </div>
-                    <div className="flex gap-2 flex-wrap mt-2">
-                      <JavaScript size={24} aria-label="JavaScript"></JavaScript>
-                      <ThreeJs size={24} aria-label="ThreeJs"></ThreeJs>
-                      <i className="devicon-arduino-plain colored text-2xl leading-none" title="Arduino"></i>
-                    </div>
+                  <p className="text-base text-zinc-500">PCL Construction · 2021</p>
+                  <p className="text-base mt-1">System Administration</p>
+                  <div className={`mt-2 text-base text-zinc-600 dark:text-zinc-400 transition-all duration-200 overflow-hidden ${showPclAnalystDesc ? 'max-h-48 opacity-100' : 'max-h-0 opacity-0'}`}>
+                    Managed campus-wide tech upgrades. Automated data tasks with PowerShell.
                   </div>
                 </div>
               </div>
-            </div>
+            </BentoCard>
 
-            {/* Projects Section */}
-            <div id="projects" className="w-full max-w-xl mx-auto lg:mx-0">
-              <h2 className="text-xl font-semibold mb-4">Projects</h2>
-              <div className="flex flex-col gap-8">
-                {/* DouDou Project */}
-                <div className="flex flex-col p-4 border border-border rounded-md bg-bw">
-                  <div className="flex items-center gap-2 mb-3">
-                    <img width="24" height="24" src={doudou} alt="DouDou App" className="w-6 h-6 object-contain" />
-                    <h3 className="text-lg font-semibold">DouDou</h3>
-                  </div>
-                  <p className="mb-4">
-                    Developed an interactive photo voting app, allowing users to initiate and manage photo voting sessions,
-                    submit photos, and vote on submissions with real-time tracking.
-                  </p>
-                  {/* <div className="w-full mb-6">
-                    <div className="w-full h-24 bg-gray-100 rounded-md flex items-center justify-center text-xs text-gray-500 overflow-hidden">
-                      <div className="w-32 h-20 bg-gray-300 rounded-md flex items-center justify-center">Thumbnail</div>
-                    </div>
-                  </div> */}
-                  <div className="flex flex-wrap gap-2 mb-4">
-                    <React size={24} aria-label="React"></React>
-                    <NextJs size={24} aria-label="Next JS"></NextJs>
-                    <TypeScript size={24} aria-label="Typescript"></TypeScript>
-                    <TailwindCSS size={24} aria-label="Tailwind CSS"></TailwindCSS>
-                    <Supabase size={24} aria-label="Supabase"></Supabase>
-                  </div>
-
-                  {/* Footer: Date range grouped with links */}
-                  <div className="flex justify-between items-center gap-2 mt-auto pt-4 border-t border-zinc-100 dark:border-zinc-800">
-                    <p className="text-sm text-gray-600 dark:text-gray-400">Oct 2024 – Present</p>
-                    <a href="https://doudou.muniee.com/" className="flex items-center gap-1 px-3 py-1 bg-black text-white dark:bg-white dark:text-black rounded-md text-sm hover:bg-zinc-800 dark:hover:bg-zinc-200 transition-colors">
-                      <GlobeIcon className="w-3 h-3"></GlobeIcon> Website
-                    </a>
-                  </div>
-                </div>
-
-                {/* SE-OER Project */}
-                <div className="flex flex-col p-4 border border-border rounded-md bg-bw">
-                  <div className="flex items-center gap-2 mb-3">
-                    <img width="24" height="24" src={seoer} alt="SE-OER App" className="w-6 h-6 object-contain" />
-                    <h3 className="text-lg font-semibold">SE-OER</h3>
-                  </div>
-                  <p className="mb-4">
-                    Developed a collaborative web application for practicing Software Engineering topics through
-                    interactive flashcard-style quizzes, enabling customized study and exam-like conditions.
-                  </p>
-                  <div className="flex flex-wrap gap-2 mb-4">
-                    <React size={24} aria-label="React"></React>
-                    <MaterialUI size={24} aria-label="MaterialUI"></MaterialUI>
-                    <TypeScript size={24} aria-label="Typescript"></TypeScript>
-                    <Django size={24} aria-label="Django"></Django>
-                    <Python size={24} aria-label="Python"></Python>
-                    <PostgreSQL size={24} aria-label="PostgreSQL"></PostgreSQL>
-                  </div>
-                  <div className="flex justify-between items-center gap-2 mt-auto pt-4 border-t border-zinc-100 dark:border-zinc-800">
-                    <p className="text-sm text-gray-600 dark:text-gray-400">Jan 2020 – May 2020</p>
-                    <a href="https://ualberta-cmput401.github.io/SE-OER/" className="flex items-center gap-1 px-3 py-1 bg-gray-100 text-black dark:bg-zinc-800 dark:text-white rounded-md text-sm hover:bg-gray-200 dark:hover:bg-zinc-700 transition-colors">
-                      <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path fillRule="evenodd" clipRule="evenodd" d="M12 2C6.477 2 2 6.477 2 12C2 16.417 4.865 20.167 8.84 21.494C9.34 21.583 9.52 21.276 9.52 21.006C9.52 20.764 9.512 20.005 9.508 19.176C6.726 19.794 6.139 17.849 6.139 17.849C5.685 16.688 5.029 16.384 5.029 16.384C4.147 15.765 5.095 15.778 5.095 15.778C6.072 15.841 6.598 16.799 6.598 16.799C7.48 18.35 8.862 17.893 9.54 17.633C9.629 16.977 9.889 16.522 10.175 16.278C7.954 16.031 5.62 15.173 5.62 11.293C5.62 10.17 6.01 9.2618 8.557C6.517 8.302 6.168 7.309 6.713 5.985C6.713 5.985 7.545 5.711 9.496 7.048C10.294 6.819 11.166 6.704 12.034 6.7C12.9 6.704 13.771 6.819 14.571 7.048C16.52 5.711 17.351 5.985 17.351 5.985C17.898 7.309 17.548 8.302 17.447 8.557C18.057 9.26 18.443 10.17 18.443 11.293C18.443 15.182 16.105 16.027 13.876 16.269C14.235 16.573 14.558 17.173 14.558 18.094C14.558 19.415 14.545 20.677 14.545 21.006C14.545 21.279 14.722 21.59 15.232 21.492C19.205 20.163 22.066 16.417 22.066 12C22.066 6.477 17.59 2 12.066 2H12Z" fill="currentColor" />
-                      </svg>
-                      Source
-                    </a>
-                  </div>
-                </div>
-
-                {/* Akogare: Edgerunner Pass */}
-                <div className="flex flex-col p-4 border border-border rounded-md bg-bw">
-                  <div className="flex items-center gap-2 mb-3">
-                    <img width="24" height="24" src={akogare} alt="Akogare: Edgerunner Pass Icon" className="w-6 h-6 object-contain rounded-full bg-gray-200" />
-                    <h3 className="text-lg font-semibold">Akogare: Edgerunner Pass</h3>
-                  </div>
-                  <p className="text-gray-700 dark:text-gray-300 mb-2">Lead contract developer for this NFT collection.</p>
-                  <p className="text-sm text-gray-700 dark:text-gray-300 mb-1"><strong>Total Volume:</strong> 14.54 ETH</p>
-                  <div className="flex flex-wrap gap-2 my-4">
-                    <Solidity size={24} aria-label="Solidity"></Solidity>
-                    <i className="devicon-hardhat-plain colored text-2xl leading-none" title="Hardhat"></i>
-                    <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-100">ERC721A</span>
-                  </div>
-                  <div className="flex justify-between items-center gap-2 mt-auto pt-4 border-t border-zinc-100 dark:border-zinc-800">
-                    <p className="text-sm text-gray-600 dark:text-gray-400">Nov 2023</p>
-                    <a href="https://opensea.io/collection/edgerunner-pass" target="_blank" rel="noopener noreferrer" className="flex items-center gap-1 px-3 py-1 bg-[#2081e2] text-white rounded-md text-sm hover:bg-[#1a69bb] transition-colors">
-                      <GlobeIcon className="w-3 h-3" /> OpenSea
-                    </a>
-                  </div>
-                </div>
-
-                {/* Ghost Child: Bones */}
-                <div className="flex flex-col p-4 border border-border rounded-md bg-bw">
-                  <div className="flex items-center gap-2 mb-3">
-                    <img width="24" height="24" src={ghostchild} alt="Ghost Child: Bones Icon" className="w-6 h-6 object-contain rounded-full bg-gray-200" />
-                    <h3 className="text-lg font-semibold">Ghost Child: Bones</h3>
-                  </div>
-                  <p className="text-gray-700 dark:text-gray-300 mb-2">Lead contract developer for this NFT collection.</p>
-                  <p className="text-sm text-gray-700 dark:text-gray-300 mb-1"><strong>Total Volume:</strong> 1259.80 ETH</p>
-                  <div className="flex flex-wrap gap-2 my-4">
-                    <Solidity size={24} aria-label="Solidity"></Solidity>
-                    <i className="devicon-hardhat-plain colored text-2xl leading-none" title="Hardhat"></i>
-                    <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-100">ERC721A</span>
-                  </div>
-                  <div className="flex justify-between items-center gap-2 mt-auto pt-4 border-t border-zinc-100 dark:border-zinc-800">
-                    <p className="text-sm text-gray-600 dark:text-gray-400">April 2023</p>
-                    <a href="https://opensea.io/collection/ghostchildbones" target="_blank" rel="noopener noreferrer" className="flex items-center gap-1 px-3 py-1 bg-[#2081e2] text-white rounded-md text-sm hover:bg-[#1a69bb] transition-colors">
-                      <GlobeIcon className="w-3 h-3" /> OpenSea
-                    </a>
-                  </div>
-                </div>
-
-                {/* Cybots NFT */}
-                <div className="flex flex-col p-4 border border-border rounded-md bg-bw">
-                  <div className="flex items-center gap-2 mb-3">
-                    <img width="24" height="24" src={cybots} alt="Cybots NFT Icon" className="w-6 h-6 object-contain rounded-full bg-gray-200" />
-                    <h3 className="text-lg font-semibold">Cybots NFT</h3>
-                  </div>
-                  <p className="text-gray-700 dark:text-gray-300 mb-2">Lead contract developer for this NFT collection.</p>
-                  <p className="text-sm text-gray-700 dark:text-gray-300 mb-1"><strong>Total Volume:</strong> 0.58 ETH</p>
-                  <div className="flex flex-wrap gap-2 my-4">
-                    <Solidity size={24} aria-label="Solidity"></Solidity>
-                    <i className="devicon-hardhat-plain colored text-2xl leading-none" title="Hardhat"></i>
-                    <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-100">ERC721A</span>
-                  </div>
-                  <div className="flex justify-between items-center gap-2 mt-auto pt-4 border-t border-zinc-100 dark:border-zinc-800">
-                    <p className="text-sm text-gray-600 dark:text-gray-400">May 2022</p>
-                    <a href="https://opensea.io/collection/cybotsnft" target="_blank" rel="noopener noreferrer" className="flex items-center gap-1 px-3 py-1 bg-[#2081e2] text-white rounded-md text-sm hover:bg-[#1a69bb] transition-colors">
-                      <GlobeIcon className="w-3 h-3" /> OpenSea
-                    </a>
-                  </div>
-                </div>
-
-              </div>
-            </div>
-
-            {/* Contributions Section */}
-            <div className="w-full max-w-xl mx-auto lg:mx-0">
-              <h2 id="contributions" className="text-xl font-semibold mb-4">Open Contributions</h2>
-              <div className="flex flex-col gap-4">
-                <div className="flex flex-col text-left bg-bw border border-border rounded-md p-3">
-                  <div className="flex items-start justify-between">
-                    <div className="flex flex-col">
-                      <div className="flex items-start gap-2">
-                        <svg className="w-4 h-4 mt-1 text-zinc-500" viewBox="0 0 16 16" version="1.1" aria-hidden="true"><path d="M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3Z"></path><path d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0ZM1.5 8a6.5 6.5 0 1 0 13 0 6.5 6.5 0 0 0-13 0Z"></path></svg>
-                        <div>
-                          <a href="https://github.com/actions/runner-images/issues/11683" className="font-medium hover:underline">
-                            macOS - 20250226.755 - Missing iOS Platform
-                          </a>
-                          <div className="text-sm text-zinc-500">
-                            <a href="https://github.com/actions/runner-images" className="hover:underline">actions/runner-images</a>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="flex flex-col items-end min-w-[100px]">
-                      <span className="px-2 py-1 text-xs font-medium bg-[#8957e5] text-white rounded-full">closed</span>
-                      <div className="text-xs text-zinc-500 mt-1">March 25, 2024</div>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="flex flex-col text-left bg-bw border border-border rounded-md p-3">
-                  <div className="flex items-start justify-between">
-                    <div className="flex flex-col">
-                      <div className="flex items-start gap-2">
-                        <svg className="w-4 h-4 mt-1 text-zinc-500" viewBox="0 0 16 16" version="1.1" aria-hidden="true"><path d="M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3Z"></path><path d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0ZM1.5 8a6.5 6.5 0 1 0 13 0 6.5 6.5 0 0 0-13 0Z"></path></svg>
-                        <div>
-                          <a href="https://github.com/actions/runner-images/issues/10200" className="font-medium hover:underline">
-                            Significant build time and bundle size for .NET MAUI on iOS
-                          </a>
-                          <div className="text-sm text-zinc-500">
-                            <a href="https://github.com/actions/runner-images" className="hover:underline">actions/runner-images</a>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="flex flex-col items-end min-w-[100px]">
-                      <span className="px-2 py-1 text-xs font-medium bg-[#8957e5] text-white rounded-full">closed</span>
-                      <div className="text-xs text-zinc-500 mt-1">July 11, 2023</div>
-                    </div>
+            {/* Experience: Sunway */}
+            <BentoCard colSpan={1}>
+              <div className="flex items-start gap-4">
+                <img width="56" height="56" src={sunway} alt="Sunway University" className="w-14 h-14 object-contain flex-shrink-0" />
+                <div className="text-left">
+                  <h3 className="font-bold text-lg">Research Assistant</h3>
+                  <p className="text-base text-zinc-500">Sunway University · 2017</p>
+                  <p className="text-base mt-1">Haptic Technology, AR, IoT</p>
+                  <div className="flex gap-2 mt-2">
+                    <ThreeJs size={18} />
+                    <JavaScript size={18} />
                   </div>
                 </div>
               </div>
-            </div>
+            </BentoCard>
 
-            {/* Currently Reading Section */}
-            <div id="reading" className="w-full max-w-xl mx-auto lg:mx-0">
-              <h2 className="text-xl font-semibold mb-4">Currently Reading</h2>
-              <div className="flex flex-col gap-4">
-                {/* Book 1 */}
-                <div className="flex flex-col text-left bg-bw border border-border rounded-md p-3">
-                  <a href="https://www.wiley.com/en-ca/Algorithmic+Trading%3A+Winning+Strategies+and+Their+Rationale-p-9781118460146" target="_blank" rel="noopener noreferrer" className="font-medium hover:underline">
-                    Algorithmic Trading: Winning Strategies and Their Rationale
-                  </a>
-                  <p className="text-sm text-zinc-500">by Ernest Chan</p>
-                </div>
-                {/* Book 2 */}
-                <div className="flex flex-col text-left bg-bw border border-border rounded-md p-3">
-                  <a href="https://learning.oreilly.com/library/view/ai-engineering/9781098166298/" target="_blank" rel="noopener noreferrer" className="font-medium hover:underline">
-                    AI Engineering
-                  </a>
-                  <p className="text-sm text-zinc-500">by Chip Huyen</p>
-                </div>
-                {/* Book 3 */}
-                <div className="flex flex-col text-left bg-bw border border-border rounded-md p-3">
-                  <a href="https://learning.oreilly.com/library/view/designing-data-intensive-applications/9781098119058/" target="_blank" rel="noopener noreferrer" className="font-medium hover:underline">
-                    Designing Data-Intensive Applications
-                  </a>
-                  <p className="text-sm text-zinc-500">by Martin Kleppmann, Chris Riccomini</p>
+            {/* Project: DouDou */}
+            <BentoCard colSpan={2} id="projects">
+              <div className="flex items-start gap-3 mb-3">
+                <img width="28" height="28" src={doudou} alt="DouDou App" className="w-7 h-7 object-contain" />
+                <div>
+                  <h3 className="font-bold text-lg">DouDou</h3>
+                  <p className="text-sm text-zinc-500">Photo voting app · 2024 – Present</p>
                 </div>
               </div>
-            </div>
+              <p className="text-left text-base leading-relaxed">
+                My friends and I couldn't agree on group photos. So I built an app for it.
+                The tricky part was making votes update instantly for everyone—solved it with Supabase's real-time subscriptions.
+              </p>
+              <div className="flex flex-wrap gap-2 mt-4">
+                <ReactIcon size={20} />
+                <NextJs size={20} />
+                <TypeScript size={20} />
+                <TailwindCSS size={20} />
+                <Supabase size={20} />
+              </div>
+              <div className="flex justify-end mt-4 pt-3 border-t border-border">
+                <a href="https://doudou.muniee.com/" className="flex items-center gap-1 px-3 py-1 bg-blank text-bw text-sm font-mono hover:opacity-80 transition-opacity">
+                  <GlobeIcon className="w-3 h-3" /> See it live
+                </a>
+              </div>
+            </BentoCard>
 
-          </div>
-        </div>
-        <footer className="flex items-center justify-between text-text px-8 py-2">
-          <p>©2026</p>
+            {/* Project: SE-OER */}
+            <BentoCard colSpan={1}>
+              <div className="flex items-start gap-3 mb-3">
+                <img width="24" height="24" src={seoer} alt="SE-OER App" className="w-6 h-6 object-contain" />
+                <div>
+                  <h3 className="font-bold">SE-OER</h3>
+                  <p className="text-xs text-zinc-500">Educational Tool · 2020</p>
+                </div>
+              </div>
+              <p className="text-left text-base leading-relaxed">
+                A flashcard-style quiz app for Software Engineering students. Built the full stack: Django backend, React frontend, PostgreSQL database.
+              </p>
+              <div className="flex flex-wrap gap-2 mt-3">
+                <ReactIcon size={18} />
+                <Django size={18} />
+                <Python size={18} />
+                <PostgreSQL size={18} />
+                <MaterialUI size={18} />
+              </div>
+              <div className="flex justify-end mt-3 pt-2 border-t border-border">
+                <a href="https://ualberta-cmput401.github.io/SE-OER/" className="flex items-center gap-1 text-xs font-mono hover:underline">
+                  <Github className="w-3 h-3" /> Source
+                </a>
+              </div>
+            </BentoCard>
+
+            {/* Web3 Experiments Block */}
+            <BentoCard colSpan={2}>
+              <h3 className="font-mono text-base uppercase tracking-tight mb-3">Web3 Experiments</h3>
+              <p className="text-base text-zinc-600 dark:text-zinc-400 mb-4 text-left">
+                Lead contract developer for several NFT collections. Wrote gas-optimized ERC721A contracts.
+              </p>
+              <div className="grid grid-cols-3 gap-3">
+                <a href="https://opensea.io/collection/ghostchildbones" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 p-2 border border-border hover:bg-main transition-colors">
+                  <img src={ghostchild} alt="Ghost Child" className="w-6 h-6 rounded-full" />
+                  <div className="text-left">
+                    <p className="text-xs font-bold">Ghost Child</p>
+                    <p className="text-xs text-zinc-500">1259 ETH</p>
+                  </div>
+                </a>
+                <a href="https://opensea.io/collection/edgerunner-pass" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 p-2 border border-border hover:bg-main transition-colors">
+                  <img src={akogare} alt="Akogare" className="w-6 h-6 rounded-full" />
+                  <div className="text-left">
+                    <p className="text-xs font-bold">Edgerunner</p>
+                    <p className="text-xs text-zinc-500">14.5 ETH</p>
+                  </div>
+                </a>
+                <a href="https://opensea.io/collection/cybotsnft" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 p-2 border border-border hover:bg-main transition-colors">
+                  <img src={cybots} alt="Cybots" className="w-6 h-6 rounded-full" />
+                  <div className="text-left">
+                    <p className="text-xs font-bold">Cybots</p>
+                    <p className="text-xs text-zinc-500">0.58 ETH</p>
+                  </div>
+                </a>
+              </div>
+              <div className="flex gap-2 mt-3">
+                <Solidity size={18} />
+                <span className="text-xs font-mono bg-main border border-border px-2 py-0.5">ERC721A</span>
+              </div>
+            </BentoCard>
+
+            {/* Currently Reading */}
+            <BentoCard colSpan={1}>
+              <h3 className="font-mono text-base uppercase tracking-tight mb-4 flex items-center gap-2">
+                <BookOpen className="w-5 h-5" /> Reading
+              </h3>
+              <div className="flex flex-col gap-3 text-left">
+                <a href="https://learning.oreilly.com/library/view/ai-engineering/9781098166298/" className="text-base hover:underline">AI Engineering</a>
+                <a href="https://learning.oreilly.com/library/view/designing-data-intensive-applications/9781098119058/" className="text-base hover:underline">Designing Data-Intensive Applications</a>
+                <a href="https://www.wiley.com/en-ca/Algorithmic+Trading" className="text-base hover:underline">Algorithmic Trading</a>
+              </div>
+            </BentoCard>
+
+          </BentoGrid>
+        </main>
+
+        {/* Footer */}
+        <footer className="flex items-center justify-between text-text px-8 py-4 border-t border-border">
+          <p className="font-mono text-sm">©2026</p>
           <p
             onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-            className="cursor-pointer hover:underline lg:hidden"
+            className="cursor-pointer hover:underline font-mono text-sm lg:hidden"
           >
             Back to top ↑
           </p>
         </footer>
-      </div >
+      </div>
     </ThemeProvider>
   );
 };
