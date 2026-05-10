@@ -1,458 +1,577 @@
-import { useState } from "react";
-import { TypeScript, JavaScript, CSharp, Go, Python, Angular, React, NextJs, TailwindCSS, Firebase, Azure, Xamarin, PowerShell, ThreeJs, Supabase, PostgreSQL, MaterialUI, Django, Solidity } from "developer-icons"
+import { useRef, useEffect, useState, useCallback } from "react";
+import { gsap } from "gsap";
+import { motion, AnimatePresence } from "framer-motion";
+import {
+  Mail,
+  Github,
+  Linkedin,
+  ExternalLink,
+  FileText,
+  Hammer,
+  Zap,
+} from "lucide-react";
 
-import { Typewriter } from "@/components/ui/typewriter";
-import { Tilt } from "@/components/ui/tilt";
-import { Spotlight } from "@/components/ui/spotlight";
+import { AsciiCanvas, AsciiCanvasRef } from "@/components/ascii-canvas";
+import { TerminalHeader } from "@/components/terminal-header";
+import { AgentChat, AgentConfig, CollapsibleAgentLog } from "@/components/agent-chat";
+import { TypewriterText } from "@/components/typewriter-text";
+import { LocationAttachment } from "@/components/attachments/location-attachment";
+import { ExperienceAttachment } from "@/components/attachments/experience-attachment";
+import { ProjectAttachment } from "@/components/attachments/project-attachment";
+import { ReadingAttachment } from "@/components/attachments/reading-attachment";
 
-import profile from "@/assets/images/profile.webp";
 import resume from "@/assets/Resume.pdf";
-import pcl from "@/assets/images/pcl.svg";
-import sunway from "@/assets/images/sunway.webp";
-import doudou from "@/assets/images/doudou.webp";
-import seoer from "@/assets/images/seoer.webp";
-import akogare from "@/assets/images/akogare.webp";
-import ghostchild from "@/assets/images/ghostchild.gif";
-import cybots from "@/assets/images/cybots.webp";
+import profile from "@/assets/images/profile.webp";
+import waving_hand from "@/assets/images/waving-hand.png";
 
-import { GlobeIcon, ChevronRight } from "lucide-react"; // Changed ChevronDown to ChevronRight
+const AGENTS: AgentConfig[] = [
+  {
+    id: "navigator",
+    name: "Navigator",
+    kaomoji: "(⌐■_■)",
+    color: "var(--accent-navigator)",
+    voice: "cool",
+  },
+  {
+    id: "archivist",
+    name: "Archivist",
+    kaomoji: "(｀・ω・´)",
+    color: "var(--accent-archivist)",
+    voice: "methodical",
+  },
+  {
+    id: "builder",
+    name: "Builder",
+    kaomoji: "(◕‿◕)♡",
+    color: "var(--accent-builder)",
+    voice: "enthusiastic",
+  },
+  {
+    id: "curator",
+    name: "Curator",
+    kaomoji: "(´｡• ᵕ •｡`)",
+    color: "var(--accent-curator)",
+    voice: "gentle",
+  },
+];
 
-const App = () => {
-  const spotlightSpringOptions = {
-    bounce: 0.3,
-    duration: 0.1
-  };
-
-  const [showPclDevDesc, setShowPclDevDesc] = useState(false);
-  const [showPclAnalystDesc, setShowPclAnalystDesc] = useState(false);
-
-  return (
-    <div className="text-center bg-[#fefbf1] grid min-h-screen grid-rows-[auto_1fr_auto]">
-      <header className="flex items-center justify-center text-black px-8 py-4 gap-4 lg:hidden">
-        <a href="#experience" className="hover:underline">Experience</a>
-        <a href="#projects" className="hover:underline">Projects</a>
-        <a href="#contributions" className="hover:underline">Contributions</a>
-      </header>
-      <h1 className="hidden">Jen Yang Koh</h1>
-      <div className="grid lg:grid-cols-2 gap-8 items-start justify-center text-black px-4 lg:px-8 py-4 lg:place-self-center">
-        <div className="flex flex-col items-center justify-start w-full lg:sticky lg:top-8">
-          <p className="py-4 text-4xl font-extrabold">Hi, I'm Andy 👋</p>
-          <Tilt rotationFactor={8} isRevese>
-            <div
-              className="flex flex-col items-center relative border-[4px] rounded-xl p-2 bg-white border-black w-full max-w-md mx-auto"
-            >
-              <Spotlight className='bg-ite blur-2xl'
-                size={64}
-                springOptions={spotlightSpringOptions}></Spotlight>
-              <div id="cutout" className="absolute top-3 left-1/2 -translate-x-1/2 w-[100px] h-[25px] rounded-[25px] bg-black"></div>
-              <p className="pt-8">[insert company logo]</p>
-              <img
-                width="288"
-                className="w-72 aspect-auto"
-                src={profile}
-                alt="Image of Jen Yang Koh"
-              />
-              <div className="px-4 py-4">
-                <div className="my-4">
-                  <div>
-                    <Typewriter
-                      text={["Jen Yang Koh", "辜振洋", "Andy Koh"]}
-                      speed={100}
-                      delay={13000}
-                      loop={true}
-                      className="text-3xl font-medium"
-                    />
-                  </div>
-                  <div>
-                    <Typewriter
-                      text={[
-                        "Software Engineer",
-                        "Professional Bug Creator",
-                        "Senior Googling Engineer"
-                      ]}
-                      speed={100}
-                      delay={10000}
-                      loop={true}
-                      className="text-lg font-medium"
-                    />
-                  </div>
-                  <div className="flex text-sm gap-2 items-center justify-center">
-                    <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4" viewBox="0 0 36 36" aria-hidden="true" role="img" preserveAspectRatio="xMidYMid meet"><path fill="#D52B1E" d="M4 5a4 4 0 0 0-4 4v18a4 4 0 0 0 4 4h6V5H4zm28 0h-6v26h6a4 4 0 0 0 4-4V9a4 4 0 0 0-4-4z" /><path fill="#EEE" d="M10 5h16v26H10z" /><path fill="#D52B1E" d="M18.615 22.113c1.198.139 2.272.264 3.469.401l-.305-1.002a.46.46 0 0 1 .159-.476l3.479-2.834l-.72-.339c-.317-.113-.23-.292-.115-.722l.531-1.936l-2.021.427c-.197.03-.328-.095-.358-.215l-.261-.911l-1.598 1.794c-.227.288-.687.288-.544-.376l.683-3.634l-.917.475c-.257.144-.514.168-.657-.089l-1.265-2.366v.059v-.059l-1.265 2.366c-.144.257-.401.233-.658.089l-.916-.475l.683 3.634c.144.664-.317.664-.544.376l-1.598-1.793l-.26.911c-.03.12-.162.245-.359.215l-2.021-.427l.531 1.936c.113.43.201.609-.116.722l-.72.339l3.479 2.834c.138.107.208.3.158.476l-.305 1.002l3.47-.401c.106 0 .176.059.175.181l-.214 3.704h.956l-.213-3.704c.002-.123.071-.182.177-.182z" /></svg>
-                    Edmonton, Alberta
-                  </div>
-                </div>
-                <div className="w-full flex flex-col items-start">
-                  <div className="mb-1 flex flex-col items-start">
-                    <h2>Languages:</h2>
-                    <div className="flex gap-2">
-                      <TypeScript size={24} aria-label="TypeScript" xlinkTitle="Typescript"></TypeScript>
-                      <JavaScript size={24} aria-label="JavaScript"></JavaScript>
-                      <Go size={24} aria-label="Go"></Go>
-                      <CSharp size={24} aria-label="CSharp"></CSharp>
-                      <Python size={24} aria-label="Python"></Python>
-                    </div>
-                  </div>
-                  <div className="mb-1 flex flex-col items-start">
-                    <h2>Stack:</h2>
-                    <div className="flex gap-2">
-                      <Angular size={24} aria-label="Angular"></Angular>
-                      <svg aria-label=".NET" className="w-6 h-6" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><path fill="#512bd4" d="M-.134-.326h512.002v512.002H-.134z" /><path d="M91.122 326.786c-3.62 0-6.698-1.206-9.232-3.619-2.534-2.475-3.8-5.413-3.8-8.815 0-3.465 1.266-6.434 3.8-8.908 2.534-2.475 5.612-3.712 9.232-3.712 3.68 0 6.787 1.237 9.321 3.712 2.595 2.474 3.892 5.443 3.892 8.908 0 3.402-1.297 6.34-3.892 8.815-2.534 2.413-5.64 3.619-9.321 3.619zM235.844 324.745h-23.532l-61.996-97.807a43.764 43.764 0 01-3.892-7.703h-.543c.483 2.847.724 8.94.724 18.28v87.23h-20.817v-133.07h25.07l59.916 95.487c2.534 3.96 4.163 6.682 4.887 8.166h.362c-.603-3.525-.905-9.495-.905-17.91v-85.743h20.726v133.07zM337.213 324.745h-72.856v-133.07h69.96v18.745h-48.42v37.675h44.62v18.652h-44.62v39.346h51.316v18.652zM440.757 210.42h-37.289v114.325h-21.54V210.42H344.73v-18.745h96.027v18.745z" fill="#fff" /></svg>
-                      <Xamarin size={24} aria-label="Xamarin"></Xamarin>
-                      <i className="devicon-microsoftsqlserver-plain colored text-2xl leading-none" title="Microsoft SQL Server"></i>
-                      <Azure size={24} aria-label="Azure"></Azure>
-                      <React size={24} aria-label="React"></React>
-                      <NextJs size={24} aria-label="Next JS"></NextJs>
-                      <TailwindCSS size={24} aria-label="Tailwind CSS"></TailwindCSS>
-                      <Firebase size={24} aria-label="Firebase"></Firebase>
-                    </div>
-                  </div>
-                </div>
-                <div>
-                  <h1 className="mt-4 font-barcode text-3xl sm:text-5xl">jenyangk.github.io</h1>
-                </div>
-              </div>
-            </div>
-          </Tilt>
-          <div className="flex gap-4 py-8">
-            <a href="https://github.com/jenyangk" className="underline">GitHub</a>
-            <a href="https://www.linkedin.com/in/jenyangkoh/" className="underline">LinkedIn</a>
-            <a href={resume} className="underline">Résumé</a>
-            <a href="mailto:jenyang.koh@gmail.com" className="underline">Email</a>
-          </div>
-        </div>
-
-        {/* Column 2: Experience, Projects, Contributions */}
-        <div className="flex flex-col gap-8 items-center lg:items-start w-full">
-          <div className="w-full max-w-xl mx-auto lg:mx-0">
-            <h2 id="experience" className="text-xl font-semibold mb-4">Experience</h2>
-            <div className="flex flex-col gap-8 items-start">
-              {/* PCL Software Developer */}
-              <div className="flex gap-8 items-start justify-start w-full">
-                <div className="flex flex-col items-center flex-shrink-0">
-                  <img width="96" height="96" src={pcl} alt="PCL Construction" className="w-24 h-24 object-contain" />
-                </div>
-                <div className="flex-grow">
-                  <div className="flex flex-col items-start text-left">
-                    <div
-                      className="group flex items-center gap-1 cursor-pointer" // Added group, adjusted gap
-                      onClick={() => setShowPclDevDesc(!showPclDevDesc)}
-                      aria-expanded={showPclDevDesc}
-                      aria-controls="pcl-dev-desc"
-                    >
-                      <h3 className="text-lg font-semibold">Software Developer</h3>
-                      <ChevronRight // Changed icon
-                        className={`w-4 h-4 transition-all duration-300 ease-in-out opacity-0 group-hover:opacity-100 ${ // Added opacity and hover effect
-                          showPclDevDesc ? 'rotate-90' : '' // Changed rotation
-                          }`}
-                      />
-                    </div>
-                    <p className="text-gray-600">October 2021 - Present</p>
-                    <p>IoT, Microservices, Mobile & Web Applications</p>
-                    {/* Added transition classes, max-h, overflow-hidden */}
-                    <div
-                      id="pcl-dev-desc"
-                      className={`mt-2 text-gray-700 text-left transition-all duration-300 ease-in-out overflow-hidden ${showPclDevDesc ? 'max-h-40 opacity-100' : 'max-h-0 opacity-0'
-                        }`}
-                    >
-                      <p>
-                        Enhanced system monitoring, automated processes, and led browser and mobile app developments. Optimized data pipelines and deployment workflows, significantly improving efficiency, reliability, and user adoption.
-                      </p>
-                    </div>
-                  </div>
-                  <div className="flex gap-2 flex-wrap mt-2">
-                    <TypeScript size={24} aria-label="TypeScript" xlinkTitle="Typescript"></TypeScript>
-                    <JavaScript size={24} aria-label="JavaScript"></JavaScript>
-                    <Go size={24} aria-label="Go"></Go>
-                    <CSharp size={24} aria-label="CSharp"></CSharp>
-                    <Azure size={24} aria-label="Azure"></Azure>
-                    <Angular size={24} aria-label="Angular"></Angular>
-                    <Xamarin size={24} aria-label="Xamarin"></Xamarin>
-                    <svg aria-label=".NET" className="w-6 h-6" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><path fill="#512bd4" d="M-.134-.326h512.002v512.002H-.134z" /><path d="M91.122 326.786c-3.62 0-6.698-1.206-9.232-3.619-2.534-2.475-3.8-5.413-3.8-8.815 0-3.465 1.266-6.434 3.8-8.908 2.534-2.475 5.612-3.712 9.232-3.712 3.68 0 6.787 1.237 9.321 3.712 2.595 2.474 3.892 5.443 3.892 8.908 0 3.402-1.297 6.34-3.892 8.815-2.534 2.413-5.64 3.619-9.321 3.619zM235.844 324.745h-23.532l-61.996-97.807a43.764 43.764 0 01-3.892-7.703h-.543c.483 2.847.724 8.94.724 18.28v87.23h-20.817v-133.07h25.07l59.916 95.487c2.534 3.96 4.163 6.682 4.887 8.166h.362c-.603-3.525-.905-9.495-.905-17.91v-85.743h20.726v133.07zM337.213 324.745h-72.856v-133.07h69.96v18.745h-48.42v37.675h44.62v18.652h-44.62v39.346h51.316v18.652zM440.757 210.42h-37.289v114.325h-21.54V210.42H344.73v-18.745h96.027v18.745z" fill="#fff" /></svg>
-                    <i className="devicon-microsoftsqlserver-plain colored text-2xl leading-none" title="Microsoft SQL Server"></i>
-                  </div>
-                </div>
-              </div>
-              {/* PCL Construction Technology Analyst */}
-              <div className="flex gap-8 items-start justify-start w-full">
-                <div className="flex flex-col items-center flex-shrink-0">
-                  <img width="96" height="96" src={pcl} alt="PCL Construction" className="w-24 h-24 object-contain" />
-                </div>
-                <div className="flex-grow">
-                  <div className="flex flex-col items-start text-left">
-                    <div
-                      className="group flex items-center gap-1 cursor-pointer" // Added group, adjusted gap
-                      onClick={() => setShowPclAnalystDesc(!showPclAnalystDesc)}
-                      aria-expanded={showPclAnalystDesc}
-                      aria-controls="pcl-analyst-desc"
-                    >
-                      <h3 className="text-lg font-semibold">Construction Technology Analyst</h3>
-                      <ChevronRight // Changed icon
-                        className={`w-4 h-4 transition-all duration-300 ease-in-out opacity-0 group-hover:opacity-100 ${ // Added opacity and hover effect
-                          showPclAnalystDesc ? 'rotate-90' : '' // Changed rotation
-                          }`}
-                      />
-                    </div>
-                    <p className="text-gray-600">June 2021 - October 2021</p>
-                    <p>System Administrator</p>
-                    {/* Added transition classes, max-h, overflow-hidden */}
-                    <div
-                      id="pcl-analyst-desc"
-                      className={`mt-2 text-sm text-gray-700 text-left transition-all duration-300 ease-in-out overflow-hidden ${showPclAnalystDesc ? 'max-h-40 opacity-100' : 'max-h-0 opacity-0'
-                        }`}
-                    >
-                      <p>
-                        Managed campus-wide tech upgrades and provided executive IT support. Automated data tasks with PowerShell, improving workflow efficiency.
-                      </p>
-                    </div>
-                  </div>
-                  <div className="flex gap-2 flex-wrap mt-2">
-                    <PowerShell size={24} aria-label="PowerShell"></PowerShell>
-                  </div>
-                </div>
-              </div>
-              {/* Sunway Research Assistant */}
-              <div className="flex gap-8 items-center justify-start w-full">
-                <div className="flex flex-col items-center flex-shrink-0">
-                  <img width="96" height="96" src={sunway} alt="Sunway University" className="w-24 h-24 object-contain" />
-                </div>
-                <div>
-                  <div className="flex flex-col items-start text-left">
-                    <h3 className="text-lg font-semibold">Research Assistant</h3>
-                    <p className="text-gray-600">June 2017 - December 2017</p>
-                    <p>Haptic Technology, Augmented Reality, IoT</p>
-                  </div>
-                  <div className="flex gap-2 flex-wrap mt-2">
-                    <JavaScript size={24} aria-label="JavaScript"></JavaScript>
-                    <ThreeJs size={24} aria-label="ThreeJs"></ThreeJs>
-                    <i className="devicon-arduino-plain colored text-2xl leading-none" title="Arduino"></i>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Projects Section */}
-          <div id="projects" className="w-full max-w-xl mx-auto lg:mx-0">
-            <h2 className="text-xl font-semibold mb-4">Projects</h2>
-            <div className="flex flex-col gap-8">
-              {/* DouDou Project */}
-              <div className="flex flex-col p-4 border border-zinc-200 rounded-md bg-white">
-                <div className="flex items-center gap-2 mb-3">
-                  <img width="24" height="24" src={doudou} alt="DouDou App" className="w-6 h-6 object-contain" />
-                  <h3 className="text-lg font-semibold">DouDou</h3>
-                </div>
-                <p className="mb-4">
-                  Developed an interactive photo voting app, allowing users to initiate and manage photo voting sessions,
-                  submit photos, and vote on submissions with real-time tracking.
-                </p>
-                {/* <div className="w-full mb-6">
-                  <div className="w-full h-24 bg-gray-100 rounded-md flex items-center justify-center text-xs text-gray-500 overflow-hidden">
-                    <div className="w-32 h-20 bg-gray-300 rounded-md flex items-center justify-center">Thumbnail</div>
-                  </div>
-                </div> */}
-                <div className="flex flex-wrap gap-2 mb-4">
-                  <React size={24} aria-label="React"></React>
-                  <NextJs size={24} aria-label="Next JS"></NextJs>
-                  <TypeScript size={24} aria-label="Typescript"></TypeScript>
-                  <TailwindCSS size={24} aria-label="Tailwind CSS"></TailwindCSS>
-                  <Supabase size={24} aria-label="Supabase"></Supabase>
-                </div>
-
-                {/* Footer: Date range grouped with links */}
-                <div className="flex justify-between items-center gap-2 mt-auto pt-4 border-t border-zinc-100">
-                  <p className="text-sm text-gray-600">Oct 2024 – Present</p>
-                  <a href="https://doudou.muniee.com/" className="flex items-center gap-1 px-3 py-1 bg-black text-white rounded-md text-sm hover:bg-zinc-800 transition-colors">
-                    <GlobeIcon className="w-3 h-3"></GlobeIcon> Website
-                  </a>
-                </div>
-              </div>
-
-              {/* SE-OER Project */}
-              <div className="flex flex-col p-4 border border-zinc-200 rounded-md bg-white">
-                <div className="flex items-center gap-2 mb-3">
-                  <img width="24" height="24" src={seoer} alt="SE-OER App" className="w-6 h-6 object-contain" />
-                  <h3 className="text-lg font-semibold">SE-OER</h3>
-                </div>
-                <p className="mb-4">
-                  Developed a collaborative web application for practicing Software Engineering topics through
-                  interactive flashcard-style quizzes, enabling customized study and exam-like conditions.
-                </p>
-                <div className="flex flex-wrap gap-2 mb-4">
-                  <React size={24} aria-label="React"></React>
-                  <MaterialUI size={24} aria-label="MaterialUI"></MaterialUI>
-                  <TypeScript size={24} aria-label="Typescript"></TypeScript>
-                  <Django size={24} aria-label="Django"></Django>
-                  <Python size={24} aria-label="Python"></Python>
-                  <PostgreSQL size={24} aria-label="PostgreSQL"></PostgreSQL>
-                </div>
-                <div className="flex justify-between items-center gap-2 mt-auto pt-4 border-t border-zinc-100">
-                  <p className="text-sm text-gray-600">Jan 2020 – May 2020</p>
-                  <a href="https://ualberta-cmput401.github.io/SE-OER/" className="flex items-center gap-1 px-3 py-1 bg-gray-100 text-black rounded-md text-sm hover:bg-gray-200 transition-colors">
-                    <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <path fillRule="evenodd" clipRule="evenodd" d="M12 2C6.477 2 2 6.477 2 12C2 16.417 4.865 20.167 8.84 21.494C9.34 21.583 9.52 21.276 9.52 21.006C9.52 20.764 9.512 20.005 9.508 19.176C6.726 19.794 6.139 17.849 6.139 17.849C5.685 16.688 5.029 16.384 5.029 16.384C4.147 15.765 5.095 15.778 5.095 15.778C6.072 15.841 6.598 16.799 6.598 16.799C7.48 18.35 8.862 17.893 9.54 17.633C9.629 16.977 9.889 16.522 10.175 16.278C7.954 16.031 5.62 15.173 5.62 11.293C5.62 10.17 6.01 9.26 6.618 8.557C6.517 8.302 6.168 7.309 6.713 5.985C6.713 5.985 7.545 5.711 9.496 7.048C10.294 6.819 11.166 6.704 12.034 6.7C12.9 6.704 13.771 6.819 14.571 7.048C16.52 5.711 17.351 5.985 17.351 5.985C17.898 7.309 17.548 8.302 17.447 8.557C18.057 9.26 18.443 10.17 18.443 11.293C18.443 15.182 16.105 16.027 13.876 16.269C14.235 16.573 14.558 17.173 14.558 18.094C14.558 19.415 14.545 20.677 14.545 21.006C14.545 21.279 14.722 21.59 15.232 21.492C19.205 20.163 22.066 16.417 22.066 12C22.066 6.477 17.59 2 12.066 2H12Z" fill="currentColor" />
-                    </svg>
-                    Source
-                  </a>
-                </div>
-              </div>
-
-              {/* Akogare: Edgerunner Pass */}
-              <div className="flex flex-col p-4 border border-zinc-200 rounded-md bg-white">
-                <div className="flex items-center gap-2 mb-3">
-                  <img width="24" height="24" src={akogare} alt="Akogare: Edgerunner Pass Icon" className="w-6 h-6 object-contain rounded-full bg-gray-200" />
-                  <h3 className="text-lg font-semibold">Akogare: Edgerunner Pass</h3>
-                </div>
-                <p className="text-gray-700 mb-2">Lead contract developer for this NFT collection.</p>
-                <p className="text-sm text-gray-700 mb-1"><strong>Total Volume:</strong> 14.54 ETH</p>
-                <div className="flex flex-wrap gap-2 my-4">
-                  <Solidity size={24} aria-label="Solidity"></Solidity>
-                  <i className="devicon-hardhat-plain colored text-2xl leading-none" title="Hardhat"></i>
-                  <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">ERC721A</span>
-                </div>
-                <div className="flex justify-between items-center gap-2 mt-auto pt-4 border-t border-zinc-100">
-                  <p className="text-sm text-gray-600">Nov 2023</p>
-                  <a href="https://opensea.io/collection/edgerunner-pass" target="_blank" rel="noopener noreferrer" className="flex items-center gap-1 px-3 py-1 bg-[#2081e2] text-white rounded-md text-sm hover:bg-[#1a69bb] transition-colors">
-                    <GlobeIcon className="w-3 h-3" /> OpenSea
-                  </a>
-                </div>
-              </div>
-
-              {/* Ghost Child: Bones */}
-              <div className="flex flex-col p-4 border border-zinc-200 rounded-md bg-white">
-                <div className="flex items-center gap-2 mb-3">
-                  <img width="24" height="24" src={ghostchild} alt="Ghost Child: Bones Icon" className="w-6 h-6 object-contain rounded-full bg-gray-200" />
-                  <h3 className="text-lg font-semibold">Ghost Child: Bones</h3>
-                </div>
-                <p className="text-gray-700 mb-2">Lead contract developer for this NFT collection.</p>
-                <p className="text-sm text-gray-700 mb-1"><strong>Total Volume:</strong> 1259.80 ETH</p>
-                <div className="flex flex-wrap gap-2 my-4">
-                  <Solidity size={24} aria-label="Solidity"></Solidity>
-                  <i className="devicon-hardhat-plain colored text-2xl leading-none" title="Hardhat"></i>
-                  <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">ERC721A</span>
-                </div>
-                <div className="flex justify-between items-center gap-2 mt-auto pt-4 border-t border-zinc-100">
-                  <p className="text-sm text-gray-600">April 2023</p>
-                  <a href="https://opensea.io/collection/ghostchildbones" target="_blank" rel="noopener noreferrer" className="flex items-center gap-1 px-3 py-1 bg-[#2081e2] text-white rounded-md text-sm hover:bg-[#1a69bb] transition-colors">
-                    <GlobeIcon className="w-3 h-3" /> OpenSea
-                  </a>
-                </div>
-              </div>
-
-              {/* Cybots NFT */}
-              <div className="flex flex-col p-4 border border-zinc-200 rounded-md bg-white">
-                <div className="flex items-center gap-2 mb-3">
-                  <img width="24" height="24" src={cybots} alt="Cybots NFT Icon" className="w-6 h-6 object-contain rounded-full bg-gray-200" />
-                  <h3 className="text-lg font-semibold">Cybots NFT</h3>
-                </div>
-                <p className="text-gray-700 mb-2">Lead contract developer for this NFT collection.</p>
-                <p className="text-sm text-gray-700 mb-1"><strong>Total Volume:</strong> 0.58 ETH</p>
-                <div className="flex flex-wrap gap-2 my-4">
-                  <Solidity size={24} aria-label="Solidity"></Solidity>
-                  <i className="devicon-hardhat-plain colored text-2xl leading-none" title="Hardhat"></i>
-                  <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">ERC721A</span>
-                </div>
-                <div className="flex justify-between items-center gap-2 mt-auto pt-4 border-t border-zinc-100">
-                  <p className="text-sm text-gray-600">May 2022</p>
-                  <a href="https://opensea.io/collection/cybotsnft" target="_blank" rel="noopener noreferrer" className="flex items-center gap-1 px-3 py-1 bg-[#2081e2] text-white rounded-md text-sm hover:bg-[#1a69bb] transition-colors">
-                    <GlobeIcon className="w-3 h-3" /> OpenSea
-                  </a>
-                </div>
-              </div>
-
-            </div>
-          </div>
-
-          {/* Contributions Section */}
-          <div className="w-full max-w-xl mx-auto lg:mx-0">
-            <h2 id="contributions" className="text-xl font-semibold mb-4">Open Contributions</h2>
-            <div className="flex flex-col gap-4">
-              <div className="flex flex-col text-left bg-white border border-zinc-200 rounded-md p-3">
-                <div className="flex items-start justify-between">
-                  <div className="flex flex-col">
-                    <div className="flex items-start gap-2">
-                      <svg className="w-4 h-4 mt-1 text-zinc-500" viewBox="0 0 16 16" version="1.1" aria-hidden="true"><path d="M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3Z"></path><path d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0ZM1.5 8a6.5 6.5 0 1 0 13 0 6.5 6.5 0 0 0-13 0Z"></path></svg>
-                      <div>
-                        <a href="https://github.com/actions/runner-images/issues/11683" className="font-medium hover:underline">
-                          macOS - 20250226.755 - Missing iOS Platform
-                        </a>
-                        <div className="text-sm text-zinc-500">
-                          <a href="https://github.com/actions/runner-images" className="hover:underline">actions/runner-images</a>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="flex flex-col items-end min-w-[100px]">
-                    <span className="px-2 py-1 text-xs font-medium bg-[#8957e5] text-white rounded-full">closed</span>
-                    <div className="text-xs text-zinc-500 mt-1">March 25, 2024</div>
-                  </div>
-                </div>
-              </div>
-
-              <div className="flex flex-col text-left bg-white border border-zinc-200 rounded-md p-3">
-                <div className="flex items-start justify-between">
-                  <div className="flex flex-col">
-                    <div className="flex items-start gap-2">
-                      <svg className="w-4 h-4 mt-1 text-zinc-500" viewBox="0 0 16 16" version="1.1" aria-hidden="true"><path d="M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3Z"></path><path d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0ZM1.5 8a6.5 6.5 0 1 0 13 0 6.5 6.5 0 0 0-13 0Z"></path></svg>
-                      <div>
-                        <a href="https://github.com/actions/runner-images/issues/10200" className="font-medium hover:underline">
-                          Significant build time and bundle size for .NET MAUI on iOS
-                        </a>
-                        <div className="text-sm text-zinc-500">
-                          <a href="https://github.com/actions/runner-images" className="hover:underline">actions/runner-images</a>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="flex flex-col items-end min-w-[100px]">
-                    <span className="px-2 py-1 text-xs font-medium bg-[#8957e5] text-white rounded-full">closed</span>
-                    <div className="text-xs text-zinc-500 mt-1">July 11, 2023</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Currently Reading Section */}
-          <div id="reading" className="w-full max-w-xl mx-auto lg:mx-0">
-            <h2 className="text-xl font-semibold mb-4">Currently Reading</h2>
-            <div className="flex flex-col gap-4">
-              {/* Book 1 */}
-              <div className="flex flex-col text-left bg-white border border-zinc-200 rounded-md p-3">
-                <a href="https://www.wiley.com/en-ca/Algorithmic+Trading%3A+Winning+Strategies+and+Their+Rationale-p-9781118460146" target="_blank" rel="noopener noreferrer" className="font-medium hover:underline">
-                  Algorithmic Trading: Winning Strategies and Their Rationale
-                </a>
-                <p className="text-sm text-zinc-500">by Ernest Chan</p>
-              </div>
-              {/* Book 2 */}
-              <div className="flex flex-col text-left bg-white border border-zinc-200 rounded-md p-3">
-                <a href="https://learning.oreilly.com/library/view/ai-engineering/9781098166298/" target="_blank" rel="noopener noreferrer" className="font-medium hover:underline">
-                  AI Engineering
-                </a>
-                <p className="text-sm text-zinc-500">by Chip Huyen</p>
-              </div>
-              {/* Book 3 */}
-              <div className="flex flex-col text-left bg-white border border-zinc-200 rounded-md p-3">
-                <a href="https://learning.oreilly.com/library/view/designing-data-intensive-applications/9781098119058/" target="_blank" rel="noopener noreferrer" className="font-medium hover:underline">
-                  Designing Data-Intensive Applications
-                </a>
-                <p className="text-sm text-zinc-500">by Martin Kleppmann, Chris Riccomini</p>
-              </div>
-            </div>
-          </div>
-
-        </div>
-      </div>
-      <footer className="flex items-center justify-between text-black px-8 py-2">
-        <p>©2025</p>
-        <p
-          onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-          className="cursor-pointer hover:underline lg:hidden"
-        >
-          Back to top ↑
-        </p>
-      </footer>
-    </div >
-  );
+const AGENT_MESSAGES: Record<string, string> = {
+  navigator: "Located. Edmonton, AB. UTC-6. Dual: 🇨🇦 / 🇲🇾.",
+  archivist: "3 companies on file. 2017–present. Chronology verified. Stand by.",
+  builder:
+    "Ooh! DouDou has real-time votes! Supabase subscriptions! ✨ Built with friends!",
+  curator: "Currently exploring AI engineering… and how systems think.",
 };
 
-export default App;
+const PROMPT_TEXT = "who is jen yang koh?";
+
+function SystemNote({ children }: { children: string }) {
+  return (
+    <p className="font-mono text-xs text-text-muted my-3">
+      <span className="opacity-50">{"> "}</span>
+      {children}
+    </p>
+  );
+}
+
+export default function App() {
+  const [phase, setPhase] = useState<"intro" | "unlocked">("intro");
+  const [promptComplete, setPromptComplete] = useState(false);
+  const [activeAgents, setActiveAgents] = useState<string[]>([]);
+  const [agentPhases, setAgentPhases] = useState<Record<string, string>>({});
+  const [showFullProfile, setShowFullProfile] = useState(false);
+  const [activeSection, setActiveSection] = useState<string | null>(null);
+  const [showSkip, setShowSkip] = useState(false);
+
+  const canvasRef = useRef<AsciiCanvasRef>(null);
+  const timelineRef = useRef<gsap.core.Timeline | null>(null);
+  const skipRef = useRef(false);
+
+  const isMobile = typeof window !== "undefined" && window.innerWidth < 768;
+
+  const visibleAgents = isMobile
+    ? [AGENTS[0], AGENTS[2]]
+    : AGENTS;
+
+  const handleSkip = useCallback(() => {
+    if (skipRef.current) return;
+    skipRef.current = true;
+    timelineRef.current?.kill();
+    setPromptComplete(true);
+    setActiveAgents(visibleAgents.map((a) => a.id));
+    const allExpanded: Record<string, string> = {};
+    visibleAgents.forEach((a) => {
+      allExpanded[a.id] = "expanded";
+    });
+    setAgentPhases(allExpanded);
+    setPhase("unlocked");
+    setShowFullProfile(true);
+    document.body.style.overflow = "auto";
+    setTimeout(() => {
+      document.getElementById("about")?.scrollIntoView({ behavior: "smooth" });
+    }, 300);
+  }, [visibleAgents]);
+
+  const runIntro = useCallback(() => {
+    const tl = gsap.timeline({
+      onComplete: () => {
+      setPhase("unlocked");
+      setShowFullProfile(true);
+      setShowSkip(false);
+      setTimeout(() => {
+        document.getElementById("about")?.scrollIntoView({ behavior: "smooth" });
+      }, 600);
+      },
+    });
+    timelineRef.current = tl;
+
+    // Show skip button after 2s
+    setTimeout(() => setShowSkip(true), 2000);
+
+    // Phase 1: Prompt typing
+    const promptDuration = skipRef.current ? 0 : PROMPT_TEXT.length * 0.12;
+    tl.to(
+      {},
+      {
+        duration: promptDuration,
+        onComplete: () => {
+          setPromptComplete(true);
+        },
+      }
+    );
+
+    tl.add(() => {}, "+=0.4");
+
+    // Phase 2: Agents appear sequentially (one at a time)
+    const agentDelay = skipRef.current ? 0 : 0.5;
+    const typeDuration = skipRef.current ? 0 : 2.0;
+    const expandDelay = skipRef.current ? 0 : 0.3;
+    const expandDuration = skipRef.current ? 0 : 0.6;
+
+    for (let i = 0; i < visibleAgents.length; i++) {
+      const agent = visibleAgents[i];
+
+      tl.add(() => {
+        setActiveAgents((prev) => [...prev, agent.id]);
+        setAgentPhases((prev) => ({ ...prev, [agent.id]: "typing" }));
+        canvasRef.current?.pulseAt(
+          window.innerWidth * (0.3 + Math.random() * 0.4),
+          window.innerHeight * (0.3 + Math.random() * 0.4),
+          1
+        );
+        // Auto-scroll to keep new agent in view
+        setTimeout(() => {
+          window.scrollTo({ top: document.body.scrollHeight, behavior: "smooth" });
+        }, 100);
+      });
+
+      tl.to(
+        {},
+        {
+          duration: typeDuration,
+          onComplete: () => {
+            setAgentPhases((prev) => ({ ...prev, [agent.id]: "attached" }));
+          },
+        }
+      );
+
+      tl.to(
+        {},
+        {
+          duration: expandDuration,
+          delay: expandDelay,
+          onComplete: () => {
+            setAgentPhases((prev) => ({ ...prev, [agent.id]: "expanded" }));
+          },
+        }
+      );
+
+      if (i < visibleAgents.length - 1) {
+        tl.to({}, { duration: agentDelay });
+      }
+    }
+
+    tl.add(() => {
+      setPhase("unlocked");
+      setShowFullProfile(true);
+      document.body.style.overflow = "auto";
+      setShowSkip(false);
+    });
+  }, [visibleAgents]);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      runIntro();
+    }, 500);
+
+    return () => {
+      clearTimeout(timer);
+    };
+  }, [runIntro]);
+
+  // Only Enter key skips, no global click
+  useEffect(() => {
+    const handleKey = (e: KeyboardEvent) => {
+      if (e.key === "Enter") handleSkip();
+    };
+
+    window.addEventListener("keydown", handleKey);
+    return () => window.removeEventListener("keydown", handleKey);
+  }, [handleSkip]);
+
+  // Scroll spy for active section
+  useEffect(() => {
+    if (phase !== "unlocked") return;
+
+    const sections = ["about", "experience", "projects", "contact"];
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) {
+            setActiveSection(entry.target.id);
+          }
+        }
+      },
+      { rootMargin: "-20% 0px -60% 0px" }
+    );
+
+    sections.forEach((id) => {
+      const el = document.getElementById(id);
+      if (el) observer.observe(el);
+    });
+
+    return () => observer.disconnect();
+  }, [phase]);
+
+  const scrollTo = (id: string) => {
+    document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+  };
+
+  return (
+    <div className="min-h-screen bg-bg text-text">
+      <AsciiCanvas ref={canvasRef} />
+      <TerminalHeader
+        phase={phase === "intro" ? "intro" : "complete"}
+        activeSection={activeSection}
+        onNavigate={scrollTo}
+        agentCount={visibleAgents.length}
+      />
+
+      <main className="relative z-10">
+        {/* INTRO STAGE */}
+        <div
+          className="mx-auto max-w-2xl px-4 pt-16 pb-8"
+        >
+          {/* Prompt */}
+          <div className="mb-8">
+            <p className="font-mono text-sm text-text-muted mb-1">
+              <span className="opacity-50">$</span> user@visitor
+            </p>
+            <div className="font-mono text-lg text-text">
+              {phase === "intro" && !promptComplete ? (
+                <TypewriterText
+                  text={PROMPT_TEXT}
+                  speed={80}
+                  showCursor
+                  start
+                  onComplete={() => setPromptComplete(true)}
+                />
+              ) : (
+                <>{PROMPT_TEXT}</>
+              )}
+            </div>
+          </div>
+
+          {/* System notes */}
+          {promptComplete && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.3 }}
+            >
+              <SystemNote>dispatching agents...</SystemNote>
+            </motion.div>
+          )}
+
+          {/* Skip button */}
+          <AnimatePresence>
+            {showSkip && phase === "intro" && (
+              <motion.button
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                onClick={handleSkip}
+                className="mb-4 inline-flex items-center gap-1.5 px-3 py-1.5 border border-border-subtle font-mono text-[10px] text-text-muted hover:text-text hover:border-text transition-colors cursor-pointer"
+              >
+                <Zap className="w-3 h-3" />
+                Press Enter or click to skip
+              </motion.button>
+            )}
+          </AnimatePresence>
+
+          {/* Agent messages */}
+          <CollapsibleAgentLog
+            agents={visibleAgents}
+            isIntroComplete={phase === "unlocked"}
+          >
+            {visibleAgents.map((agent) => {
+              const isActive = activeAgents.includes(agent.id);
+              const aphase = agentPhases[agent.id] || "pending";
+              if (!isActive) return null;
+
+              let attachment = null;
+              if (agent.id === "navigator") attachment = <LocationAttachment />;
+              if (agent.id === "archivist") attachment = <ExperienceAttachment />;
+              if (agent.id === "builder") attachment = <ProjectAttachment />;
+              if (agent.id === "curator") attachment = <ReadingAttachment />;
+
+              return (
+                <AgentChat
+                  key={agent.id}
+                  agent={agent}
+                  message={AGENT_MESSAGES[agent.id]}
+                  attachment={attachment}
+                  phase={aphase as any}
+                  timestamp={new Date().toLocaleTimeString([], {
+                    hour: "2-digit",
+                    minute: "2-digit",
+                  })}
+                />
+              );
+            })}
+          </CollapsibleAgentLog>
+
+          {/* System complete note */}
+          {phase === "unlocked" && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.3 }}
+            >
+              <SystemNote>profile assembled. scroll to explore.</SystemNote>
+            </motion.div>
+          )}
+        </div>
+
+        {/* FULL PORTFOLIO */}
+        <AnimatePresence>
+          {showFullProfile && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="mx-auto max-w-2xl px-4 pb-20"
+            >
+              {/* About */}
+              <section id="about" className="mb-16 pt-8">
+                <div className="flex items-start gap-4 mb-6">
+                  <img
+                    src={profile}
+                    alt="Jen Yang Koh"
+                    className="w-28 h-28 md:w-36 md:h-36 rounded border border-border-subtle object-cover"
+                    loading="eager"
+                  />
+                  <div>
+                    <h2 className="font-serif text-2xl font-bold text-text">
+                      Jen Yang Koh
+                    </h2>
+                    <p className="font-mono text-xs text-text-muted mt-1">
+                      Also goes by Andy
+                      <img
+                        src={waving_hand}
+                        alt=""
+                        className="w-4 h-4 inline-block ml-1"
+                      />
+                    </p>
+                  </div>
+                </div>
+
+                <div className="border-l-2 border-border-subtle pl-4">
+                  <p className="text-xl font-serif font-semibold text-text leading-snug mb-4">
+                    I build software that works.
+                  </p>
+                  <p className="text-sm text-text-muted leading-relaxed">
+                    I don't stress too much about labels like "frontend" or
+                    "backend." If a button needs to be clicked, I'll design it.
+                    If that button needs to save data, I'll write the API. I just
+                    want to build the whole thing right.
+                  </p>
+                </div>
+
+                <div className="flex flex-wrap gap-4 mt-6">
+                  <a
+                    href="https://github.com/jenyangk"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1.5 text-xs font-mono text-text-muted hover:text-text transition-colors"
+                  >
+                    <Github className="w-3.5 h-3.5" />
+                    GitHub
+                  </a>
+                  <a
+                    href="https://www.linkedin.com/in/jenyangkoh/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1.5 text-xs font-mono text-text-muted hover:text-text transition-colors"
+                  >
+                    <Linkedin className="w-3.5 h-3.5" />
+                    LinkedIn
+                  </a>
+                  <a
+                    href={resume}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1.5 text-xs font-mono text-text-muted hover:text-text transition-colors"
+                  >
+                    <FileText className="w-3.5 h-3.5" />
+                    Résumé
+                  </a>
+                  <a
+                    href="mailto:jenyang.koh@gmail.com"
+                    className="inline-flex items-center gap-1.5 text-xs font-mono text-text-muted hover:text-text transition-colors"
+                  >
+                    <Mail className="w-3.5 h-3.5" />
+                    Email
+                  </a>
+                </div>
+              </section>
+
+              {/* Currently Building */}
+              <section className="mb-16">
+                <div className="flex items-center gap-2 mb-4">
+                  <Hammer className="w-4 h-4 text-builder" />
+                  <h3 className="font-serif text-lg font-semibold">
+                    Currently Building
+                  </h3>
+                </div>
+                <div className="space-y-4 border-l border-border-subtle pl-4">
+                  {[
+                    {
+                      name: "IoT Platform",
+                      org: "Latium Technologies",
+                      status: "In Progress",
+                      desc: "Monitoring systems, mobile apps, and web portals for construction site operations.",
+                      tech: ["C#", ".NET", "Azure", "React"],
+                    },
+                    {
+                      name: "Eagles Website",
+                      org: "Eagles Communications Ltd.",
+                      status: "Client Work",
+                      desc: "Redesigning a Singaporean organization's website with Next.js, Prismic CMS, and Cloudflare.",
+                      tech: ["Next.js", "Prismic", "Cloudflare"],
+                    },
+                    {
+                      name: "Phishing Simulation",
+                      status: "R&D",
+                      desc: "Early-phase AI-native security tool using agentic workflows and LangGraph for SME phishing awareness.",
+                      tech: ["LangGraph", "Python", "AI Agents"],
+                    },
+                    {
+                      name: "AI Engineering",
+                      status: "Learning",
+                      desc: "Studying agent orchestration, LLM systems design, and building experimental AI tools.",
+                      tech: ["LangGraph", "OpenAI", "Python"],
+                    },
+                  ].map((item, i) => (
+                    <div key={i} className="group">
+                      <div className="flex items-center justify-between gap-2">
+                        <h4 className="text-sm font-medium text-text">
+                          {item.name}
+                        </h4>
+                        <span className="text-[10px] font-mono text-text-muted uppercase tracking-wider">
+                          {item.status}
+                        </span>
+                      </div>
+                      {item.org && (
+                        <p className="text-xs text-text-muted mt-0.5">
+                          {item.org}
+                        </p>
+                      )}
+                      <p className="text-xs text-text-muted mt-1 leading-relaxed">
+                        {item.desc}
+                      </p>
+                      <div className="flex flex-wrap gap-1 mt-2">
+                        {item.tech.map((t) => (
+                          <span
+                            key={t}
+                            className="px-1.5 py-0.5 text-[10px] font-mono border border-border-subtle text-text-muted"
+                          >
+                            {t}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </section>
+
+              {/* Experience */}
+              <section id="experience" className="mb-16">
+                <ExperienceAttachment />
+              </section>
+
+              {/* Projects */}
+              <section id="projects" className="mb-16">
+                <ProjectAttachment />
+              </section>
+
+              {/* Reading */}
+              <section className="mb-16">
+                <ReadingAttachment />
+              </section>
+
+              {/* Contact */}
+              <section id="contact" className="mb-12">
+                <h3 className="font-serif text-2xl font-bold text-text mb-4">
+                  Let's build something together.
+                </h3>
+                <p className="text-sm text-text-muted mb-6 leading-relaxed">
+                  I'm always open to interesting projects, collaborations, or just
+                  a good conversation about software.
+                </p>
+                <div className="flex flex-wrap gap-3">
+                  <a
+                    href="mailto:jenyang.koh@gmail.com"
+                    className="inline-flex items-center gap-2 px-4 py-2 border border-border text-xs font-mono hover:bg-text hover:text-bg transition-colors"
+                  >
+                    <Mail className="w-3.5 h-3.5" />
+                    Email Me
+                  </a>
+                  <a
+                    href={resume}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 px-4 py-2 border border-border text-xs font-mono hover:bg-text hover:text-bg transition-colors"
+                  >
+                    <FileText className="w-3.5 h-3.5" />
+                    View Résumé
+                  </a>
+                  <a
+                    href="https://www.linkedin.com/in/jenyangkoh/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 px-4 py-2 border border-border text-xs font-mono hover:bg-text hover:text-bg transition-colors"
+                  >
+                    <ExternalLink className="w-3.5 h-3.5" />
+                    LinkedIn
+                  </a>
+                </div>
+              </section>
+
+              {/* Footer */}
+              <footer className="border-t border-border-subtle pt-6 flex items-center justify-between text-text-muted">
+                <p className="font-mono text-[10px]">© 2026 Jen Yang Koh</p>
+                <button
+                  onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+                  className="font-mono text-[10px] hover:text-text transition-colors"
+                >
+                  Back to top ↑
+                </button>
+              </footer>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </main>
+    </div>
+  );
+}

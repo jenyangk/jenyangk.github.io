@@ -1,13 +1,24 @@
 export default {
   content: ['index.html', './src/**/*.{js,jsx,ts,tsx,vue,html}'],
+  darkMode: 'media',
   theme: {
     fontFamily: {
-      sans: ['"Neue Haas Grotesk Display Pro"', 'ui-sans-serif', 'system-ui', 'sans-serif', '"Apple Color Emoji"', '"Segoe UI Emoji"', '"Segoe UI Symbol"', '"Noto Color Emoji"'],
+      sans: ['Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+      serif: ['"Young Serif"', 'Georgia', 'serif'],
+      mono: ['"JetBrains Mono"', '"Fira Code"', 'ui-monospace', 'SFMono-Regular', 'monospace'],
     },
     extend: {
-      fontFamily: {
-        barcode: ['"Libre Barcode 39"', 'monospace'],
-      }
+      colors: {
+        bg: 'var(--bg)',
+        text: 'var(--text)',
+        'text-muted': 'var(--text-muted)',
+        border: 'var(--border)',
+        'border-subtle': 'var(--border-subtle)',
+        navigator: 'var(--accent-navigator)',
+        archivist: 'var(--accent-archivist)',
+        builder: 'var(--accent-builder)',
+        curator: 'var(--accent-curator)',
+      },
     },
   },
   plugins: [],
