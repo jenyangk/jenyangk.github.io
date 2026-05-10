@@ -3,49 +3,38 @@ import {
   TailwindCSS, Firebase, Azure, Xamarin, PowerShell, ThreeJs, Supabase,
   PostgreSQL, Django, Solidity
 } from "developer-icons";
-import { motion } from "framer-motion";
 
 interface ToolGroupProps {
   title: string;
   description: string;
   tools: { icon: React.ElementType; name: string }[];
-  delay?: number;
 }
 
-const ToolGroup = ({ title, description, tools, delay = 0 }: ToolGroupProps) => (
-  <motion.div
-    initial={{ opacity: 0, x: -10 }}
-    whileInView={{ opacity: 1, x: 0 }}
-    transition={{ duration: 0.3, delay }}
-    viewport={{ once: true }}
-    className="flex flex-col gap-3"
-  >
-    <div className="flex items-baseline gap-2">
-      <h3 className="font-mono text-base font-bold uppercase tracking-tight">{title}</h3>
-      <div className="flex-grow h-px bg-border opacity-30" />
+const ToolGroup = ({ title, description, tools }: ToolGroupProps) => (
+  <div className="flex flex-col gap-3">
+    <div className="flex items-baseline gap-3">
+      <h3 className="font-mono text-sm font-bold uppercase tracking-tight">{title}</h3>
+      <div className="flex-grow h-px bg-border opacity-10" />
     </div>
-    <p className="text-base text-zinc-600 dark:text-zinc-400 mb-2">{description}</p>
-    <div className="flex flex-wrap gap-2">
+    <p className="text-base text-zinc-500">{description}</p>
+    <div className="flex flex-wrap gap-3">
       {tools.map((tool) => (
         <div
           key={tool.name}
-          className="group relative flex items-center justify-center p-2 border border-border bg-main hover:bg-bw hover:border-text transition-all duration-100"
+          className="flex items-center gap-2 text-sm text-zinc-600 hover:text-text transition-colors"
           title={tool.name}
         >
-          <tool.icon size={20} />
-          {/* Tooltip */}
-          <span className="absolute -top-8 left-1/2 -translate-x-1/2 px-2 py-0.5 bg-blank text-bw text-xs font-mono opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none z-10">
-            {tool.name}
-          </span>
+          <tool.icon size={16} />
+          <span className="font-mono text-xs">{tool.name}</span>
         </div>
       ))}
     </div>
-  </motion.div>
+  </div>
 );
 
 // .NET icon component
 const DotNetIcon = () => (
-  <svg aria-label=".NET" className="w-5 h-5" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+  <svg aria-label=".NET" className="w-4 h-4" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
     <path fill="#512bd4" d="M-.134-.326h512.002v512.002H-.134z" />
     <path d="M91.122 326.786c-3.62 0-6.698-1.206-9.232-3.619-2.534-2.475-3.8-5.413-3.8-8.815 0-3.465 1.266-6.434 3.8-8.908 2.534-2.475 5.612-3.712 9.232-3.712 3.68 0 6.787 1.237 9.321 3.712 2.595 2.474 3.892 5.443 3.892 8.908 0 3.402-1.297 6.34-3.892 8.815-2.534 2.413-5.64 3.619-9.321 3.619zM235.844 324.745h-23.532l-61.996-97.807a43.764 43.764 0 01-3.892-7.703h-.543c.483 2.847.724 8.94.724 18.28v87.23h-20.817v-133.07h25.07l59.916 95.487c2.534 3.96 4.163 6.682 4.887 8.166h.362c-.603-3.525-.905-9.495-.905-17.91v-85.743h20.726v133.07zM337.213 324.745h-72.856v-133.07h69.96v18.745h-48.42v37.675h44.62v18.652h-44.62v39.346h51.316v18.652zM440.757 210.42h-37.289v114.325h-21.54V210.42H344.73v-18.745h96.027v18.745z" fill="#fff" />
   </svg>
@@ -53,7 +42,7 @@ const DotNetIcon = () => (
 
 // SQL Server icon wrapper
 const SqlServerIcon = () => (
-  <i className="devicon-microsoftsqlserver-plain colored text-xl leading-none" title="Microsoft SQL Server" />
+  <i className="devicon-microsoftsqlserver-plain colored text-sm leading-none" title="Microsoft SQL Server" />
 );
 
 export const Toolkit = () => {
@@ -99,12 +88,10 @@ export const Toolkit = () => {
   ];
 
   return (
-    <div className="flex flex-col gap-6">
-      <div className="flex items-baseline gap-2 mb-2">
-        <h2 className="font-mono text-lg font-bold uppercase tracking-tight">My Toolkit</h2>
-      </div>
-      {toolGroups.map((group, index) => (
-        <ToolGroup key={group.title} {...group} delay={index * 0.1} />
+    <div className="flex flex-col gap-10">
+      <p className="font-mono text-xs uppercase tracking-widest text-zinc-400 mb-2">Toolkit</p>
+      {toolGroups.map((group) => (
+        <ToolGroup key={group.title} {...group} />
       ))}
     </div>
   );
