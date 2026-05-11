@@ -76,9 +76,7 @@ function SystemNote({ children }: { children: string }) {
 
 export default function App() {
   const [phase, setPhase] = useState<"intro" | "unlocked">("intro");
-  const [promptComplete, setPromptComplete] = useState(
-    typeof window !== "undefined" && window.innerWidth < 768
-  );
+  const [promptComplete, setPromptComplete] = useState(false);
   const [activeAgents, setActiveAgents] = useState<string[]>([]);
   const [agentPhases, setAgentPhases] = useState<Record<string, string>>({});
   const [showFullProfile, setShowFullProfile] = useState(false);
@@ -89,6 +87,9 @@ export default function App() {
   const timelineRef = useRef<gsap.core.Timeline | null>(null);
   const skipRef = useRef(false);
   const skipTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const hasStartedRef = useRef(false);
+  const visibleAgentsRef = useRef(AGENTS);
+  const isMobileRef = useRef(false);
 
   const mmRef = useRef<gsap.MatchMedia | null>(null);
   const [isMobile, setIsMobile] = useState(false);
@@ -103,7 +104,9 @@ export default function App() {
         reduceMotion: "(prefers-reduced-motion: reduce)",
       },
       (ctx) => {
-        setIsMobile(!!ctx.conditions?.isMobile);
+        const mobile = !!ctx.conditions?.isMobile;
+        setIsMobile(mobile);
+        isMobileRef.current = mobile;
         setReduceMotion(!!ctx.conditions?.reduceMotion);
       }
     );
@@ -112,17 +115,21 @@ export default function App() {
     };
   }, []);
 
-  const visibleAgents = isMobile ? [AGENTS[0], AGENTS[2]] : AGENTS;
+  const visibleAgents = AGENTS;
+  visibleAgentsRef.current = visibleAgents;
+  const agentCount = visibleAgents.length;
 
   const handleSkip = useCallback(() => {
     if (skipRef.current) return;
     skipRef.current = true;
     timelineRef.current?.kill();
     if (skipTimerRef.current) clearTimeout(skipTimerRef.current);
+    const agents = visibleAgentsRef.current;
+    const mobile = isMobileRef.current;
     setPromptComplete(true);
-    setActiveAgents(visibleAgents.map((a) => a.id));
+    setActiveAgents(agents.map((a) => a.id));
     const allExpanded: Record<string, string> = {};
-    visibleAgents.forEach((a) => {
+    agents.forEach((a) => {
       allExpanded[a.id] = "expanded";
     });
     setAgentPhases(allExpanded);
@@ -130,17 +137,23 @@ export default function App() {
     setShowFullProfile(true);
     document.body.style.overflow = "auto";
     requestAnimationFrame(() => {
-      document.getElementById("about")?.scrollIntoView({ behavior: isMobile ? "auto" : "smooth" });
+      document.getElementById("about")?.scrollIntoView({ behavior: mobile ? "auto" : "smooth" });
     });
-  }, [visibleAgents, isMobile]);
+  }, []);
 
   const runIntro = useCallback(() => {
+    if (hasStartedRef.current) return;
+    hasStartedRef.current = true;
+
+    const agents = visibleAgentsRef.current;
+    const mobile = isMobileRef.current;
+
     if (reduceMotion) {
       // Skip all animation for reduced motion
       setPromptComplete(true);
-      setActiveAgents(visibleAgents.map((a) => a.id));
+      setActiveAgents(agents.map((a) => a.id));
       const allExpanded: Record<string, string> = {};
-      visibleAgents.forEach((a) => {
+      agents.forEach((a) => {
         allExpanded[a.id] = "expanded";
       });
       setAgentPhases(allExpanded);
@@ -156,9 +169,11 @@ export default function App() {
         setShowFullProfile(true);
         setShowSkip(false);
         document.body.style.overflow = "auto";
-        requestAnimationFrame(() => {
-          document.getElementById("about")?.scrollIntoView({ behavior: "smooth" });
-        });
+        // Scroll to portfolio once after everything is done
+        const about = document.getElementById("about");
+        if (about) {
+          about.scrollIntoView({ behavior: "smooth" });
+        }
       },
     });
     timelineRef.current = tl;
@@ -167,49 +182,44 @@ export default function App() {
     skipTimerRef.current = setTimeout(() => setShowSkip(true), 2000);
 
     // Phase 1: Prompt typing
-    const promptDuration = skipRef.current ? 0 : isMobile ? 0 : PROMPT_TEXT.length * 0.12;
+    const promptDuration = skipRef.current ? 0 : PROMPT_TEXT.length * 0.12;
     tl.to({}, { duration: promptDuration });
     tl.call(() => setPromptComplete(true));
 
-    tl.to({}, { duration: isMobile ? 0 : 0.4 });
+    tl.to({}, { duration: 0.4 });
 
     // Phase 2: Agents appear sequentially (one at a time)
-    const agentDelay = skipRef.current ? 0 : isMobile ? 0 : 0.5;
-    const typeDuration = skipRef.current ? 0 : isMobile ? 0 : 2.0;
-    const expandDelay = skipRef.current ? 0 : isMobile ? 0 : 0.3;
-    const expandDuration = skipRef.current ? 0 : isMobile ? 0 : 0.6;
+    const agentDelay = skipRef.current ? 0 : 0.5;
+    const typeDuration = skipRef.current ? 0 : 2.0;
 
-    for (let i = 0; i < visibleAgents.length; i++) {
-      const agent = visibleAgents[i];
+    for (let i = 0; i < agents.length; i++) {
+      const agent = agents[i];
 
       tl.call(() => {
         setActiveAgents((prev) => [...prev, agent.id]);
         setAgentPhases((prev) => ({ ...prev, [agent.id]: "typing" }));
-        if (!isMobile) {
+        if (!mobile) {
           canvasRef.current?.pulseAt(
             window.innerWidth * (0.3 + Math.random() * 0.4),
             window.innerHeight * (0.3 + Math.random() * 0.4),
             1
           );
         }
-        // Auto-scroll to keep new agent in view (defer to next frame)
-        requestAnimationFrame(() => {
-          window.scrollTo({ top: document.body.scrollHeight, behavior: isMobile ? "auto" : "smooth" });
-        });
       });
 
       tl.to({}, { duration: typeDuration });
-      tl.call(() => {
-        setAgentPhases((prev) => ({ ...prev, [agent.id]: "attached" }));
-      });
 
-      tl.to({}, { duration: expandDelay + expandDuration });
-      tl.call(() => {
-        setAgentPhases((prev) => ({ ...prev, [agent.id]: "expanded" }));
-      });
-
-      if (i < visibleAgents.length - 1) {
+      if (i < agents.length - 1) {
+        // Collapse finished agent, pause, then show next
+        tl.call(() => {
+          setAgentPhases((prev) => ({ ...prev, [agent.id]: "collapsed" }));
+        });
         tl.to({}, { duration: agentDelay });
+      } else {
+        // Last agent stays expanded
+        tl.call(() => {
+          setAgentPhases((prev) => ({ ...prev, [agent.id]: "expanded" }));
+        });
       }
     }
 
@@ -220,7 +230,7 @@ export default function App() {
       setShowSkip(false);
       if (skipTimerRef.current) clearTimeout(skipTimerRef.current);
     });
-  }, [visibleAgents, reduceMotion, isMobile]);
+  }, [reduceMotion]);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -247,8 +257,10 @@ export default function App() {
     if (phase !== "unlocked") return;
 
     const sections = ["about", "experience", "projects", "contact"];
+    let enabled = false;
 
     const handleScroll = () => {
+      if (!enabled) return;
       const scrollPos = window.scrollY + window.innerHeight * 0.35;
 
       let bestId = sections[0];
@@ -268,8 +280,16 @@ export default function App() {
     };
 
     window.addEventListener("scroll", handleScroll, { passive: true });
-    handleScroll();
-    return () => window.removeEventListener("scroll", handleScroll);
+    // Delay enabling scroll spy so the final auto-scroll doesn't trigger it
+    const timer = setTimeout(() => {
+      enabled = true;
+      handleScroll();
+    }, 1500);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      clearTimeout(timer);
+    };
   }, [phase]);
 
   const scrollTo = (id: string) => {
@@ -283,7 +303,7 @@ export default function App() {
         phase={phase === "intro" ? "intro" : "complete"}
         activeSection={activeSection}
         onNavigate={scrollTo}
-        agentCount={visibleAgents.length}
+        agentCount={agentCount}
       />
 
       <main className="relative z-10">
