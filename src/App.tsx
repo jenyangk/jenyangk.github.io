@@ -247,15 +247,26 @@ export default function App() {
     if (phase !== "unlocked") return;
 
     const sections = ["about", "experience", "projects", "contact"];
+    const ratios = new Map<string, number>();
+
     const observer = new IntersectionObserver(
       (entries) => {
         for (const entry of entries) {
-          if (entry.isIntersecting) {
-            setActiveSection(entry.target.id);
+          ratios.set(entry.target.id, entry.intersectionRatio);
+        }
+        let bestId: string | null = null;
+        let bestRatio = -1;
+        for (const [id, ratio] of ratios) {
+          if (ratio > bestRatio) {
+            bestRatio = ratio;
+            bestId = id;
           }
         }
+        if (bestId && bestRatio > 0) {
+          setActiveSection(bestId);
+        }
       },
-      { rootMargin: "-20% 0px -60% 0px" }
+      { rootMargin: "-20% 0px -60% 0px", threshold: [0, 0.25, 0.5, 0.75, 1] }
     );
 
     sections.forEach((id) => {
@@ -365,7 +376,7 @@ export default function App() {
           </CollapsibleAgentLog>
 
           {/* System complete note */}
-          {phase === "unlocked" && (
+          {phase === "unlocked" && !isMobile && (
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
