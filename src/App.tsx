@@ -247,34 +247,29 @@ export default function App() {
     if (phase !== "unlocked") return;
 
     const sections = ["about", "experience", "projects", "contact"];
-    const ratios = new Map<string, number>();
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        for (const entry of entries) {
-          ratios.set(entry.target.id, entry.intersectionRatio);
-        }
-        let bestId: string | null = null;
-        let bestRatio = -1;
-        for (const [id, ratio] of ratios) {
-          if (ratio > bestRatio) {
-            bestRatio = ratio;
-            bestId = id;
-          }
-        }
-        if (bestId && bestRatio > 0) {
-          setActiveSection(bestId);
-        }
-      },
-      { rootMargin: "-20% 0px -60% 0px", threshold: [0, 0.25, 0.5, 0.75, 1] }
-    );
+    const handleScroll = () => {
+      const scrollPos = window.scrollY + window.innerHeight * 0.35;
 
-    sections.forEach((id) => {
-      const el = document.getElementById(id);
-      if (el) observer.observe(el);
-    });
+      let bestId = sections[0];
+      let bestDiff = Infinity;
 
-    return () => observer.disconnect();
+      for (const id of sections) {
+        const el = document.getElementById(id);
+        if (!el) continue;
+        const diff = Math.abs(el.offsetTop - scrollPos);
+        if (diff < bestDiff) {
+          bestDiff = diff;
+          bestId = id;
+        }
+      }
+
+      setActiveSection(bestId);
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    handleScroll();
+    return () => window.removeEventListener("scroll", handleScroll);
   }, [phase]);
 
   const scrollTo = (id: string) => {
