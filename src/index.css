@@ -65,6 +65,15 @@
 	background-color: var(--text);
 }
 
+.scrollbar-hide {
+	-ms-overflow-style: none;
+	scrollbar-width: none;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+	display: none;
+}
+
 body {
 	background-color: var(--bg);
 	color: var(--text);
