@@ -80,15 +80,16 @@ export const AsciiCanvas = forwardRef<AsciiCanvasRef>((_, ref) => {
     if (!ctx) return;
 
     reducedMotionRef.current = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const isMobile = window.innerWidth < 768;
+    const dpr = isMobile ? 1 : Math.min(window.devicePixelRatio, 2);
+    const charSize = isMobile ? 24 : 18;
 
     const resize = () => {
-      const dpr = Math.min(window.devicePixelRatio, 2);
       const rect = canvas.getBoundingClientRect();
       canvas.width = rect.width * dpr;
       canvas.height = rect.height * dpr;
-      ctx.scale(dpr, dpr);
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 
-      const charSize = 18;
       const cols = Math.ceil(rect.width / charSize) + 1;
       const rows = Math.ceil(rect.height / charSize) + 1;
       cellsRef.current = buildGrid(cols, rows);
@@ -106,31 +107,45 @@ export const AsciiCanvas = forwardRef<AsciiCanvasRef>((_, ref) => {
     };
     window.addEventListener("mousemove", handleMouseMove, { passive: true });
 
-    const charSize = 18;
     const now = () => performance.now();
+    let isVisible = true;
+    let isDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+    const darkMql = window.matchMedia("(prefers-color-scheme: dark)");
+    const onDarkChange = (e: MediaQueryListEvent) => { isDark = e.matches; };
+    darkMql.addEventListener("change", onDarkChange);
+
+    const baseColor = () => isDark ? "245, 240, 230" : "42, 42, 42";
+    const zoneColors: Record<string, string> = {
+      navigator: "108, 140, 191",
+      archivist: "184, 149, 106",
+      builder: "255, 107, 107",
+      curator: "122, 158, 126",
+    };
 
     const draw = () => {
       if (!ctx || !canvas) return;
+      if (!isVisible) {
+        rafRef.current = requestAnimationFrame(draw);
+        return;
+      }
+
       const rect = canvas.getBoundingClientRect();
       ctx.clearRect(0, 0, rect.width, rect.height);
 
       const mouse = mouseRef.current;
       const cells = cellsRef.current;
       const currentTime = now();
-
-      const isDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-      const baseColor = isDark ? "245, 240, 230" : "42, 42, 42";
-      const zoneColors: Record<string, string> = {
-        navigator: "108, 140, 191",
-        archivist: "184, 149, 106",
-        builder: "255, 107, 107",
-        curator: "122, 158, 126",
-      };
+      const bc = baseColor();
       const activeZone = activityZoneRef.current;
-      const zoneColor = activeZone ? zoneColors[activeZone] || baseColor : baseColor;
+      const zoneColor = activeZone ? zoneColors[activeZone] || bc : bc;
 
       // Clean up old pulses
       pulsesRef.current = pulsesRef.current.filter((p) => currentTime - p.time < 2000);
+      const hasPulses = pulsesRef.current.length > 0;
+
+      ctx.font = `${charSize}px "JetBrains Mono", monospace`;
+      ctx.textAlign = "center";
+      ctx.textBaseline = "middle";
 
       for (let i = 0; i < cells.length; i++) {
         const cell = cells[i];
@@ -139,21 +154,26 @@ export const AsciiCanvas = forwardRef<AsciiCanvasRef>((_, ref) => {
 
         const dx = mouse.x - px;
         const dy = mouse.y - py;
-        const dist = Math.sqrt(dx * dx + dy * dy);
+        const distSq = dx * dx + dy * dy;
         const maxDist = 120;
-        const mouseInfluence = Math.max(0, 1 - dist / maxDist);
+        const mouseInfluence = distSq < maxDist * maxDist
+          ? Math.max(0, 1 - Math.sqrt(distSq) / maxDist)
+          : 0;
 
         // Pulse influence from agent activity
         let pulseInfluence = 0;
-        for (const pulse of pulsesRef.current) {
-          const pdx = pulse.x - px;
-          const pdy = pulse.y - py;
-          const pdist = Math.sqrt(pdx * pdx + pdy * pdy);
-          const pmax = 200;
-          const age = (currentTime - pulse.time) / 2000;
-          const decay = 1 - age;
-          if (pdist < pmax && decay > 0) {
-            pulseInfluence += Math.max(0, 1 - pdist / pmax) * pulse.intensity * decay;
+        if (hasPulses) {
+          for (const pulse of pulsesRef.current) {
+            const pdx = pulse.x - px;
+            const pdy = pulse.y - py;
+            const pdistSq = pdx * pdx + pdy * pdy;
+            const pmax = 200;
+            if (pdistSq >= pmax * pmax) continue;
+            const age = (currentTime - pulse.time) / 2000;
+            const decay = 1 - age;
+            if (decay > 0) {
+              pulseInfluence += Math.max(0, 1 - Math.sqrt(pdistSq) / pmax) * pulse.intensity * decay;
+            }
           }
         }
 
@@ -170,32 +190,47 @@ export const AsciiCanvas = forwardRef<AsciiCanvasRef>((_, ref) => {
 
         if (finalOpacity < 0.01) continue;
 
-        ctx.save();
-        ctx.translate(px + charSize / 2, py + charSize / 2);
-        ctx.scale(finalScale, finalScale);
-        ctx.translate(-(px + charSize / 2), -(py + charSize / 2));
-
-        const color = pulseInfluence > 0.3 || mouseInfluence > 0.5 ? zoneColor : baseColor;
+        const color = pulseInfluence > 0.3 || mouseInfluence > 0.5 ? zoneColor : bc;
         ctx.fillStyle = `rgba(${color}, ${finalOpacity})`;
-        ctx.font = `${charSize}px "JetBrains Mono", monospace`;
-        ctx.textAlign = "center";
-        ctx.textBaseline = "middle";
-        ctx.fillText(cell.char, px + charSize / 2, py + charSize / 2 + 1);
 
-        ctx.restore();
+        if (finalScale !== 1) {
+          ctx.save();
+          ctx.translate(px + charSize / 2, py + charSize / 2);
+          ctx.scale(finalScale, finalScale);
+          ctx.translate(-(px + charSize / 2), -(py + charSize / 2));
+          ctx.fillText(cell.char, px + charSize / 2, py + charSize / 2 + 1);
+          ctx.restore();
+        } else {
+          ctx.fillText(cell.char, px + charSize / 2, py + charSize / 2 + 1);
+        }
       }
 
-      if (!reducedMotionRef.current) {
-        rafRef.current = requestAnimationFrame(draw);
-      }
+      rafRef.current = requestAnimationFrame(draw);
     };
 
-    draw();
+    if (!reducedMotionRef.current) {
+      draw();
+    } else {
+      // Single render for reduced motion
+      draw();
+      cancelAnimationFrame(rafRef.current);
+    }
+
+    // Pause when off-screen
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        isVisible = entry.isIntersecting;
+      },
+      { threshold: 0 }
+    );
+    observer.observe(canvas);
 
     return () => {
       window.removeEventListener("resize", resize);
       window.removeEventListener("mousemove", handleMouseMove);
+      darkMql.removeEventListener("change", onDarkChange);
       cancelAnimationFrame(rafRef.current);
+      observer.disconnect();
     };
   }, [buildGrid]);
 

@@ -76,7 +76,9 @@ function SystemNote({ children }: { children: string }) {
 
 export default function App() {
   const [phase, setPhase] = useState<"intro" | "unlocked">("intro");
-  const [promptComplete, setPromptComplete] = useState(false);
+  const [promptComplete, setPromptComplete] = useState(
+    typeof window !== "undefined" && window.innerWidth < 768
+  );
   const [activeAgents, setActiveAgents] = useState<string[]>([]);
   const [agentPhases, setAgentPhases] = useState<Record<string, string>>({});
   const [showFullProfile, setShowFullProfile] = useState(false);
@@ -86,17 +88,37 @@ export default function App() {
   const canvasRef = useRef<AsciiCanvasRef>(null);
   const timelineRef = useRef<gsap.core.Timeline | null>(null);
   const skipRef = useRef(false);
+  const skipTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  const isMobile = typeof window !== "undefined" && window.innerWidth < 768;
+  const mmRef = useRef<gsap.MatchMedia | null>(null);
+  const [isMobile, setIsMobile] = useState(false);
+  const [reduceMotion, setReduceMotion] = useState(false);
 
-  const visibleAgents = isMobile
-    ? [AGENTS[0], AGENTS[2]]
-    : AGENTS;
+  useEffect(() => {
+    const mm = gsap.matchMedia();
+    mmRef.current = mm;
+    mm.add(
+      {
+        isMobile: "(max-width: 767px)",
+        reduceMotion: "(prefers-reduced-motion: reduce)",
+      },
+      (ctx) => {
+        setIsMobile(!!ctx.conditions?.isMobile);
+        setReduceMotion(!!ctx.conditions?.reduceMotion);
+      }
+    );
+    return () => {
+      mm.revert();
+    };
+  }, []);
+
+  const visibleAgents = isMobile ? [AGENTS[0], AGENTS[2]] : AGENTS;
 
   const handleSkip = useCallback(() => {
     if (skipRef.current) return;
     skipRef.current = true;
     timelineRef.current?.kill();
+    if (skipTimerRef.current) clearTimeout(skipTimerRef.current);
     setPromptComplete(true);
     setActiveAgents(visibleAgents.map((a) => a.id));
     const allExpanded: Record<string, string> = {};
@@ -107,97 +129,98 @@ export default function App() {
     setPhase("unlocked");
     setShowFullProfile(true);
     document.body.style.overflow = "auto";
-    setTimeout(() => {
-      document.getElementById("about")?.scrollIntoView({ behavior: "smooth" });
-    }, 300);
-  }, [visibleAgents]);
+    requestAnimationFrame(() => {
+      document.getElementById("about")?.scrollIntoView({ behavior: isMobile ? "auto" : "smooth" });
+    });
+  }, [visibleAgents, isMobile]);
 
   const runIntro = useCallback(() => {
-    const tl = gsap.timeline({
-      onComplete: () => {
+    if (reduceMotion) {
+      // Skip all animation for reduced motion
+      setPromptComplete(true);
+      setActiveAgents(visibleAgents.map((a) => a.id));
+      const allExpanded: Record<string, string> = {};
+      visibleAgents.forEach((a) => {
+        allExpanded[a.id] = "expanded";
+      });
+      setAgentPhases(allExpanded);
       setPhase("unlocked");
       setShowFullProfile(true);
-      setShowSkip(false);
-      setTimeout(() => {
-        document.getElementById("about")?.scrollIntoView({ behavior: "smooth" });
-      }, 600);
+      document.body.style.overflow = "auto";
+      return;
+    }
+
+    const tl = gsap.timeline({
+      onComplete: () => {
+        setPhase("unlocked");
+        setShowFullProfile(true);
+        setShowSkip(false);
+        document.body.style.overflow = "auto";
+        requestAnimationFrame(() => {
+          document.getElementById("about")?.scrollIntoView({ behavior: "smooth" });
+        });
       },
     });
     timelineRef.current = tl;
 
     // Show skip button after 2s
-    setTimeout(() => setShowSkip(true), 2000);
+    skipTimerRef.current = setTimeout(() => setShowSkip(true), 2000);
 
     // Phase 1: Prompt typing
-    const promptDuration = skipRef.current ? 0 : PROMPT_TEXT.length * 0.12;
-    tl.to(
-      {},
-      {
-        duration: promptDuration,
-        onComplete: () => {
-          setPromptComplete(true);
-        },
-      }
-    );
+    const promptDuration = skipRef.current ? 0 : isMobile ? 0 : PROMPT_TEXT.length * 0.12;
+    tl.to({}, { duration: promptDuration });
+    tl.call(() => setPromptComplete(true));
 
-    tl.add(() => {}, "+=0.4");
+    tl.to({}, { duration: isMobile ? 0 : 0.4 });
 
     // Phase 2: Agents appear sequentially (one at a time)
-    const agentDelay = skipRef.current ? 0 : 0.5;
-    const typeDuration = skipRef.current ? 0 : 2.0;
-    const expandDelay = skipRef.current ? 0 : 0.3;
-    const expandDuration = skipRef.current ? 0 : 0.6;
+    const agentDelay = skipRef.current ? 0 : isMobile ? 0 : 0.5;
+    const typeDuration = skipRef.current ? 0 : isMobile ? 0 : 2.0;
+    const expandDelay = skipRef.current ? 0 : isMobile ? 0 : 0.3;
+    const expandDuration = skipRef.current ? 0 : isMobile ? 0 : 0.6;
 
     for (let i = 0; i < visibleAgents.length; i++) {
       const agent = visibleAgents[i];
 
-      tl.add(() => {
+      tl.call(() => {
         setActiveAgents((prev) => [...prev, agent.id]);
         setAgentPhases((prev) => ({ ...prev, [agent.id]: "typing" }));
-        canvasRef.current?.pulseAt(
-          window.innerWidth * (0.3 + Math.random() * 0.4),
-          window.innerHeight * (0.3 + Math.random() * 0.4),
-          1
-        );
-        // Auto-scroll to keep new agent in view
-        setTimeout(() => {
-          window.scrollTo({ top: document.body.scrollHeight, behavior: "smooth" });
-        }, 100);
+        if (!isMobile) {
+          canvasRef.current?.pulseAt(
+            window.innerWidth * (0.3 + Math.random() * 0.4),
+            window.innerHeight * (0.3 + Math.random() * 0.4),
+            1
+          );
+        }
+        // Auto-scroll to keep new agent in view (defer to next frame)
+        requestAnimationFrame(() => {
+          window.scrollTo({ top: document.body.scrollHeight, behavior: isMobile ? "auto" : "smooth" });
+        });
       });
 
-      tl.to(
-        {},
-        {
-          duration: typeDuration,
-          onComplete: () => {
-            setAgentPhases((prev) => ({ ...prev, [agent.id]: "attached" }));
-          },
-        }
-      );
+      tl.to({}, { duration: typeDuration });
+      tl.call(() => {
+        setAgentPhases((prev) => ({ ...prev, [agent.id]: "attached" }));
+      });
 
-      tl.to(
-        {},
-        {
-          duration: expandDuration,
-          delay: expandDelay,
-          onComplete: () => {
-            setAgentPhases((prev) => ({ ...prev, [agent.id]: "expanded" }));
-          },
-        }
-      );
+      tl.to({}, { duration: expandDelay + expandDuration });
+      tl.call(() => {
+        setAgentPhases((prev) => ({ ...prev, [agent.id]: "expanded" }));
+      });
 
       if (i < visibleAgents.length - 1) {
         tl.to({}, { duration: agentDelay });
       }
     }
 
-    tl.add(() => {
+    tl.call(() => {
       setPhase("unlocked");
       setShowFullProfile(true);
       document.body.style.overflow = "auto";
       setShowSkip(false);
+      if (skipTimerRef.current) clearTimeout(skipTimerRef.current);
     });
-  }, [visibleAgents]);
+  }, [visibleAgents, reduceMotion, isMobile]);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -249,7 +272,7 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-bg text-text">
-      <AsciiCanvas ref={canvasRef} />
+      {!isMobile && <AsciiCanvas ref={canvasRef} />}
       <TerminalHeader
         phase={phase === "intro" ? "intro" : "complete"}
         activeSection={activeSection}

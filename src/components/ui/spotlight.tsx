@@ -17,6 +17,13 @@ export function Spotlight({
   const containerRef = useRef<HTMLDivElement>(null);
   const [isHovered, setIsHovered] = useState(false);
   const [parentElement, setParentElement] = useState<HTMLElement | null>(null);
+  const [isEnabled, setIsEnabled] = useState(true);
+
+  useEffect(() => {
+    const mql = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const touch = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+    setIsEnabled(!mql.matches && !touch);
+  }, []);
 
   const mouseX = useSpring(0, springOptions);
   const mouseY = useSpring(0, springOptions);
@@ -45,21 +52,24 @@ export function Spotlight({
     [mouseX, mouseY, parentElement]
   );
 
+  const handleMouseEnter = useCallback(() => setIsHovered(true), []);
+  const handleMouseLeave = useCallback(() => setIsHovered(false), []);
+
   useEffect(() => {
-    if (!parentElement) return;
+    if (!parentElement || !isEnabled) return;
 
     parentElement.addEventListener('mousemove', handleMouseMove);
-    parentElement.addEventListener('mouseenter', () => setIsHovered(true));
-    parentElement.addEventListener('mouseleave', () => setIsHovered(false));
+    parentElement.addEventListener('mouseenter', handleMouseEnter);
+    parentElement.addEventListener('mouseleave', handleMouseLeave);
 
     return () => {
       parentElement.removeEventListener('mousemove', handleMouseMove);
-      parentElement.removeEventListener('mouseenter', () => setIsHovered(true));
-      parentElement.removeEventListener('mouseleave', () =>
-        setIsHovered(false)
-      );
+      parentElement.removeEventListener('mouseenter', handleMouseEnter);
+      parentElement.removeEventListener('mouseleave', handleMouseLeave);
     };
-  }, [parentElement, handleMouseMove]);
+  }, [parentElement, handleMouseMove, handleMouseEnter, handleMouseLeave, isEnabled]);
+
+  if (!isEnabled) return null;
 
   return (
     <motion.div
