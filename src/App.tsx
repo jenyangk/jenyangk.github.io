@@ -191,6 +191,7 @@ export default function App() {
     // Phase 2: Agents appear sequentially (one at a time)
     const agentDelay = skipRef.current ? 0 : 0.5;
     const typeDuration = skipRef.current ? 0 : 2.0;
+    const readDuration = skipRef.current ? 0 : 1.5;
 
     for (let i = 0; i < agents.length; i++) {
       const agent = agents[i];
@@ -210,15 +211,24 @@ export default function App() {
       tl.to({}, { duration: typeDuration });
 
       if (i < agents.length - 1) {
-        // Collapse finished agent, pause, then show next
+        // Show full message for a moment so user can read it
+        tl.call(() => {
+          setAgentPhases((prev) => ({ ...prev, [agent.id]: "attached" }));
+        });
+        tl.to({}, { duration: readDuration });
+        // Then collapse before next agent
         tl.call(() => {
           setAgentPhases((prev) => ({ ...prev, [agent.id]: "collapsed" }));
         });
         tl.to({}, { duration: agentDelay });
       } else {
-        // Last agent stays expanded
+        // Last agent: show attachment briefly, then collapse before unlock
         tl.call(() => {
-          setAgentPhases((prev) => ({ ...prev, [agent.id]: "expanded" }));
+          setAgentPhases((prev) => ({ ...prev, [agent.id]: "attached" }));
+        });
+        tl.to({}, { duration: readDuration });
+        tl.call(() => {
+          setAgentPhases((prev) => ({ ...prev, [agent.id]: "collapsed" }));
         });
       }
     }

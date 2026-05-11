@@ -33,7 +33,7 @@ export function AgentChat({
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
-        className="mb-2 py-2 px-3 border border-border-subtle bg-bg/50 flex items-center gap-2"
+        className="mb-2 py-2 px-3 border border-border-subtle bg-bg/50 flex items-center gap-2 flex-wrap"
       >
         <span
           className="text-base select-none whitespace-nowrap shrink-0"
@@ -42,10 +42,10 @@ export function AgentChat({
         >
           {agent.kaomoji}
         </span>
-        <span className="font-mono text-xs font-medium" style={{ color: agent.color }}>
+        <span className="font-mono text-xs font-medium truncate min-w-0" style={{ color: agent.color }}>
           {agent.name}
         </span>
-        <span className="ml-auto font-mono text-[10px] text-text-muted">
+        <span className="ml-auto font-mono text-[10px] text-text-muted shrink-0">
           completed
         </span>
       </motion.div>
@@ -186,7 +186,7 @@ export function CollapsibleAgentLog({
               e.stopPropagation();
               setIsExpanded(true);
             }}
-            className="w-full flex items-center gap-3 px-3 py-2.5 border border-border-subtle bg-bg/60 hover:bg-bg/80 transition-colors text-left group cursor-pointer"
+            className="w-full flex flex-col items-center gap-3 px-3 py-2.5 border border-border-subtle bg-bg/60 hover:bg-bg/80 transition-colors text-left group cursor-pointer"
           >
             <div className="flex -space-x-1.5">
               {agents.map((agent) => (
