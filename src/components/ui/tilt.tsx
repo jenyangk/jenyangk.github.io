@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useRef } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import {
     motion,
     useMotionTemplate,
@@ -29,6 +29,13 @@ export function Tilt({
     springOptions,
 }: TiltProps) {
     const ref = useRef<HTMLDivElement>(null);
+    const [isEnabled, setIsEnabled] = useState(true);
+
+    useEffect(() => {
+        const mql = window.matchMedia('(prefers-reduced-motion: reduce)');
+        const touch = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+        setIsEnabled(!mql.matches && !touch);
+    }, []);
 
     const x = useMotionValue(0);
     const y = useMotionValue(0);
@@ -54,7 +61,7 @@ export function Tilt({
     const transform = useMotionTemplate`perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
 
     const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-        if (!ref.current) return;
+        if (!ref.current || !isEnabled) return;
 
         const rect = ref.current.getBoundingClientRect();
         const width = rect.width;
@@ -70,6 +77,7 @@ export function Tilt({
     };
 
     const handleMouseLeave = () => {
+        if (!isEnabled) return;
         x.set(0);
         y.set(0);
     };
@@ -81,7 +89,7 @@ export function Tilt({
             style={{
                 transformStyle: 'preserve-3d',
                 ...style,
-                transform,
+                transform: isEnabled ? transform : undefined,
             }}
             onMouseMove={handleMouseMove}
             onMouseLeave={handleMouseLeave}
