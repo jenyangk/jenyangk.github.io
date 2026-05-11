@@ -14,7 +14,7 @@ interface AgentChatProps {
   agent: AgentConfig;
   message: string;
   attachment?: ReactNode;
-  phase: "pending" | "typing" | "attached" | "expanded";
+  phase: "pending" | "typing" | "attached" | "expanded" | "collapsed";
   timestamp?: string;
 }
 
@@ -26,6 +26,31 @@ export function AgentChat({
   timestamp,
 }: AgentChatProps) {
   const showAttachment = phase === "attached" || phase === "expanded";
+
+  if (phase === "collapsed") {
+    return (
+      <motion.div
+        initial={{ opacity: 0, y: 10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+        className="mb-2 py-2 px-3 border border-border-subtle bg-bg/50 flex items-center gap-2"
+      >
+        <span
+          className="text-base select-none whitespace-nowrap shrink-0"
+          style={{ color: agent.color }}
+          aria-hidden
+        >
+          {agent.kaomoji}
+        </span>
+        <span className="font-mono text-xs font-medium" style={{ color: agent.color }}>
+          {agent.name}
+        </span>
+        <span className="ml-auto font-mono text-[10px] text-text-muted">
+          completed
+        </span>
+      </motion.div>
+    );
+  }
 
   return (
     <motion.div
