@@ -57,7 +57,7 @@ const AGENTS: AgentConfig[] = [
 
 const AGENT_MESSAGES: Record<string, string> = {
   navigator: "Located. Edmonton, AB. UTC-6. Dual: 🇨🇦 / 🇲🇾.",
-  archivist: "3 companies on file. 2017–present. Chronology verified. Stand by.",
+  archivist: "2 companies on file. 2021–present. Chronology verified. Stand by.",
   builder:
     "Ooh! DouDou has real-time votes! Supabase subscriptions! ✨ Built with friends!",
   curator: "Currently exploring AI engineering… and how systems think.",

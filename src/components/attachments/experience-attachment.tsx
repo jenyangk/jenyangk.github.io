@@ -1,7 +1,6 @@
 import { Calendar } from "lucide-react";
 import latium from "@/assets/images/latium.png";
 import pcl from "@/assets/images/pcl.svg";
-import sunway from "@/assets/images/sunway.webp";
 
 interface ExperienceItem {
   company: string;
@@ -14,35 +13,19 @@ interface ExperienceItem {
 const experiences: ExperienceItem[] = [
   {
     company: "Latium Technologies",
-    title: "Software Developer",
+    title: "Software Engineer",
     period: "September 2022 – Present",
     description:
-      "I joined Latium as they were scaling up their IoT platform for construction sites — think cameras, sensors, and real-time monitoring all talking to each other in the middle of a dusty building site. I ended up owning a bunch of different pieces: I built the JSI mobile app in .NET MAUI from scratch, and within a few months mobile adoption jumped 92% because foremen could finally check their sites without lugging a laptop around. I also rebuilt our data pipelines, cutting infrastructure costs by 90% by stripping out redundant services and consolidating everything through Azure Event Hubs and Functions. On the DevOps side, I got our deployment success rate up to 95% after hunting down some nasty race conditions in our Helm charts. Probably the most fun project was an algorithmic camera positioning tool — instead of engineers manually guessing where to mount 20+ cameras, I wrote a spatial coverage algorithm that figured it out automatically, halving installation time. These days I'm also deep in streaming optimization, shaving 30% off end-to-end latency by partitioning queues by device priority.",
+      "I joined Latium to scale their IoT platform for construction sites — cameras, sensors, and real-time monitoring all talking to each other across 100+ active sites. As one of two full-stack engineers on a cross-functional team, I've owned pieces end-to-end, from frontend through backend and cloud infrastructure. I led development of the mobile app in .NET MAUI from scratch, now used daily by field crews with icon-first navigation built for low-literacy environments. I halved per-site implementation time from 4 hours to 2 by writing a least-squares plane fit with RBF interpolation to compute tilt from calibration data, deployed across 100+ sites. On the web side, I delivered camera livestreaming and PTZ control for 200+ cameras at ~5s latency, eliminating on-site physical access for camera operation. Lately I've been deep in performance and platform work — cutting sensor-to-camera trigger latency from 5-30s down to 1-2s with priority queueing and device-based partitioning, and re-architecting the active-alarms API against a billion-row telemetry table to drop response time by an order of magnitude. The most fun has been architecting a smart edge computing platform in Go on ARM gateway hardware — LoRaWAN sensors, local rule evaluation with state-machine safeguards, real-time PTZ dispatch over a WireGuard mesh, backed by NATS JetStream, PostgreSQL, VictoriaMetrics, Loki, and Grafana. I integrated YOLO object detection on an on-device NPU as a motion-verification filter that suppresses false-positive camera dispatch. I also defined feature-branching as the team's source-control standard and now lead epic breakdown, task estimation, and production deployment.",
     logo: latium,
   },
   {
     company: "PCL Construction",
     title: "Software Developer",
-    period: "October 2021 – September 2022",
+    period: "June 2021 – September 2022",
     description:
-      "This was my first real software role after pivoting from IT support, and PCL threw me straight into the deep end. I was the only developer on a monitoring dashboard project that tracked equipment health across job sites — React frontend, .NET Core backend, the whole stack. I also got to lead development on a mobile app for safety inspections, which meant learning mobile development on the fly while coordinating with superintendents who had very strong opinions about what 'simple' meant. Between writing code, I was still the go-to person for anything infrastructure-related from my previous role, so I got pretty good at context-switching between debugging a WebSocket connection and explaining to someone why their printer wasn't working.",
+      "My first real software role after pivoting from IT support. I was the sole developer on a platform-performance monitoring tool for their IoT platform — React frontend, .NET Core backend, the whole stack. I also extended the platform with follow-up reminder notifications (email, SMS, Teams) that kept site teams from missing time-sensitive alarms across 100+ sites, and reduced latest-telemetry lookup latency for the customer-facing portal by adding a targeted index on the telemetry table. This is where I first learned the platform inside-out before moving to Latium to lead it end-to-end.",
     logo: pcl,
-  },
-  {
-    company: "PCL Construction",
-    title: "Construction Technology Analyst",
-    period: "June 2021 – October 2021",
-    description:
-      "I started at PCL doing IT support for their main Edmonton campus, but I kept writing scripts to automate the boring stuff — patching, backups, user provisioning. My PowerShell scripts ended up cutting 20% off our manual labor hours, which caught the attention of the software team. That four-month stint basically became my informal internship: I'd fix printers in the morning, then sit in on architecture reviews in the afternoon. It taught me that the best way to move into development is to solve real problems for real people, even if your official title says 'IT support.'",
-    logo: pcl,
-  },
-  {
-    company: "Sunway University",
-    title: "Research Assistant",
-    period: "2017",
-    description:
-      "My first taste of research — I spent a year at Sunway exploring how haptic feedback could make AR interfaces feel more tangible. We were building glove prototypes with vibration motors and trying to sync them with HoloLens visualizations. It was equal parts soldering circuits at 2am and reading papers on human perception. I also got to tinker with early IoT setups, connecting temperature and motion sensors to Raspberry Pi boards. None of it ever shipped as a product, but it gave me a lasting appreciation for hardware-software boundaries and the patience required to debug something you can't just console.log.",
-    logo: sunway,
   },
 ];
 
