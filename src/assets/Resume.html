@@ -71,42 +71,45 @@
 <p><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>jenyang.koh@gmail.com | <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>587-566-9053 | <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg>Edmonton, Canada</p>
 <p><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg><a href="https://linkedin.com/in/jenyangkoh">jenyangkoh</a> | <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg><a href="https://github.com/jenyangk">jenyangk</a> | <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg><a href="https://jenyangkoh.com">jenyangkoh.com</a></p>
 <h2>Summary</h2>
-<p><em>Software Engineer with 5+ years building full-stack IoT and edge platforms across 100+ active sites, processing gigabytes of telemetry daily. Sole technical owner of end-to-end product delivery, from on-site user discovery in fast-paced field environments through cloud infrastructure. Architected a production edge platform that powers sensor-driven motion intrusion detection across customer sites.</em></p>
+<p><em>Software Engineer with 5+ years building full-stack IoT and edge platforms across 200+ production sites, processing 2M+ telemetry events daily. Technical lead for end-to-end product delivery, from on-site user discovery in fast-paced field environments through cloud infrastructure. Architected a production edge platform powering sensor-driven motion-intrusion detection across customer sites.</em></p>
 <h2>Experience</h2>
 <p class="role"><span class="role-left"><strong>Software Engineer II</strong> | <strong>Latium Technologies</strong></span><span class="role-date"><strong>Feb 2025 – Present</strong></span></p>
 <ul>
-<li>Led architecture and end-to-end delivery of a customer-facing web and mobile security platform as technical lead for a four-engineer team, scaling deployment to 100+ production sites with 2x YoY growth</li>
-<li>Architected edge-based rules execution and AI image-processing pipelines to detect and classify intrusion events directly on site, sustaining p95 event-processing latency under 300 ms while reducing cloud-compute and data-transfer costs; cut camera hardware requirements per site by 60% and false-negative rates by 70%, enabling faster and more reliable incident response</li>
-<li>Cut sensor-to-camera trigger p99 latency from 30s to 2s for time-sensitive site security events by splitting telemetry into priority/non-priority queues, with Event Hub auto-scaling and device-based partitioning</li>
-<li>Cut the platform's active-alarms API response time by an order of magnitude for large customers by re-architecting the query plan against a billion-row telemetry table, replacing a correlated scan with a pre-materialized fleet-hierarchy approach and an inline latest-telemetry lookup that eliminated tens of millions of logical reads per query without adding indexes</li>
-<li>Defined feature-branching as the team's source-control standard, replacing a traditional flow that broke mid-sprint, with branch-protection policies enforced through CI, and leads epic breakdown, task estimation, and production deployment for feature pushes</li>
+<li>Technical lead for a 4-engineer team building an industrial IoT platform for real-time equipment monitoring; owned architecture and end-to-end delivery, scaling deployment to 200+ production sites with 2× YoY site growth</li>
+<li>Re-architected and scaled the IoT telemetry pipeline across 200+ production sites and ~3,000 sensors — introducing batching, parallel processing, and backpressure controls — to reliably process 2M+ events/day at p95 ~300ms end-to-end latency from sensor ingestion to user-visible data</li>
+<li>Improved resilience of the IoT data pipeline through automated recovery, DLQ-based replay, retry controls, and proactive alerting, cutting repeat production incidents by ~50% and reducing manual on-call intervention</li>
+<li>Architected and led delivery of a .NET MAUI field application replacing a long-stagnant legacy product, partnering with business analysts and customers to redesign core workflows and drive 2× user adoption</li>
+<li>Rebuilt the team's shipping process after unstable environments blocked urgent releases — introduced feature branching, CI-enforced branch protection, release tagging, and documentation — enabling safe emergency ships, reducing knowledge silos, and establishing a weekly deployment cadence</li>
+</ul>
+<p class="role"><span class="role-left"><strong>Lead Developer</strong> | <strong>Eagles Communications</strong></span><span class="role-date"><strong>Mar 2026 – Present</strong></span></p>
+<ul>
+<li>Owned end-to-end delivery of a mobile-first web platform with a self-service CMS, enabling 5 non-technical staff to publish independently and cutting content-update turnaround from days to minutes</li>
+<li>Redesigned media delivery architecture using Next.js, Cloudflare CDN, and headless CMS, cutting TTFB by 62% and reducing page weight ~85%</li>
+<li>Migrated 4 years of VantagePoint newsletter archive from PDF to SEO-indexed web articles, growing monthly website engagement by 50%</li>
 </ul>
 <p class="role"><span class="role-left"><strong>Software Engineer I</strong> | <strong>Latium Technologies</strong></span><span class="role-date"><strong>Sep 2022 – Feb 2025</strong></span></p>
 <ul>
-<li>Owned a customer-facing web + mobile product as one of two full-stack engineers on a cross-functional team across 100+ active construction sites, from frontend through backend and cloud infrastructure</li>
-<li>Led development of the mobile app from scratch in .NET MAUI as lead developer, displacing a shelved legacy app since the App Store debut, now used daily with icon-first navigation for low-literacy field environments</li>
-<li>Delivered camera livestreaming and PTZ control in the web client (200+ cameras, ~5s latency), eliminating on-site physical access for camera operation</li>
-<li>Halved product implementation and deployment time from 4 hours to 2 hours per site by implementing a least-squares plane fit with RBF interpolation to compute tilt from calibration data, deployed across 100+ sites</li>
-<li>Architected and built a smart edge computing platform rolling out to customer sites, running Go services on ARM-based gateway hardware processing LoRaWAN sensor events, evaluating rules locally with state-machine safeguards, and dispatching PTZ camera actions in real-time, backed by persistent pub/sub messaging, a relational store, and an observability stack provisioned as-code</li>
+<li>Owned a customer-facing web + mobile product as one of two full-stack engineers on a cross-functional team, from frontend through backend and cloud infrastructure</li>
+<li>Reduced per-site deployment time by 75% through automation scripts for device configuration, registration, and final hardware verification across field-deployable security systems</li>
+<li>Architected an edge computing platform in Go on ARM gateways: microservices processing 50 sensor events/sec via persistent queues, evaluating rules on-device in &lt;100ms (vs ~500ms cloud round-trip) and dispatching real-time camera actions — sustaining full site protection through WAN outages</li>
+<li>Collaborated with hardware engineering to cut sensor-to-camera trigger latency from 30s to 2s and sustain p95 event processing under 300ms by implementing priority-based telemetry queues with device partitioning</li>
+<li>Mentored 5 engineers to production feature PRs within one week through 1:1 pairing and live walkthroughs; authored architecture documentation still in use by all new hires</li>
 </ul>
 <p class="role"><span class="role-left"><strong>Software Developer I</strong> | <strong>PCL Construction</strong></span><span class="role-date"><strong>Jun 2021 – Sep 2022</strong></span></p>
 <ul>
-<li>Developed platform-performance monitoring tooling as sole developer for the IoT platform, later led end-to-end at Latium</li>
+<li>Developed platform-performance monitoring tooling as sole developer for the IoT platform later led end-to-end at Latium</li>
 <li>Extended the platform with follow-up reminder notifications that kept site teams from missing time-sensitive alarms across 100+ sites</li>
-<li>Reduced latest-telemetry lookup latency for the customer-facing portal by adding a targeted index on the telemetry table, lowering query cost for the platform's hottest read path across asset maps, dashboards, and alarm views</li>
-</ul>
-<h2>Projects</h2>
-<p class="role"><span class="role-left"><strong>Lead Developer</strong> | <strong>Eagles Communications</strong></span><span class="role-date"><strong>Mar 2026 – Present</strong></span></p>
-<ul>
-<li>Rebuilt <a href="https://eagles.org.sg">eagles.org.sg</a> from legacy WordPress to Next.js + Prismic CMS, <a href="https://eagles-redesign.vercel.app/">redesigned the site</a> from the ground up with a mobile-friendly responsive layout, accessibility-first markup and semantic structure, and web-native newsletters that render directly in the browser instead of email attachments</li>
+<li>Cut latency on the customer portal's hottest read path with a targeted index on the telemetry table, lowering query cost for latest-telemetry lookups across asset maps, dashboards, and alarm views</li>
 </ul>
 <h2>Technical Skills</h2>
-<p><strong>Languages:</strong> TypeScript, JavaScript, C#, Golang, T-SQL, pgSQL, Python</p>
-<p><strong>Frameworks &amp; Libraries:</strong> React, Next.js, .NET, .NET MAUI, Angular, React Native</p>
-<p><strong>Cloud:</strong> Azure (Functions, Service Bus, Event Hub, IoT Hub, Custom Vision, VM, Key Vault, Storage Account, APIM), AWS (EC2, S3), Cloudflare (Workers, D1, R2)</p>
-<p><strong>Systems:</strong> Distributed systems, edge computing, event-driven architecture, serverless, RESTful APIs, MVVM, high availability, observability, real-time telemetry pipelines, pub/sub messaging, IoT integration</p>
-<p><strong>AI/Tooling:</strong> Agent harnesses, code harnesses, agentic workflows, loop engineering, LLM applications, prompt engineering, context engineering, developer productivity tooling</p>
+<p><strong>Languages:</strong> TypeScript, Go (Golang), C#, JavaScript, Python, SQL (T-SQL)</p>
+<p><strong>Frameworks &amp; Libraries:</strong> React, Next.js, Angular, React Native, .NET, .NET MAUI</p>
+<p><strong>Databases:</strong> PostgreSQL, Microsoft SQL Server</p>
+<p><strong>Cloud:</strong> Azure (Functions, Service Bus, Event Hubs, IoT Hub, Custom Vision, Virtual Machines, Key Vault, Storage Accounts, API Management), AWS (EC2, S3), Cloudflare (Workers, D1, R2)</p>
+<p><strong>Systems:</strong> Distributed systems, edge computing, event-driven architecture, serverless, REST APIs, real-time telemetry pipelines, pub/sub messaging, high availability, observability, IoT integration</p>
+<p><strong>Tools:</strong> Git, CI/CD pipelines, release automation</p>
+<p><strong>AI/Tooling:</strong> AI-assisted development, agentic workflows, LLM applications, developer productivity tooling</p>
 <h2>Education</h2>
-<p class="role"><span class="role-left"><strong>University of Alberta</strong> | B.S. in Computing Science. Minor in Psychology.</span><span class="role-date"><strong>Class of 2021</strong></span></p>
+<p class="role"><span class="role-left"><strong>University of Alberta</strong> | B.S. Computing Science, Minor in Psychology</span><span class="role-date"><strong>Class of 2021</strong></span></p>
 </body>
 </html>

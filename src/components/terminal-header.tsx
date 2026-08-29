@@ -1,99 +1,62 @@
-import { motion, AnimatePresence } from "framer-motion";
+import { ModeToggle } from "@/components/mode-toggle";
 
-interface TerminalHeaderProps {
-  phase: "intro" | "active" | "complete";
-  activeSection?: string | null;
-  onNavigate?: (section: string) => void;
-  agentCount?: number;
+export interface StickyHeaderProps {
+    activeSection: string | null;
+    onNavigate: (id: string) => void;
 }
 
-const SECTIONS = [
-  { id: "about", label: "About" },
-  { id: "experience", label: "Experience" },
-  { id: "projects", label: "Projects" },
-  { id: "contact", label: "Contact" },
+const NAV_LINKS = [
+    { id: "about", label: "About" },
+    { id: "experience", label: "Experience" },
+    { id: "projects", label: "Projects" },
+    { id: "contact", label: "Contact" },
 ];
 
-export function TerminalHeader({
-  phase,
-  activeSection,
-  onNavigate,
-  agentCount = 4,
-}: TerminalHeaderProps) {
-  return (
-    <motion.header
-      initial={{ opacity: 0, y: -10 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.4 }}
-      className="fixed top-0 left-0 right-0 z-50 border-b border-border-subtle bg-bg/80 backdrop-blur-sm"
-    >
-      <div className="max-w-3xl mx-auto px-3 sm:px-4 py-2.5 flex items-center justify-between text-xs font-mono min-w-0">
-        <div className="flex items-center gap-2 sm:gap-3 min-w-0 overflow-hidden">
-          {phase === "intro" || phase === "active" ? (
-            <>
-              <span className="flex items-center gap-1.5 shrink-0">
-                <span className="relative flex h-2 w-2">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-500 opacity-75" />
-                  <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500" />
-                </span>
-                <span className="text-text-muted hidden sm:inline">
-                  {agentCount} agents online
-                </span>
-                <span className="text-text-muted sm:hidden">
-                  {agentCount}
-                </span>
-              </span>
-              <span className="text-border-subtle shrink-0">|</span>
-              <span className="text-text-muted truncate">jenyangk.github.io</span>
-            </>
-          ) : (
-            <>
-              <span className="text-text-muted truncate shrink-0 hidden sm:inline">jenyangk.github.io</span>
-              <span className="text-border-subtle shrink-0 hidden sm:inline">|</span>
-              <nav className="flex items-center gap-2 sm:gap-3 overflow-x-auto scrollbar-hide -mx-1 px-1">
-                {SECTIONS.map((section) => (
-                  <button
-                    key={section.id}
-                    onClick={() => onNavigate?.(section.id)}
-                    className={`hover:text-text transition-colors whitespace-nowrap shrink-0 ${
-                      activeSection === section.id
-                        ? "text-text underline underline-offset-4"
-                        : "text-text-muted"
-                    }`}
-                  >
-                    {section.label}
-                  </button>
-                ))}
-              </nav>
-            </>
-          )}
-        </div>
+export function StickyHeader({ activeSection, onNavigate }: StickyHeaderProps) {
+    return (
+        <header
+            className="fixed top-0 left-0 right-0 z-40 border-b border-border-subtle"
+            style={{ backgroundColor: "var(--header-bg)", backdropFilter: "blur(8px)" }}
+        >
+            <div className="mx-auto flex h-14 max-w-2xl items-center justify-between gap-3 px-4">
+                <a
+                    href="#"
+                    onClick={(e) => {
+                        e.preventDefault();
+                        onNavigate("top");
+                    }}
+                    className="shrink-0 whitespace-nowrap font-serif text-lg font-bold text-text"
+                >
+                    Andy Koh
+                </a>
 
-        <AnimatePresence mode="wait">
-          {phase === "intro" && (
-            <motion.span
-              key="status"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              className="text-text-muted shrink-0 ml-2"
-            >
-              initializing...
-            </motion.span>
-          )}
-          {phase === "complete" && (
-            <motion.span
-              key="done"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              className="text-text-muted shrink-0 ml-2 hidden sm:inline"
-            >
-              profile assembled
-            </motion.span>
-          )}
-        </AnimatePresence>
-      </div>
-    </motion.header>
-  );
+                <nav
+                    className="flex items-center gap-2.5 sm:gap-5"
+                    aria-label="Main"
+                >
+                    {NAV_LINKS.map(({ id, label }) => (
+                        <button
+                            key={id}
+                            type="button"
+                            onClick={() => onNavigate(id)}
+                            className={`relative whitespace-nowrap font-mono text-[11px] sm:text-xs pb-1 transition-colors cursor-pointer ${
+                                activeSection === id
+                                    ? "text-text"
+                                    : "text-text-muted hover:text-text"
+                            }`}
+                        >
+                            {label}
+                            <span
+                                aria-hidden="true"
+                                className={`absolute left-0 right-0 bottom-0 h-px bg-accent transition-opacity duration-200 ${
+                                    activeSection === id ? "opacity-100" : "opacity-0"
+                                }`}
+                            />
+                        </button>
+                    ))}
+                    <ModeToggle />
+                </nav>
+            </div>
+        </header>
+    );
 }
