@@ -28,8 +28,9 @@ export function Contact({ mascotRef }: ContactProps) {
             ta.value = EMAIL;
             document.body.appendChild(ta);
             ta.select();
-            document.execCommand("copy");
+            const ok = document.execCommand("copy");
             document.body.removeChild(ta);
+            if (!ok) return;
         }
         setCopied(true);
         mascotRef.current?.celebrate();
@@ -67,7 +68,7 @@ export function Contact({ mascotRef }: ContactProps) {
                         copied ? "opacity-100" : "opacity-0"
                     }`}
                 >
-                    copied (⌐■_■)ノ♪
+                    {copied ? "copied (⌐■_■)ノ♪" : ""}
                 </span>
             </div>
 

@@ -35,10 +35,14 @@ export function StickyHeader({ activeSection, onNavigate }: StickyHeaderProps) {
                     aria-label="Main"
                 >
                     {NAV_LINKS.map(({ id, label }) => (
-                        <button
+                        <a
                             key={id}
-                            type="button"
-                            onClick={() => onNavigate(id)}
+                            href={`#${id}`}
+                            onClick={(e) => {
+                                e.preventDefault();
+                                onNavigate(id);
+                            }}
+                            aria-current={activeSection === id ? "true" : undefined}
                             className={`relative whitespace-nowrap font-mono text-[11px] sm:text-xs pb-1 transition-colors cursor-pointer ${
                                 activeSection === id
                                     ? "text-text"
@@ -52,7 +56,7 @@ export function StickyHeader({ activeSection, onNavigate }: StickyHeaderProps) {
                                     activeSection === id ? "opacity-100" : "opacity-0"
                                 }`}
                             />
-                        </button>
+                        </a>
                     ))}
                     <ModeToggle />
                 </nav>

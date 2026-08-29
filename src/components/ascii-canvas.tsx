@@ -75,6 +75,13 @@ export function AsciiCanvas() {
       const cols = Math.ceil(rect.width / charSize) + 1;
       const rows = Math.ceil(rect.height / charSize) + 1;
       cellsRef.current = buildGrid(cols, rows);
+
+      // Reduced motion runs a single draw pass; canvas was just cleared,
+      // so repaint once after resizing.
+      if (reducedMotionRef.current) {
+        draw();
+        cancelAnimationFrame(rafRef.current);
+      }
     };
 
     resize();
@@ -94,6 +101,12 @@ export function AsciiCanvas() {
     let isDark = document.documentElement.classList.contains("dark");
     const themeObserver = new MutationObserver(() => {
       isDark = document.documentElement.classList.contains("dark");
+      // Reduced motion runs a single draw pass; repaint once so the
+      // scaffold picks up the new theme colors immediately.
+      if (reducedMotionRef.current) {
+        draw();
+        cancelAnimationFrame(rafRef.current);
+      }
     });
     themeObserver.observe(document.documentElement, {
       attributes: true,
