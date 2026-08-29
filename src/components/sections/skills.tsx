@@ -7,12 +7,12 @@ const TIERS: { tier: Tier; label: string; items: string[] }[] = [
     {
         tier: 1,
         label: "daily",
-        items: ["TypeScript", "React", "Next.js", "Azure"],
+        items: ["TypeScript", "React", "Go", "C#", "Azure"],
     },
     {
         tier: 2,
         label: "often",
-        items: ["Go", "C#", "SQL", ".NET", "Cloudflare", "JavaScript"],
+        items: ["SQL", "Next.js", ".NET", "Cloudflare", "JavaScript"],
     },
     {
         tier: 3,
