@@ -8,30 +8,59 @@
 	--text-muted: #555555;
 	--border: #1a1a1a;
 	--border-subtle: rgba(26, 26, 26, 0.15);
-
-	--accent-navigator: #6c8cbf;
-	--accent-archivist: #b8956a;
-	--accent-builder: #ff6b6b;
-	--accent-curator: #7a9e7e;
+	--accent: #b8956a;
+	--accent-strong: #8a6a3f;
+	--header-bg: rgba(250, 248, 245, 0.85);
 
 	--font-mono: 'JetBrains Mono', monospace;
 	--font-sans: 'Inter', system-ui, sans-serif;
 	--font-serif: 'Young Serif', Georgia, serif;
+
+	color-scheme: light;
 }
 
-@media (prefers-color-scheme: dark) {
-	:root {
-		--bg: #1a1a1a;
-		--text: #f5f0e6;
-		--text-muted: #a0a0a0;
-		--border: #f5f0e6;
-		--border-subtle: rgba(245, 240, 230, 0.12);
+.dark {
+	--bg: #1a1a1a;
+	--text: #f5f0e6;
+	--text-muted: #a6a29a;
+	--border: #f5f0e6;
+	--border-subtle: rgba(245, 240, 230, 0.12);
+	--accent: #c9a97a;
+	--accent-strong: #dcbf90;
+	--header-bg: rgba(26, 26, 26, 0.85);
 
-		--accent-navigator: #7a9fcf;
-		--accent-archivist: #c9a97a;
-		--accent-builder: #ff8585;
-		--accent-curator: #8fb892;
+	color-scheme: dark;
+}
+
+/* Kaomoji mascot animations */
+@keyframes kaomoji-float {
+	from {
+		transform: translateY(0);
 	}
+	to {
+		transform: translateY(2px);
+	}
+}
+
+.kaomoji-float {
+	animation: kaomoji-float 2s ease-in-out infinite alternate;
+}
+
+@keyframes kaomoji-pulse {
+	0% {
+		transform: scale(1);
+	}
+	50% {
+		transform: scale(1.05);
+	}
+	100% {
+		transform: scale(1);
+	}
+}
+
+.kaomoji-pulse {
+	display: inline-block;
+	animation: kaomoji-pulse 300ms ease-in-out;
 }
 
 /* Prefers reduced motion */

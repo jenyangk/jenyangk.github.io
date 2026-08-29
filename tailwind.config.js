@@ -1,6 +1,6 @@
 export default {
   content: ['index.html', './src/**/*.{js,jsx,ts,tsx,vue,html}'],
-  darkMode: 'media',
+  darkMode: 'class',
   theme: {
     fontFamily: {
       sans: ['Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'],
@@ -14,10 +14,8 @@ export default {
         'text-muted': 'var(--text-muted)',
         border: 'var(--border)',
         'border-subtle': 'var(--border-subtle)',
-        navigator: 'var(--accent-navigator)',
-        archivist: 'var(--accent-archivist)',
-        builder: 'var(--accent-builder)',
-        curator: 'var(--accent-curator)',
+        accent: 'var(--accent)',
+        'accent-strong': 'var(--accent-strong)',
       },
     },
   },

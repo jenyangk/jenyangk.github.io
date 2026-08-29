@@ -3,6 +3,17 @@
 
 <head>
       <meta charset="UTF-8" />
+      <script>
+            (function () {
+                  try {
+                        var stored = localStorage.getItem('vite-ui-theme');
+                        var dark = stored
+                              ? stored === 'dark' || (stored === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches)
+                              : window.matchMedia('(prefers-color-scheme: dark)').matches;
+                        if (dark) document.documentElement.classList.add('dark');
+                  } catch (e) {}
+            })();
+      </script>
       <link rel="icon"
             type="image/svg+xml"
             href="/src/assets/images/favicon.ico" />
@@ -11,7 +22,7 @@
       <link rel="preconnect"
             href="https://fonts.gstatic.com"
             crossorigin>
-      <link href="https://fonts.googleapis.com/css2?family=Libre+Barcode+39&family=JetBrains+Mono:wght@400;500;700&family=Young+Serif&family=Inter:wght@400;500;600;700&display=swap"
+      <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Young+Serif&family=Inter:wght@400;500;600;700&display=swap"
             rel="stylesheet">
       <link href="https://fonts.cdnfonts.com/css/neue-haas-grotesk-display-pro"
             rel="stylesheet">
@@ -20,9 +31,9 @@
             href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css" />
       <meta name="viewport"
             content="width=device-width, initial-scale=1.0" />
-      <title>Andy Koh — Product Engineer | Full-Stack Web, Mobile & IoT</title>
+      <title>Andy Koh — Full-Stack Software Engineer</title>
       <meta name="description"
-            content="Jen Yang (Andy) Koh is a product engineer at Latium Technologies — full-stack web + mobile products, end-to-end from user research to ship. Daily user of AI coding agents (OpenCode, Claude Code)." />
+            content="Andy Koh is a full-stack software engineer in Edmonton, Canada building systems where correctness matters. Interested in fintech, open to work in Canada or Singapore." />
       <meta name="author" content="Jen Yang Koh" />
       <meta name="keywords" content="product engineer, full-stack engineer, web, mobile, IoT, React, TypeScript, .NET, Azure, Angular, .NET MAUI, Next.js, Claude Code, OpenCode" />
       <link rel="canonical" href="https://jenyangk.github.io/" />
@@ -33,9 +44,9 @@
       <meta property="og:url"
             content="https://jenyangk.github.io/">
       <meta property="og:title"
-            content="Andy Koh — Product Engineer | Full-Stack Web, Mobile & IoT">
+            content="Andy Koh — Full-Stack Software Engineer">
       <meta property="og:description"
-            content="Jen Yang (Andy) Koh is a product engineer at Latium Technologies — full-stack web + mobile products, end-to-end from user research to ship. Daily user of AI coding agents (OpenCode, Claude Code).">
+            content="Andy Koh is a full-stack software engineer in Edmonton, Canada building systems where correctness matters. Interested in fintech, open to work in Canada or Singapore.">
       <meta property="og:image"
             content="https://raw.githubusercontent.com/jenyangk/jenyangk.github.io/refs/heads/main/src/assets/images/profile.webp">
 
@@ -45,9 +56,9 @@
       <meta property="twitter:url"
             content="https://jenyangk.github.io/">
       <meta property="twitter:title"
-            content="Andy Koh — Product Engineer | Full-Stack Web, Mobile & IoT">
+            content="Andy Koh — Full-Stack Software Engineer">
       <meta property="twitter:description"
-            content="Jen Yang (Andy) Koh is a product engineer at Latium Technologies — full-stack web + mobile products, end-to-end from user research to ship. Daily user of AI coding agents (OpenCode, Claude Code).">
+            content="Andy Koh is a full-stack software engineer in Edmonton, Canada building systems where correctness matters. Interested in fintech, open to work in Canada or Singapore.">
       <meta property="twitter:image"
             content="https://raw.githubusercontent.com/jenyangk/jenyangk.github.io/refs/heads/main/src/assets/images/profile.webp">
 
@@ -58,7 +69,7 @@
         "@type": "Person",
         "name": "Jen Yang Koh",
         "alternateName": "Andy Koh",
-        "jobTitle": "Product Engineer",
+        "jobTitle": "Full-Stack Software Engineer",
         "worksFor": {
           "@type": "Organization",
           "name": "Latium Technologies"

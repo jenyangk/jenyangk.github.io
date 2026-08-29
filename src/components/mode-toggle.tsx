@@ -1,9 +1,8 @@
-import { Moon, Sun } from "lucide-react"
-import { useTheme } from "@/components/theme-provider"
-import { Button } from "@/components/ui/button"
+import { useTheme } from "@/components/theme-provider";
+import { Moon, Sun } from "lucide-react";
 
 export function ModeToggle() {
-    const { theme, setTheme } = useTheme()
+    const { theme, setTheme } = useTheme();
 
     const toggleTheme = () => {
         if (theme === 'dark') {
@@ -16,16 +15,19 @@ export function ModeToggle() {
         }
     }
 
+    const isDark =
+        theme === 'dark' ||
+        (theme === 'system' &&
+            window.matchMedia("(prefers-color-scheme: dark)").matches)
+
     return (
-        <Button
-            variant="outline"
-            size="icon"
-            className="bg-bw border-border text-text hover:bg-main/90 hover:translate-x-0 hover:translate-y-0 hover:shadow-shadow"
+        <button
+            type="button"
             onClick={toggleTheme}
+            aria-label="Toggle dark mode"
+            className="inline-flex h-7 w-7 items-center justify-center text-text-muted hover:text-text transition-colors"
         >
-            <Sun className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
-            <Moon className="absolute h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
-            <span className="sr-only">Toggle theme</span>
-        </Button>
+            {isDark ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
+        </button>
     )
 }
