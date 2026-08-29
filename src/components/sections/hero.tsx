@@ -27,6 +27,15 @@ export function Hero({ mascotRef, mood = "default" }: HeroProps) {
             <p className="mt-6 font-mono text-xs text-text-muted">
                 Edmonton, Canada · Open to Singapore
             </p>
+            <p className="mt-4 font-mono text-xs">
+                <a
+                    href="/Andy_Koh_Resume.pdf"
+                    download="Andy_Koh_Resume.pdf"
+                    className="inline-flex items-center gap-1.5 text-text underline decoration-border-subtle underline-offset-4 hover:decoration-text transition-colors"
+                >
+                    Download resume ↓
+                </a>
+            </p>
         </section>
     );
 }
