@@ -18,19 +18,7 @@ export function StickyHeader({ activeSection, onNavigate }: StickyHeaderProps) {
             className="fixed top-0 left-0 right-0 z-40 border-b border-border-subtle"
             style={{ backgroundColor: "var(--header-bg)", backdropFilter: "blur(8px)" }}
         >
-            <div className="mx-auto flex h-14 max-w-2xl items-center justify-between gap-3 px-4">
-                <a
-                    href="#"
-                    onClick={(e) => {
-                        e.preventDefault();
-                        onNavigate("top");
-                    }}
-                    aria-label="Back to top"
-                    className="shrink-0 whitespace-nowrap font-mono text-xs text-text-muted transition-colors hover:text-text"
-                >
-                    ~
-                </a>
-
+            <div className="mx-auto flex h-14 max-w-2xl items-center px-4">
                 <nav
                     className="flex items-center gap-2.5 sm:gap-5"
                     aria-label="Main"
@@ -59,8 +47,11 @@ export function StickyHeader({ activeSection, onNavigate }: StickyHeaderProps) {
                             />
                         </a>
                     ))}
-                    <ModeToggle />
                 </nav>
+
+                <div className="ml-auto flex items-center">
+                    <ModeToggle />
+                </div>
             </div>
         </header>
     );
