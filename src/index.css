@@ -63,6 +63,87 @@
 	animation: kaomoji-pulse 300ms ease-in-out;
 }
 
+/* Click easter egg: reduce-motion cross-fade on face swap */
+@keyframes kaomoji-fade {
+	from {
+		opacity: 0;
+	}
+	to {
+		opacity: 1;
+	}
+}
+
+.kaomoji-fade {
+	display: inline-block;
+	animation: kaomoji-fade 150ms ease-out;
+}
+
+/* Angry: ±2px horizontal shake at ~8Hz for ~450ms then rest (hold handled by timer) */
+@keyframes kaomoji-shake {
+	0% { transform: translateX(-2px); }
+	12.5% { transform: translateX(2px); }
+	25% { transform: translateX(-2px); }
+	37.5% { transform: translateX(2px); }
+	50% { transform: translateX(-2px); }
+	62.5% { transform: translateX(2px); }
+	75% { transform: translateX(-2px); }
+	87.5% { transform: translateX(2px); }
+	100% { transform: translateX(0); }
+}
+
+.kaomoji-shake {
+	display: inline-block;
+	animation: kaomoji-shake 450ms steps(2, jump-none) 1;
+}
+
+/* Flee: 3px vertical bob while translating right (translate handled inline) */
+@keyframes kaomoji-bob {
+	from { translate: 0 0; }
+	to { translate: 0 3px; }
+}
+
+.kaomoji-bob {
+	display: inline-block;
+	animation: kaomoji-bob 150ms ease-in-out infinite alternate;
+}
+
+/* Table flip windup: lean back 6° for 350ms (overridden by throw/flight chain) */
+@keyframes kaomoji-lean {
+	0% { rotate: 0deg; }
+	100% { rotate: -6deg; }
+}
+
+.kaomoji-lean {
+	animation: kaomoji-lean 350ms ease-out forwards;
+}
+
+/* The table itself: 150ms throw then ~900ms flight (30px down-right, 360° spin, fade) */
+@keyframes kaomoji-table-fly {
+	0% {
+		display: inline-block;
+		translate: 0 0;
+		rotate: 0deg;
+		opacity: 1;
+	}
+	14% {
+		/* 150ms windup end: table "leaves the hand" */
+		translate: 0 0;
+		rotate: 0deg;
+		opacity: 1;
+	}
+	100% {
+		translate: 30px 30px;
+		rotate: 360deg;
+		opacity: 0;
+	}
+}
+
+.kaomoji-table {
+	display: inline-block;
+	animation: kaomoji-table-fly 1050ms linear 350ms forwards;
+	opacity: 1;
+}
+
 /* Prefers reduced motion */
 @media (prefers-reduced-motion: reduce) {
 	*,

@@ -36,7 +36,7 @@ export function Reading() {
                 ))}
             </ul>
             <p className="mt-8 font-mono text-xs text-text-muted">
-                Off the screen: badminton, cooking, astrophotography on clear
+                Off the screen: badminton, cooking, travelling, astrophotography on clear
                 nights.
             </p>
         </section>

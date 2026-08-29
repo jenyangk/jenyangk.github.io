@@ -26,9 +26,9 @@ const ENTRIES: ExperienceEntry[] = [
         ],
         bullets: [
             "Technical lead for a 4-engineer team; scaled deployment to 200+ production sites with 2× YoY growth",
-            "Re-architected the telemetry pipeline — batching, parallel processing, backpressure — processing 2M+ events/day at p95 ~300ms from sensor to user-visible data",
-            "Improved pipeline resilience through automated recovery, DLQ-based replay, and proactive alerting, cutting repeat production incidents by ~50%",
-            "Rebuilt the team's shipping process — feature branching, CI-enforced branch protection, release tagging — establishing a weekly deployment cadence",
+            "Re-architected the telemetry pipeline: batching, parallel processing, and backpressure. It processes 2M+ events/day at p95 ~300ms from sensor to user-visible data",
+            "Improved pipeline resilience through automated recovery, DLQ-based replay, and proactive alerting",
+            "Rebuilt the team's shipping process with feature branching, CI-enforced branch protection, and release tagging. Established a weekly deployment cadence",
         ],
     },
     {
@@ -46,7 +46,7 @@ const ENTRIES: ExperienceEntry[] = [
         company: "Latium Technologies",
         dates: "Sep 2022 – Feb 2025",
         bullets: [
-            "Architected an edge computing platform in Go on ARM gateways — persistent queues processing 50 sensor events/sec, evaluating rules on-device in <100ms vs ~500ms cloud round-trip, sustaining full site protection through WAN outages",
+            "Architected an edge computing platform in Go on ARM gateways: persistent queues processing 50 sensor events/sec, evaluating rules on-device in <100ms vs ~500ms cloud round-trip, sustaining full site protection through WAN outages",
             "Collaborated with hardware engineering to cut sensor-to-camera trigger latency from 30s to 2s using priority-based telemetry queues with device partitioning",
             "Mentored 5 engineers to production PRs within a week through pairing and live walkthroughs",
         ],
