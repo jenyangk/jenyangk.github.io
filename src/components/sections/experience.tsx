@@ -14,9 +14,9 @@ const ENTRIES: ExperienceEntry[] = [
         dates: "Feb 2025 – Present",
         lead: (
             <p className="text-base text-text italic leading-relaxed max-w-[65ch]">
-                Walked upstairs one Friday to meet the field team. Pitched a
-                replacement for their legacy tool on Monday. Shipped the first
-                version two weeks later.
+                Replaced a shelved legacy mobile app with a new .NET MAUI
+                field app. Partnered with business analysts and customers to
+                redesign core workflows; drove 2× adoption.
             </p>
         ),
         metrics: [
