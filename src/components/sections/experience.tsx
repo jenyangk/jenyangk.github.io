@@ -3,7 +3,6 @@ interface ExperienceEntry {
     company: string;
     dates: string;
     bullets: string[];
-    metrics?: { value: string; label: string }[];
 }
 
 const ENTRIES: ExperienceEntry[] = [
@@ -11,11 +10,6 @@ const ENTRIES: ExperienceEntry[] = [
         role: "Software Engineer II",
         company: "Latium Technologies",
         dates: "Feb 2025 – Present",
-        metrics: [
-            { value: "200+", label: "sites" },
-            { value: "2M+", label: "events/day" },
-            { value: "~50%", label: "fewer repeat incidents" },
-        ],
         bullets: [
             "Technical lead for a 4-engineer team; scaled deployment to 200+ production sites with 2× YoY growth",
             "Re-architected the telemetry pipeline: batching, parallel processing, and backpressure. It processes 2M+ events/day at p95 ~300ms from sensor to user-visible data",
@@ -73,24 +67,6 @@ export function Experience() {
                                 {entry.dates}
                             </span>
                         </div>
-
-                        {entry.metrics && (
-                            <div className="my-5 flex items-stretch divide-x divide-border-subtle">
-                                {entry.metrics.map((m) => (
-                                    <div
-                                        key={m.label}
-                                        className="first:pl-0 pl-5 pr-5 last:pr-0"
-                                    >
-                                        <div className="font-serif text-2xl md:text-3xl text-text">
-                                            {m.value}
-                                        </div>
-                                        <div className="font-mono text-[10px] uppercase tracking-wider text-text-muted mt-1">
-                                            {m.label}
-                                        </div>
-                                    </div>
-                                ))}
-                            </div>
-                        )}
 
                         <ul className="space-y-1.5">
                             {entry.bullets.map((bullet) => (
