@@ -9,11 +9,6 @@ export function About() {
                 pipelines, and the interfaces on top of them. I like tools
                 that fit the problem, not the familiar ones.
             </p>
-
-            <p className="mt-4 font-mono text-sm text-text-muted">
-                Currently: Software Engineer II at Latium. Reading The Poverty
-                of Historicism. Building muniee.com. Squash twice a week.
-            </p>
         </section>
     );
 }
