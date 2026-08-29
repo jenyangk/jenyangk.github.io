@@ -33,7 +33,7 @@ export function Hero({ mascotRef, mood = "default" }: HeroProps) {
                     download="Andy_Koh_Resume.pdf"
                     className="inline-flex items-center gap-1.5 text-text underline decoration-border-subtle underline-offset-4 hover:decoration-text transition-colors"
                 >
-                    Download resume ↓
+                    Resume ↓
                 </a>
             </p>
         </section>
