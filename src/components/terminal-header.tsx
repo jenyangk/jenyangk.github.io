@@ -25,9 +25,10 @@ export function StickyHeader({ activeSection, onNavigate }: StickyHeaderProps) {
                         e.preventDefault();
                         onNavigate("top");
                     }}
-                    className="shrink-0 whitespace-nowrap font-serif text-lg font-bold text-text"
+                    aria-label="Back to top"
+                    className="shrink-0 whitespace-nowrap font-mono text-xs text-text-muted transition-colors hover:text-text"
                 >
-                    Andy Koh
+                    ~
                 </a>
 
                 <nav

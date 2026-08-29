@@ -12,7 +12,7 @@ export function About() {
             <p className="max-w-[65ch] text-base text-text-muted leading-relaxed">
                 Software Engineer II at Latium Technologies, building industrial
                 IoT platforms that process millions of telemetry events a day.
-                My focus is full-stack systems work — edge computing, data
+                My focus is full-stack systems work. Edge computing, data
                 pipelines, and the interfaces on top of them. I like tools
                 that fit the problem, not the familiar ones.
             </p>

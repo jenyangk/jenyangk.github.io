@@ -78,7 +78,7 @@ function VoteCount() {
     if (offline) {
         return (
             <span className="whitespace-nowrap font-mono text-[11px] text-text-muted">
-                offline — likely cold-starting
+                offline: likely cold-starting
             </span>
         );
     }
@@ -110,8 +110,8 @@ export function Projects() {
                     <VoteCount />
                 </div>
                 <p className="mt-2 max-w-[65ch] text-sm text-text-muted leading-relaxed">
-                    Interactive photo voting app with a multi-phase workflow —
-                    friends vote on photos in real time.
+                    Interactive photo voting app. Friends vote on photos in
+                    real time through a multi-phase workflow.
                 </p>
                 <div className="mt-3 flex flex-wrap gap-1.5">
                     {[
@@ -154,7 +154,7 @@ export function Projects() {
             </article>
 
             <p className="mt-8 max-w-[65ch] text-sm text-text-muted leading-relaxed">
-                Also tinkering with a Raspberry Pi — an astrophotography rig
+                Also tinkering with a Raspberry Pi astrophotography rig
                 that captures star fields on clear nights.
             </p>
 
