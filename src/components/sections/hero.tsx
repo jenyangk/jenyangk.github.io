@@ -22,7 +22,7 @@ export function Hero({ mascotRef, mood = "default" }: HeroProps) {
                 Full-stack software engineer
             </p>
             <p className="mt-4 max-w-[65ch] text-base text-text-muted leading-relaxed">
-                I build software that keeps working when the demo ends.
+                Good systems are the ones you stop noticing.
             </p>
             <p className="mt-6 font-mono text-xs text-text-muted">
                 Edmonton, Canada · Open to Singapore
