@@ -2,17 +2,14 @@ const BOOKS = [
     {
         title: "The Poverty of Historicism",
         author: "Karl Popper",
-        take: "prophecy fails; piecemeal works",
     },
     {
         title: "Designing Data-Intensive Applications, 2nd Edition",
         author: "Martin Kleppmann and Chris Riccomini",
-        take: "same instincts, updated territory",
     },
     {
         title: "AI Engineering",
         author: "Chip Huyen",
-        take: "evals are the whole game",
     },
 ];
 
@@ -29,9 +26,6 @@ export function Reading() {
                             {book.title}
                         </span>
                         <span className="text-text-muted"> — {book.author} </span>
-                        <span className="text-text-muted">
-                            ({book.take})
-                        </span>
                     </li>
                 ))}
             </ul>
