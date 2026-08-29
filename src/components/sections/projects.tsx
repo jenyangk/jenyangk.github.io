@@ -110,19 +110,11 @@ export function Projects() {
                     <VoteCount />
                 </div>
                 <p className="mt-2 max-w-[65ch] text-sm text-text-muted leading-relaxed">
-                    Interactive photo voting app. Friends vote on photos in
+                    Photo voting for friend groups. Friends vote on photos in
                     real time through a multi-phase workflow.
                 </p>
                 <div className="mt-3 flex flex-wrap gap-1.5">
-                    {[
-                        "React",
-                        "TypeScript",
-                        "Socket.IO",
-                        "Express",
-                        "Node.js",
-                        "Azure Static Web Apps",
-                        "Render",
-                    ].map((tech) => (
+                    {["Next.js", "TypeScript", "Supabase", "S3"].map((tech) => (
                         <span
                             key={tech}
                             className="border border-border-subtle px-1.5 py-0.5 font-mono text-[10px] text-text-muted"
@@ -153,25 +145,48 @@ export function Projects() {
                 </div>
             </article>
 
-            <p className="mt-8 max-w-[65ch] text-sm text-text-muted leading-relaxed">
-                Also tinkering with a Raspberry Pi astrophotography rig
-                that captures star fields on clear nights.
-            </p>
-
-            <div className="mt-10 space-y-2 font-mono text-xs text-text-muted">
-                <p>
-                    <span className="text-text">Languages</span> · TypeScript,
-                    Go, C#, JavaScript, Python, SQL
+            <article className="mt-8">
+                <h3 className="font-bold text-text text-lg">muniee</h3>
+                <p className="mt-2 max-w-[65ch] text-sm text-text-muted leading-relaxed">
+                    A set of small, single-purpose webtools I use all the time.
+                    No signup, no servers, no tracking. Includes sweep (batch
+                    QR scanner), timeformats (one moment across 27 time
+                    formats), timezones (overlap-hours comparison), and cron
+                    (expression parser with next-runs and shareable links).
                 </p>
-                <p>
-                    <span className="text-text">Frameworks</span> · React,
-                    Next.js, Angular, React Native, .NET, .NET MAUI
-                </p>
-                <p>
-                    <span className="text-text">Cloud</span> · Azure, AWS,
-                    Cloudflare
-                </p>
-            </div>
+                <div className="mt-3 flex flex-wrap gap-1.5">
+                    {["Vanilla JS", "Static HTML", "Cloudflare Pages"].map(
+                        (tech) => (
+                            <span
+                                key={tech}
+                                className="border border-border-subtle px-1.5 py-0.5 font-mono text-[10px] text-text-muted"
+                            >
+                                {tech}
+                            </span>
+                        ),
+                    )}
+                </div>
+                <div className="mt-3 flex gap-4">
+                    <a
+                        href="https://muniee.com"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1.5 font-mono text-xs text-text-muted hover:text-text transition-colors"
+                    >
+                        <ExternalLink className="h-3.5 w-3.5" />
+                        muniee.com
+                    </a>
+                    <a
+                        href="https://github.com/jenyangk/sweep"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1.5 font-mono text-xs text-text-muted hover:text-text transition-colors"
+                    >
+                        <Github className="h-3.5 w-3.5" />
+                        sweep on GitHub
+                    </a>
+                </div>
+            </article>
         </section>
     );
 }
