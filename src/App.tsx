@@ -5,18 +5,20 @@ import { StickyHeader } from "@/components/terminal-header";
 import { KaomojiMascotRef, KaomojiMood } from "@/components/kaomoji-mascot";
 import { Hero } from "@/components/sections/hero";
 import { About } from "@/components/sections/about";
+import { Skills } from "@/components/sections/skills";
 import { Experience } from "@/components/sections/experience";
 import { Projects } from "@/components/sections/projects";
 import { Reading } from "@/components/sections/reading";
 import { Contact } from "@/components/sections/contact";
 
-const SECTIONS = ["about", "experience", "projects", "contact"] as const;
+const SECTIONS = ["about", "skills", "experience", "projects", "contact"] as const;
 
 const MOOD_BY_SECTION: Record<(typeof SECTIONS)[number], KaomojiMood> = {
-  about: "default",
-  experience: "work",
-  projects: "projects",
-  contact: "thinking",
+    about: "default",
+    skills: "thinking",
+    experience: "work",
+    projects: "projects",
+    contact: "thinking",
 };
 
 export default function App() {
@@ -77,6 +79,7 @@ export default function App() {
       <main className="relative z-10 mx-auto max-w-2xl px-4">
         <Hero mascotRef={mascotRef} mood={mascotMood} />
         <About />
+        <Skills />
         <Experience />
         <Projects />
         <Reading />
