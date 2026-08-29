@@ -146,6 +146,8 @@ export const KaomojiMascot = forwardRef<KaomojiMascotRef, KaomojiMascotProps>(
       return () => {
         if (blinkTimerRef.current) clearTimeout(blinkTimerRef.current);
         if (unblinkTimerRef.current) clearTimeout(unblinkTimerRef.current);
+        // Falling asleep mid-blink must not leave the eyes stuck closed
+        setBlinking(false);
       };
     }, [reducedMotion, asleep]);
 
