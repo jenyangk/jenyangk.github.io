@@ -1,18 +1,18 @@
 const BOOKS = [
     {
-        title: "A Brief History of Time",
-        author: "Stephen Hawking",
-        take: "still the best explainer",
+        title: "The Poverty of Historicism",
+        author: "Karl Popper",
+        take: "prophecy fails; piecemeal works",
     },
     {
-        title: "Designing Data-Intensive Applications",
-        author: "Martin Kleppmann",
-        take: "the systems book I keep returning to",
+        title: "Designing Data-Intensive Applications, 2nd Edition",
+        author: "Martin Kleppmann and Chris Riccomini",
+        take: "same instincts, updated territory",
     },
     {
-        title: "Meditations",
-        author: "Marcus Aurelius",
-        take: "quiet advice on doing the work",
+        title: "AI Engineering",
+        author: "Chip Huyen",
+        take: "evals are the whole game",
     },
 ];
 
