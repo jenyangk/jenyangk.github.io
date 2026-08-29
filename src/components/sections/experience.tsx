@@ -2,7 +2,6 @@ interface ExperienceEntry {
     role: string;
     company: string;
     dates: string;
-    lead?: React.ReactNode;
     bullets: string[];
     metrics?: { value: string; label: string }[];
 }
@@ -12,13 +11,6 @@ const ENTRIES: ExperienceEntry[] = [
         role: "Software Engineer II",
         company: "Latium Technologies",
         dates: "Feb 2025 – Present",
-        lead: (
-            <p className="text-base text-text italic leading-relaxed max-w-[65ch]">
-                Replaced a shelved legacy mobile app with a new .NET MAUI
-                field app. Partnered with business analysts and customers to
-                redesign core workflows; drove 2× adoption.
-            </p>
-        ),
         metrics: [
             { value: "200+", label: "sites" },
             { value: "2M+", label: "events/day" },
@@ -81,8 +73,6 @@ export function Experience() {
                                 {entry.dates}
                             </span>
                         </div>
-
-                        {entry.lead}
 
                         {entry.metrics && (
                             <div className="my-5 flex items-stretch divide-x divide-border-subtle">
