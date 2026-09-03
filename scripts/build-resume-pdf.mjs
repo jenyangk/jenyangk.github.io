@@ -54,9 +54,10 @@ const CSS = `  /* ATS-friendly: single column, simple serif/sans, no columns, no
     font-size: 10pt;
     text-transform: uppercase;
     letter-spacing: 1px;
-    border-bottom: 1px solid #999;
-    padding-bottom: 1px;
-    margin: 6px 0 2px;
+    border-bottom: 1.6px solid #bbbcb6;
+    padding-bottom: 2px;
+    padding-top: 8px;
+    margin: 6px 0 3px;
     color: #222;
   }
   h3 {
@@ -65,7 +66,7 @@ const CSS = `  /* ATS-friendly: single column, simple serif/sans, no columns, no
     color: #000;
   }
   p { margin: 1px 0; }
-  ul { margin: 2px 0 3px 0; padding-left: 15px; }
+  ul { margin: 2px 4px 3px 0; padding-left: 15px; padding-bottom: 4px }
   li { margin: 1.5px 0; }
   strong { font-weight: 600; }
   a { color: #111; text-decoration: underline; }
