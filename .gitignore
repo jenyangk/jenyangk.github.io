@@ -200,7 +200,8 @@ sketch
 .venv/
 docs/
 screenshots/
-scripts/
+scripts/*
+!scripts/build-resume-pdf.mjs
 .superpowers/
 .scratch/
 .agents/
