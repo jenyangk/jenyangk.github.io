@@ -56,7 +56,7 @@ const CSS = `  /* ATS-friendly: single column, simple serif/sans, no columns, no
     letter-spacing: 1px;
     border-bottom: 1.6px solid #bbbcb6;
     padding-bottom: 2px;
-    padding-top: 8px;
+    padding-top: 6px;
     margin: 6px 0 3px;
     color: #222;
   }

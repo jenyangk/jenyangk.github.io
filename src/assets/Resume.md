@@ -23,7 +23,7 @@ _Software Engineer with 5+ years building full-stack IoT and edge platforms acro
 
 - Owned end-to-end delivery of a mobile-first web application with a self-service CMS, enabling 5 non-technical staff to publish independently and cutting content-update turnaround from days to minutes
 - Redesigned media delivery architecture using Next.js, Cloudflare CDN, and headless CMS, cutting TTFB by 62% and reducing page weight ~85%
-- Migrated 4 years of VantagePoint newsletter archive from PDF to SEO-indexed web articles, growing monthly website engagement by 50%
+- Built an AI pipeline to migrate 4 years of VantagePoint PDF newsletters into SEO-indexed web articles, using LLM extraction to parse PDFs, identify components, and rebuild content in Prismic CMS, growing monthly engagement by 50%
 
 **Software Engineer I** | Latium Technologies | Sep 2022 – Feb 2025
 
