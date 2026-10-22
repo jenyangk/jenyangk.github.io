@@ -33,7 +33,7 @@ _Software Engineer with 5+ years building full-stack IoT and edge platforms acro
 - Collaborated with hardware engineering to cut sensor-to-camera trigger latency from 30s to 2s and sustain p95 event processing under 300ms by implementing priority-based telemetry queues with device partitioning
 - Led incident response for customer-facing systems as part of the production on-call rotation, diagnosing failures across application and cloud infrastructure and implementing corrective actions to prevent recurrence
 
-**Software Developer I** | PCL Construction | Jun 2021 – Sep 2022
+**Software Developer I** | PCL Construction | Oct 2021 – Sep 2022
 
 - Developed platform-performance monitoring tooling as sole developer for the IoT platform later led end-to-end at Latium
 - Extended the platform with follow-up reminder notifications that kept site teams from missing time-sensitive alarms across 100+ sites

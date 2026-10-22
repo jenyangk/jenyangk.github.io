@@ -40,7 +40,7 @@ const ENTRIES: ExperienceEntry[] = [
     {
         role: "Software Developer I",
         company: "PCL Construction",
-        dates: "Jun 2021 – Sep 2022",
+        dates: "Oct 2021 – Sep 2022",
         bullets: [
             "Sole developer on the platform-performance monitoring tooling for the IoT platform later led end-to-end at Latium",
             "Added follow-up reminder notifications that kept site teams from missing time-sensitive alarms across 100+ sites",
